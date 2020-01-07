@@ -1,0 +1,2421 @@
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"Touch_ADS7843.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.Read_XY,"ax",%progbits
+  17              		.align	1
+  18              		.arch armv7e-m
+  19              		.syntax unified
+  20              		.thumb
+  21              		.thumb_func
+  22              		.fpu fpv5-d16
+  24              	Read_XY:
+  25              	.LVL0:
+  26              	.LFB2:
+  27              		.file 1 "Core/Src/Touch_ADS7843.c"
+   1:Core/Src/Touch_ADS7843.c **** #include "Touch_ADS7843.h"
+   2:Core/Src/Touch_ADS7843.c **** 
+   3:Core/Src/Touch_ADS7843.c **** #define THRESHOLD 2
+   4:Core/Src/Touch_ADS7843.c **** #define    SPI_RD_DELAY    1
+   5:Core/Src/Touch_ADS7843.c **** #define    CHX             0xd1    // 12 bit mode
+   6:Core/Src/Touch_ADS7843.c **** #define    CHY             0x90
+   7:Core/Src/Touch_ADS7843.c **** 
+   8:Core/Src/Touch_ADS7843.c **** 
+   9:Core/Src/Touch_ADS7843.c **** 
+  10:Core/Src/Touch_ADS7843.c **** // ********** Private functions prototype ***************************************************
+  11:Core/Src/Touch_ADS7843.c **** /*
+  12:Core/Src/Touch_ADS7843.c **** * Obtain raw x,y data from ADS7846
+  13:Core/Src/Touch_ADS7843.c **** *
+  14:Core/Src/Touch_ADS7843.c **** * @param pointer to raw x and y coordinates (pointer to store data)
+  15:Core/Src/Touch_ADS7843.c **** * @returns x (horizontal position)
+  16:Core/Src/Touch_ADS7843.c **** * @returns y (vertical position)
+  17:Core/Src/Touch_ADS7843.c **** *
+  18:Core/Src/Touch_ADS7843.c **** */
+  19:Core/Src/Touch_ADS7843.c **** static void TP_GetAdXY(Touch_ADS7843_DriverStruct *handle, int *x,int *y);
+  20:Core/Src/Touch_ADS7843.c **** 
+  21:Core/Src/Touch_ADS7843.c **** /*
+  22:Core/Src/Touch_ADS7843.c **** * Obtain raw single channel data from ADS7846 (Called by TP_GetADXY)
+  23:Core/Src/Touch_ADS7843.c **** *
+  24:Core/Src/Touch_ADS7843.c **** * @param channel to be read (CHX or CHY)
+  25:Core/Src/Touch_ADS7843.c **** * @returns raw scaled down value (return value range must be between 0 and 1024)
+  26:Core/Src/Touch_ADS7843.c **** *
+  27:Core/Src/Touch_ADS7843.c **** */
+  28:Core/Src/Touch_ADS7843.c **** static int Read_XY(Touch_ADS7843_DriverStruct *handle, uint8_t XY);
+  29:Core/Src/Touch_ADS7843.c **** 
+  30:Core/Src/Touch_ADS7843.c **** /*
+  31:Core/Src/Touch_ADS7843.c **** * Draw a calibration crosshair on the LCD screen
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 2
+
+
+  32:Core/Src/Touch_ADS7843.c **** *
+  33:Core/Src/Touch_ADS7843.c **** * @param x (horizontal position)
+  34:Core/Src/Touch_ADS7843.c **** * @param y (vertical position)
+  35:Core/Src/Touch_ADS7843.c **** *
+  36:Core/Src/Touch_ADS7843.c **** */
+  37:Core/Src/Touch_ADS7843.c **** static void DrawCross(Touch_ADS7843_DriverStruct *handle, unsigned int Xpos,unsigned int Ypos);
+  38:Core/Src/Touch_ADS7843.c **** 
+  39:Core/Src/Touch_ADS7843.c **** /*
+  40:Core/Src/Touch_ADS7843.c **** * Set the calibration matrix
+  41:Core/Src/Touch_ADS7843.c **** *
+  42:Core/Src/Touch_ADS7843.c **** * @param displayPTR (pointer to display data)
+  43:Core/Src/Touch_ADS7843.c **** * @param screenPTR  (pointer to screen data)
+  44:Core/Src/Touch_ADS7843.c **** * @param matrixPTR  (pointer to calibration matrix)
+  45:Core/Src/Touch_ADS7843.c **** *
+  46:Core/Src/Touch_ADS7843.c **** * @returns 0 when matrix.divider != 0
+  47:Core/Src/Touch_ADS7843.c **** * @returns 1 when matrix.divider = 0
+  48:Core/Src/Touch_ADS7843.c **** *
+  49:Core/Src/Touch_ADS7843.c **** */
+  50:Core/Src/Touch_ADS7843.c **** static uint8_t setCalibrationMatrix(Touch_ADS7843_DriverStruct *handle, Touch_ADS7843_Coordinate * 
+  51:Core/Src/Touch_ADS7843.c **** 
+  52:Core/Src/Touch_ADS7843.c **** // ********** Private functions prototype *****************************(END)*****************
+  53:Core/Src/Touch_ADS7843.c **** 
+  54:Core/Src/Touch_ADS7843.c **** 
+  55:Core/Src/Touch_ADS7843.c **** 
+  56:Core/Src/Touch_ADS7843.c **** 
+  57:Core/Src/Touch_ADS7843.c **** 
+  58:Core/Src/Touch_ADS7843.c **** 
+  59:Core/Src/Touch_ADS7843.c **** void Touch_ADS7843(
+  60:Core/Src/Touch_ADS7843.c ****     Touch_ADS7843_DriverStruct *handle, 
+  61:Core/Src/Touch_ADS7843.c ****     Touch_ADS7843_SPITransmitReceive_Callback spi, 
+  62:Core/Src/Touch_ADS7843.c ****     Touch_ADS7843_DigitalOut_Callback tp_cs, 
+  63:Core/Src/Touch_ADS7843.c ****     Touch_ADS7843_DigitalIn_Callback tp_irq, 
+  64:Core/Src/Touch_ADS7843.c ****     Touch_ADS7843_WaitMilliseconds_Callback waitms,
+  65:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_DriverStruct *_LCD)
+  66:Core/Src/Touch_ADS7843.c **** {
+  67:Core/Src/Touch_ADS7843.c ****     handle->LCD = _LCD;
+  68:Core/Src/Touch_ADS7843.c ****     handle->_tp_spi = spi;
+  69:Core/Src/Touch_ADS7843.c ****     handle->_tp_cs = tp_cs;
+  70:Core/Src/Touch_ADS7843.c ****     handle->_tp_irq = tp_irq;
+  71:Core/Src/Touch_ADS7843.c ****     handle->_waitms = waitms;
+  72:Core/Src/Touch_ADS7843.c ****     handle->DisplaySample[0].x=45;
+  73:Core/Src/Touch_ADS7843.c ****     handle->DisplaySample[0].y=45;
+  74:Core/Src/Touch_ADS7843.c ****     handle->DisplaySample[1].x=45;
+  75:Core/Src/Touch_ADS7843.c ****     handle->DisplaySample[1].y=210;
+  76:Core/Src/Touch_ADS7843.c ****     handle->DisplaySample[2].x=190;
+  77:Core/Src/Touch_ADS7843.c ****     handle->DisplaySample[2].y=190;
+  78:Core/Src/Touch_ADS7843.c ****     handle->ScreenSample[0].x=45;
+  79:Core/Src/Touch_ADS7843.c ****     handle->ScreenSample[0].y=45;
+  80:Core/Src/Touch_ADS7843.c ****     handle->ScreenSample[1].x=45;
+  81:Core/Src/Touch_ADS7843.c ****     handle->ScreenSample[1].y=210;
+  82:Core/Src/Touch_ADS7843.c ****     handle->ScreenSample[2].x=190;
+  83:Core/Src/Touch_ADS7843.c ****     handle->ScreenSample[2].y=190;
+  84:Core/Src/Touch_ADS7843.c ****     handle->_tp_cs(1);
+  85:Core/Src/Touch_ADS7843.c ****     //handle->_tp_spi->frequency(850000);  //500000
+  86:Core/Src/Touch_ADS7843.c ****     //handle->_tp_spi->format(8,3);                    // 8 bit spi mode 0
+  87:Core/Src/Touch_ADS7843.c **** }
+  88:Core/Src/Touch_ADS7843.c **** 
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 3
+
+
+  89:Core/Src/Touch_ADS7843.c **** uint8_t Touch_ADS7843_OnTouch(Touch_ADS7843_DriverStruct *handle) { return !(handle->_tp_irq()); }
+  90:Core/Src/Touch_ADS7843.c **** 
+  91:Core/Src/Touch_ADS7843.c **** int Read_XY(Touch_ADS7843_DriverStruct *handle, uint8_t XY)
+  92:Core/Src/Touch_ADS7843.c **** {
+  28              		.loc 1 92 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32              		.loc 1 92 1 is_stmt 0 view .LVU1
+  33 0000 70B5     		push	{r4, r5, r6, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 16
+  36              		.cfi_offset 4, -16
+  37              		.cfi_offset 5, -12
+  38              		.cfi_offset 6, -8
+  39              		.cfi_offset 14, -4
+  40 0002 0446     		mov	r4, r0
+  41 0004 0D46     		mov	r5, r1
+  93:Core/Src/Touch_ADS7843.c ****     uint8_t msb, lsb;
+  42              		.loc 1 93 5 is_stmt 1 view .LVU2
+  94:Core/Src/Touch_ADS7843.c ****     unsigned int Temp;
+  43              		.loc 1 94 5 view .LVU3
+  95:Core/Src/Touch_ADS7843.c **** 
+  96:Core/Src/Touch_ADS7843.c ****     handle->_tp_cs(0);
+  44              		.loc 1 96 5 view .LVU4
+  45              		.loc 1 96 11 is_stmt 0 view .LVU5
+  46 0006 8369     		ldr	r3, [r0, #24]
+  47              		.loc 1 96 5 view .LVU6
+  48 0008 0020     		movs	r0, #0
+  49              	.LVL1:
+  50              		.loc 1 96 5 view .LVU7
+  51 000a 9847     		blx	r3
+  52              	.LVL2:
+  97:Core/Src/Touch_ADS7843.c ****     //wait_us(SPI_RD_DELAY);
+  98:Core/Src/Touch_ADS7843.c ****     for(Temp=0; Temp<3; ++Temp);
+  53              		.loc 1 98 5 is_stmt 1 view .LVU8
+  54              		.loc 1 98 13 is_stmt 0 view .LVU9
+  55 000c 0023     		movs	r3, #0
+  56              	.LVL3:
+  57              	.L2:
+  58              		.loc 1 98 5 discriminator 1 view .LVU10
+  59 000e 022B     		cmp	r3, #2
+  60 0010 01D8     		bhi	.L9
+  61              		.loc 1 98 32 is_stmt 1 discriminator 3 view .LVU11
+  62              		.loc 1 98 25 is_stmt 0 discriminator 3 view .LVU12
+  63 0012 0133     		adds	r3, r3, #1
+  64              	.LVL4:
+  65              		.loc 1 98 25 discriminator 3 view .LVU13
+  66 0014 FBE7     		b	.L2
+  67              	.L9:
+  99:Core/Src/Touch_ADS7843.c ****     handle->_tp_spi(XY);
+  68              		.loc 1 99 5 is_stmt 1 view .LVU14
+  69              		.loc 1 99 11 is_stmt 0 view .LVU15
+  70 0016 6369     		ldr	r3, [r4, #20]
+  71              	.LVL5:
+  72              		.loc 1 99 5 view .LVU16
+  73 0018 2846     		mov	r0, r5
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 4
+
+
+  74 001a 9847     		blx	r3
+  75              	.LVL6:
+ 100:Core/Src/Touch_ADS7843.c ****     //wait_us(SPI_RD_DELAY);
+ 101:Core/Src/Touch_ADS7843.c ****     for(Temp=0; Temp<3; ++Temp);
+  76              		.loc 1 101 5 is_stmt 1 view .LVU17
+  77              		.loc 1 101 13 is_stmt 0 view .LVU18
+  78 001c 0023     		movs	r3, #0
+  79              	.LVL7:
+  80              	.L4:
+  81              		.loc 1 101 5 discriminator 1 view .LVU19
+  82 001e 022B     		cmp	r3, #2
+  83 0020 01D8     		bhi	.L10
+  84              		.loc 1 101 32 is_stmt 1 discriminator 3 view .LVU20
+  85              		.loc 1 101 25 is_stmt 0 discriminator 3 view .LVU21
+  86 0022 0133     		adds	r3, r3, #1
+  87              	.LVL8:
+  88              		.loc 1 101 25 discriminator 3 view .LVU22
+  89 0024 FBE7     		b	.L4
+  90              	.L10:
+ 102:Core/Src/Touch_ADS7843.c ****     msb = handle->_tp_spi(0x00);  // msb
+  91              		.loc 1 102 5 is_stmt 1 view .LVU23
+  92              		.loc 1 102 17 is_stmt 0 view .LVU24
+  93 0026 6369     		ldr	r3, [r4, #20]
+  94              	.LVL9:
+  95              		.loc 1 102 11 view .LVU25
+  96 0028 0020     		movs	r0, #0
+  97 002a 9847     		blx	r3
+  98              	.LVL10:
+  99 002c 0646     		mov	r6, r0
+ 100              	.LVL11:
+ 103:Core/Src/Touch_ADS7843.c ****     //wait_us(SPI_RD_DELAY);
+ 104:Core/Src/Touch_ADS7843.c ****     for(Temp=0; Temp<3; ++Temp);
+ 101              		.loc 1 104 5 is_stmt 1 view .LVU26
+ 102              		.loc 1 104 13 is_stmt 0 view .LVU27
+ 103 002e 0023     		movs	r3, #0
+ 104              	.LVL12:
+ 105              	.L6:
+ 106              		.loc 1 104 5 discriminator 1 view .LVU28
+ 107 0030 022B     		cmp	r3, #2
+ 108 0032 01D8     		bhi	.L11
+ 109              		.loc 1 104 32 is_stmt 1 discriminator 3 view .LVU29
+ 110              		.loc 1 104 25 is_stmt 0 discriminator 3 view .LVU30
+ 111 0034 0133     		adds	r3, r3, #1
+ 112              	.LVL13:
+ 113              		.loc 1 104 25 discriminator 3 view .LVU31
+ 114 0036 FBE7     		b	.L6
+ 115              	.L11:
+ 105:Core/Src/Touch_ADS7843.c ****     lsb = handle->_tp_spi(0x00);  // lsb
+ 116              		.loc 1 105 5 is_stmt 1 view .LVU32
+ 117              		.loc 1 105 17 is_stmt 0 view .LVU33
+ 118 0038 6369     		ldr	r3, [r4, #20]
+ 119              	.LVL14:
+ 120              		.loc 1 105 11 view .LVU34
+ 121 003a 0020     		movs	r0, #0
+ 122 003c 9847     		blx	r3
+ 123              	.LVL15:
+ 124 003e 0546     		mov	r5, r0
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 5
+
+
+ 125              	.LVL16:
+ 106:Core/Src/Touch_ADS7843.c ****     handle->_tp_cs(1);
+ 126              		.loc 1 106 5 is_stmt 1 view .LVU35
+ 127              		.loc 1 106 11 is_stmt 0 view .LVU36
+ 128 0040 A369     		ldr	r3, [r4, #24]
+ 129              		.loc 1 106 5 view .LVU37
+ 130 0042 0120     		movs	r0, #1
+ 131 0044 9847     		blx	r3
+ 132              	.LVL17:
+ 107:Core/Src/Touch_ADS7843.c ****     Temp = ((msb << 8 ) | lsb);
+ 133              		.loc 1 107 5 is_stmt 1 view .LVU38
+ 134              		.loc 1 107 25 is_stmt 0 view .LVU39
+ 135 0046 45EA0620 		orr	r0, r5, r6, lsl #8
+ 136              	.LVL18:
+ 108:Core/Src/Touch_ADS7843.c ****     Temp >>= 3;
+ 137              		.loc 1 108 5 is_stmt 1 view .LVU40
+ 109:Core/Src/Touch_ADS7843.c ****     Temp &= 0xfff;
+ 138              		.loc 1 109 5 view .LVU41
+ 110:Core/Src/Touch_ADS7843.c ****     Temp /= 4;                  // Scaling : return value range must be between 0 and 1024
+ 139              		.loc 1 110 5 view .LVU42
+ 111:Core/Src/Touch_ADS7843.c ****     return(Temp);
+ 140              		.loc 1 111 5 view .LVU43
+ 112:Core/Src/Touch_ADS7843.c **** }
+ 141              		.loc 1 112 1 is_stmt 0 view .LVU44
+ 142 004a C0F34910 		ubfx	r0, r0, #5, #10
+ 143              	.LVL19:
+ 144              		.loc 1 112 1 view .LVU45
+ 145 004e 70BD     		pop	{r4, r5, r6, pc}
+ 146              		.loc 1 112 1 view .LVU46
+ 147              		.cfi_endproc
+ 148              	.LFE2:
+ 150              		.section	.text.TP_GetAdXY,"ax",%progbits
+ 151              		.align	1
+ 152              		.syntax unified
+ 153              		.thumb
+ 154              		.thumb_func
+ 155              		.fpu fpv5-d16
+ 157              	TP_GetAdXY:
+ 158              	.LVL20:
+ 159              	.LFB3:
+ 113:Core/Src/Touch_ADS7843.c **** 
+ 114:Core/Src/Touch_ADS7843.c **** 
+ 115:Core/Src/Touch_ADS7843.c **** void TP_GetAdXY(Touch_ADS7843_DriverStruct *handle, int *x,int *y)
+ 116:Core/Src/Touch_ADS7843.c **** {
+ 160              		.loc 1 116 1 is_stmt 1 view -0
+ 161              		.cfi_startproc
+ 162              		@ args = 0, pretend = 0, frame = 0
+ 163              		@ frame_needed = 0, uses_anonymous_args = 0
+ 164              		.loc 1 116 1 is_stmt 0 view .LVU48
+ 165 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 166              	.LCFI1:
+ 167              		.cfi_def_cfa_offset 24
+ 168              		.cfi_offset 3, -24
+ 169              		.cfi_offset 4, -20
+ 170              		.cfi_offset 5, -16
+ 171              		.cfi_offset 6, -12
+ 172              		.cfi_offset 7, -8
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 6
+
+
+ 173              		.cfi_offset 14, -4
+ 174 0002 0746     		mov	r7, r0
+ 175 0004 0D46     		mov	r5, r1
+ 176 0006 1446     		mov	r4, r2
+ 117:Core/Src/Touch_ADS7843.c ****     int adx, ady, temp;
+ 177              		.loc 1 117 5 is_stmt 1 view .LVU49
+ 118:Core/Src/Touch_ADS7843.c ****     adx = Read_XY(handle, CHX);
+ 178              		.loc 1 118 5 view .LVU50
+ 179              		.loc 1 118 11 is_stmt 0 view .LVU51
+ 180 0008 D121     		movs	r1, #209
+ 181              	.LVL21:
+ 182              		.loc 1 118 11 view .LVU52
+ 183 000a FFF7FEFF 		bl	Read_XY
+ 184              	.LVL22:
+ 185              		.loc 1 118 11 view .LVU53
+ 186 000e 0646     		mov	r6, r0
+ 187              	.LVL23:
+ 119:Core/Src/Touch_ADS7843.c ****     //wait_us(1);
+ 120:Core/Src/Touch_ADS7843.c ****     for(temp=0; temp<3; ++temp);
+ 188              		.loc 1 120 5 is_stmt 1 view .LVU54
+ 189              		.loc 1 120 13 is_stmt 0 view .LVU55
+ 190 0010 0023     		movs	r3, #0
+ 191              	.LVL24:
+ 192              	.L13:
+ 193              		.loc 1 120 5 discriminator 1 view .LVU56
+ 194 0012 022B     		cmp	r3, #2
+ 195 0014 01DC     		bgt	.L16
+ 196              		.loc 1 120 32 is_stmt 1 discriminator 3 view .LVU57
+ 197              		.loc 1 120 25 is_stmt 0 discriminator 3 view .LVU58
+ 198 0016 0133     		adds	r3, r3, #1
+ 199              	.LVL25:
+ 200              		.loc 1 120 25 discriminator 3 view .LVU59
+ 201 0018 FBE7     		b	.L13
+ 202              	.L16:
+ 121:Core/Src/Touch_ADS7843.c ****     ady = Read_XY(handle, CHY);
+ 203              		.loc 1 121 5 is_stmt 1 view .LVU60
+ 204              		.loc 1 121 11 is_stmt 0 view .LVU61
+ 205 001a 9021     		movs	r1, #144
+ 206 001c 3846     		mov	r0, r7
+ 207              	.LVL26:
+ 208              		.loc 1 121 11 view .LVU62
+ 209 001e FFF7FEFF 		bl	Read_XY
+ 210              	.LVL27:
+ 122:Core/Src/Touch_ADS7843.c ****     *x = adx;
+ 211              		.loc 1 122 5 is_stmt 1 view .LVU63
+ 212              		.loc 1 122 8 is_stmt 0 view .LVU64
+ 213 0022 2E60     		str	r6, [r5]
+ 123:Core/Src/Touch_ADS7843.c ****     *y = ady;
+ 214              		.loc 1 123 5 is_stmt 1 view .LVU65
+ 215              		.loc 1 123 8 is_stmt 0 view .LVU66
+ 216 0024 2060     		str	r0, [r4]
+ 124:Core/Src/Touch_ADS7843.c **** }
+ 217              		.loc 1 124 1 view .LVU67
+ 218 0026 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 219              		.loc 1 124 1 view .LVU68
+ 220              		.cfi_endproc
+ 221              	.LFE3:
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 7
+
+
+ 223              		.section	.text.setCalibrationMatrix,"ax",%progbits
+ 224              		.align	1
+ 225              		.syntax unified
+ 226              		.thumb
+ 227              		.thumb_func
+ 228              		.fpu fpv5-d16
+ 230              	setCalibrationMatrix:
+ 231              	.LVL28:
+ 232              	.LFB6:
+ 125:Core/Src/Touch_ADS7843.c **** 
+ 126:Core/Src/Touch_ADS7843.c **** //void Touch_ADS7843_DrawPoint(Touch_ADS7843_DriverStruct *handle, unsigned int Xpos,unsigned int Y
+ 127:Core/Src/Touch_ADS7843.c **** //{
+ 128:Core/Src/Touch_ADS7843.c **** ////    LCD->wr_reg(0x03, 0x1030);
+ 129:Core/Src/Touch_ADS7843.c **** ////    LCD->SPI::write(0x03);
+ 130:Core/Src/Touch_ADS7843.c **** //    WindowMax(LCD);
+ 131:Core/Src/Touch_ADS7843.c **** //    SPI_TFT_ILI9341_pixel(LCD,Xpos,Ypos,color);
+ 132:Core/Src/Touch_ADS7843.c **** //    SPI_TFT_ILI9341_pixel(LCD,Xpos+1,Ypos,color);
+ 133:Core/Src/Touch_ADS7843.c **** //    SPI_TFT_ILI9341_pixel(LCD,Xpos,Ypos+1,color);
+ 134:Core/Src/Touch_ADS7843.c **** //    SPI_TFT_ILI9341_pixel(LCD,Xpos+1,Ypos+1,color);
+ 135:Core/Src/Touch_ADS7843.c **** //}
+ 136:Core/Src/Touch_ADS7843.c **** 
+ 137:Core/Src/Touch_ADS7843.c **** void DrawCross(Touch_ADS7843_DriverStruct *handle, unsigned int Xpos,unsigned int Ypos)
+ 138:Core/Src/Touch_ADS7843.c **** {
+ 139:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos-15,Ypos,Xpos-2,Ypos,White);
+ 140:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos+2,Ypos,Xpos+15,Ypos,White);
+ 141:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos,Ypos-15,Xpos,Ypos-2,White);
+ 142:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos,Ypos+2,Xpos,Ypos+15,White);
+ 143:Core/Src/Touch_ADS7843.c **** 
+ 144:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos-15,Ypos+15,Xpos-7,Ypos+15,DarkGrey);
+ 145:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos-15,Ypos+7,Xpos-15,Ypos+15,DarkGrey);
+ 146:Core/Src/Touch_ADS7843.c **** 
+ 147:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos-15,Ypos-15,Xpos-7,Ypos-15,DarkGrey);
+ 148:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos-15,Ypos-7,Xpos-15,Ypos-15,DarkGrey);
+ 149:Core/Src/Touch_ADS7843.c **** 
+ 150:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos+7,Ypos+15,Xpos+15,Ypos+15,DarkGrey);
+ 151:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos+15,Ypos+7,Xpos+15,Ypos+15,DarkGrey);
+ 152:Core/Src/Touch_ADS7843.c **** 
+ 153:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos+7,Ypos-15,Xpos+15,Ypos-15,DarkGrey);
+ 154:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos+15,Ypos-15,Xpos+15,Ypos-7,DarkGrey);
+ 155:Core/Src/Touch_ADS7843.c **** }
+ 156:Core/Src/Touch_ADS7843.c **** 
+ 157:Core/Src/Touch_ADS7843.c **** uint8_t Touch_ADS7843_ReadADS7843(Touch_ADS7843_DriverStruct *handle, Touch_ADS7843_Coordinate *scr
+ 158:Core/Src/Touch_ADS7843.c **** {
+ 159:Core/Src/Touch_ADS7843.c ****     int m0,m1,m2,TP_X[1],TP_Y[1],temp[3];
+ 160:Core/Src/Touch_ADS7843.c ****     uint8_t count=0;
+ 161:Core/Src/Touch_ADS7843.c ****     int buffer[2][9]={{0},{0}};
+ 162:Core/Src/Touch_ADS7843.c ****     if (!screenPtr) screenPtr = &(handle->screen);
+ 163:Core/Src/Touch_ADS7843.c ****     do
+ 164:Core/Src/Touch_ADS7843.c ****     {
+ 165:Core/Src/Touch_ADS7843.c ****         TP_GetAdXY(handle,TP_X,TP_Y);
+ 166:Core/Src/Touch_ADS7843.c ****         buffer[0][count]=TP_X[0];
+ 167:Core/Src/Touch_ADS7843.c ****         buffer[1][count]=TP_Y[0];
+ 168:Core/Src/Touch_ADS7843.c ****         count++;
+ 169:Core/Src/Touch_ADS7843.c ****     }
+ 170:Core/Src/Touch_ADS7843.c ****     while(!handle->_tp_irq() && (count < 9));
+ 171:Core/Src/Touch_ADS7843.c ****     if(count==9)
+ 172:Core/Src/Touch_ADS7843.c ****     {
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 8
+
+
+ 173:Core/Src/Touch_ADS7843.c ****         temp[0]=(buffer[0][0]+buffer[0][1]+buffer[0][2])/3;
+ 174:Core/Src/Touch_ADS7843.c ****         temp[1]=(buffer[0][3]+buffer[0][4]+buffer[0][5])/3;
+ 175:Core/Src/Touch_ADS7843.c ****         temp[2]=(buffer[0][6]+buffer[0][7]+buffer[0][8])/3;
+ 176:Core/Src/Touch_ADS7843.c ****         m0=temp[0]-temp[1];
+ 177:Core/Src/Touch_ADS7843.c ****         m1=temp[1]-temp[2];
+ 178:Core/Src/Touch_ADS7843.c ****         m2=temp[2]-temp[0];
+ 179:Core/Src/Touch_ADS7843.c ****         m0=m0>0?m0:(-m0);
+ 180:Core/Src/Touch_ADS7843.c ****         m1=m1>0?m1:(-m1);
+ 181:Core/Src/Touch_ADS7843.c ****         m2=m2>0?m2:(-m2);
+ 182:Core/Src/Touch_ADS7843.c ****         if( (m0>THRESHOLD)  &&  (m1>THRESHOLD)  &&  (m2>THRESHOLD) ) return 0;
+ 183:Core/Src/Touch_ADS7843.c ****         if(m0<m1)
+ 184:Core/Src/Touch_ADS7843.c ****         {
+ 185:Core/Src/Touch_ADS7843.c ****             if(m2<m0)
+ 186:Core/Src/Touch_ADS7843.c ****                 screenPtr->x=(temp[0]+temp[2])/2;
+ 187:Core/Src/Touch_ADS7843.c ****             else
+ 188:Core/Src/Touch_ADS7843.c ****                 screenPtr->x=(temp[0]+temp[1])/2;
+ 189:Core/Src/Touch_ADS7843.c ****         }
+ 190:Core/Src/Touch_ADS7843.c ****         else if(m2<m1)
+ 191:Core/Src/Touch_ADS7843.c ****             screenPtr->x=(temp[0]+temp[2])/2;
+ 192:Core/Src/Touch_ADS7843.c ****         else
+ 193:Core/Src/Touch_ADS7843.c ****             screenPtr->x=(temp[1]+temp[2])/2;
+ 194:Core/Src/Touch_ADS7843.c **** 
+ 195:Core/Src/Touch_ADS7843.c ****         temp[0]=(buffer[1][0]+buffer[1][1]+buffer[1][2])/3;
+ 196:Core/Src/Touch_ADS7843.c ****         temp[1]=(buffer[1][3]+buffer[1][4]+buffer[1][5])/3;
+ 197:Core/Src/Touch_ADS7843.c ****         temp[2]=(buffer[1][6]+buffer[1][7]+buffer[1][8])/3;
+ 198:Core/Src/Touch_ADS7843.c ****         m0=temp[0]-temp[1];
+ 199:Core/Src/Touch_ADS7843.c ****         m1=temp[1]-temp[2];
+ 200:Core/Src/Touch_ADS7843.c ****         m2=temp[2]-temp[0];
+ 201:Core/Src/Touch_ADS7843.c ****         m0=m0>0?m0:(-m0);
+ 202:Core/Src/Touch_ADS7843.c ****         m1=m1>0?m1:(-m1);
+ 203:Core/Src/Touch_ADS7843.c ****         m2=m2>0?m2:(-m2);
+ 204:Core/Src/Touch_ADS7843.c ****         if( (m0>THRESHOLD)  &&  (m1>THRESHOLD)  &&  (m2>THRESHOLD) ) return 0;
+ 205:Core/Src/Touch_ADS7843.c **** 
+ 206:Core/Src/Touch_ADS7843.c ****         if(m0<m1)
+ 207:Core/Src/Touch_ADS7843.c ****         {
+ 208:Core/Src/Touch_ADS7843.c ****             if(m2<m0)
+ 209:Core/Src/Touch_ADS7843.c ****                 screenPtr->y=(temp[0]+temp[2])/2;
+ 210:Core/Src/Touch_ADS7843.c ****             else
+ 211:Core/Src/Touch_ADS7843.c ****                 screenPtr->y=(temp[0]+temp[1])/2;
+ 212:Core/Src/Touch_ADS7843.c ****         }
+ 213:Core/Src/Touch_ADS7843.c ****         else if(m2<m1)
+ 214:Core/Src/Touch_ADS7843.c ****             screenPtr->y=(temp[0]+temp[2])/2;
+ 215:Core/Src/Touch_ADS7843.c ****         else
+ 216:Core/Src/Touch_ADS7843.c ****             screenPtr->y=(temp[1]+temp[2])/2;
+ 217:Core/Src/Touch_ADS7843.c ****         return 1;
+ 218:Core/Src/Touch_ADS7843.c ****     }
+ 219:Core/Src/Touch_ADS7843.c ****     return 0;
+ 220:Core/Src/Touch_ADS7843.c **** }
+ 221:Core/Src/Touch_ADS7843.c **** 
+ 222:Core/Src/Touch_ADS7843.c **** uint8_t setCalibrationMatrix(Touch_ADS7843_DriverStruct *handle, Touch_ADS7843_Coordinate * display
+ 223:Core/Src/Touch_ADS7843.c **** {
+ 233              		.loc 1 223 1 is_stmt 1 view -0
+ 234              		.cfi_startproc
+ 235              		@ args = 0, pretend = 0, frame = 0
+ 236              		@ frame_needed = 0, uses_anonymous_args = 0
+ 237              		.loc 1 223 1 is_stmt 0 view .LVU70
+ 238 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 9
+
+
+ 239              	.LCFI2:
+ 240              		.cfi_def_cfa_offset 24
+ 241              		.cfi_offset 4, -24
+ 242              		.cfi_offset 5, -20
+ 243              		.cfi_offset 6, -16
+ 244              		.cfi_offset 7, -12
+ 245              		.cfi_offset 8, -8
+ 246              		.cfi_offset 14, -4
+ 224:Core/Src/Touch_ADS7843.c ****     uint8_t retTHRESHOLD = 0 ;
+ 247              		.loc 1 224 5 is_stmt 1 view .LVU71
+ 248              	.LVL29:
+ 225:Core/Src/Touch_ADS7843.c ****     // K = (Xs0 - Xs2)*(Ys1 - Ys2) - (Xs1 - Xs2)*(Ys0 - Ys2)
+ 226:Core/Src/Touch_ADS7843.c ****     matrixPtr->Divider = ((screenPtr[0].x - screenPtr[2].x) * (screenPtr[1].y - screenPtr[2].y)) -
+ 249              		.loc 1 226 5 view .LVU72
+ 250              		.loc 1 226 40 is_stmt 0 view .LVU73
+ 251 0004 1568     		ldr	r5, [r2]
+ 252              		.loc 1 226 57 view .LVU74
+ 253 0006 1769     		ldr	r7, [r2, #16]
+ 254              		.loc 1 226 43 view .LVU75
+ 255 0008 E81B     		subs	r0, r5, r7
+ 256              	.LVL30:
+ 257              		.loc 1 226 76 view .LVU76
+ 258 000a D568     		ldr	r5, [r2, #12]
+ 259              		.loc 1 226 93 view .LVU77
+ 260 000c 5669     		ldr	r6, [r2, #20]
+ 261              		.loc 1 226 79 view .LVU78
+ 262 000e AD1B     		subs	r5, r5, r6
+ 263              		.loc 1 226 61 view .LVU79
+ 264 0010 05FB00F5 		mul	r5, r5, r0
+ 227:Core/Src/Touch_ADS7843.c ****                          ((screenPtr[1].x - screenPtr[2].x) * (screenPtr[0].y - screenPtr[2].y)) ;
+ 265              		.loc 1 227 40 view .LVU80
+ 266 0014 9468     		ldr	r4, [r2, #8]
+ 267              		.loc 1 227 43 view .LVU81
+ 268 0016 E41B     		subs	r4, r4, r7
+ 269              		.loc 1 227 76 view .LVU82
+ 270 0018 5068     		ldr	r0, [r2, #4]
+ 271              		.loc 1 227 79 view .LVU83
+ 272 001a 801B     		subs	r0, r0, r6
+ 226:Core/Src/Touch_ADS7843.c ****                          ((screenPtr[1].x - screenPtr[2].x) * (screenPtr[0].y - screenPtr[2].y)) ;
+ 273              		.loc 1 226 98 view .LVU84
+ 274 001c 00FB1450 		mls	r0, r0, r4, r5
+ 226:Core/Src/Touch_ADS7843.c ****                          ((screenPtr[1].x - screenPtr[2].x) * (screenPtr[0].y - screenPtr[2].y)) ;
+ 275              		.loc 1 226 24 view .LVU85
+ 276 0020 9861     		str	r0, [r3, #24]
+ 228:Core/Src/Touch_ADS7843.c ****     if( matrixPtr->Divider == 0 )
+ 277              		.loc 1 228 5 is_stmt 1 view .LVU86
+ 278              		.loc 1 228 7 is_stmt 0 view .LVU87
+ 279 0022 0028     		cmp	r0, #0
+ 280 0024 78D0     		beq	.L19
+ 229:Core/Src/Touch_ADS7843.c ****     {
+ 230:Core/Src/Touch_ADS7843.c ****         retTHRESHOLD = 1;
+ 231:Core/Src/Touch_ADS7843.c ****     }
+ 232:Core/Src/Touch_ADS7843.c ****     else
+ 233:Core/Src/Touch_ADS7843.c ****     {
+ 234:Core/Src/Touch_ADS7843.c ****         //                 (Xd0 - Xd2)*(Ys1 - Ys2) - (Xd1 - Xd2)*(Ys0 - Ys2)
+ 235:Core/Src/Touch_ADS7843.c ****         //            A = ---------------------------------------------------
+ 236:Core/Src/Touch_ADS7843.c ****         //                                   K
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 10
+
+
+ 237:Core/Src/Touch_ADS7843.c ****         matrixPtr->An = ((displayPtr[0].x - displayPtr[2].x) * (screenPtr[1].y - screenPtr[2].y)) -
+ 281              		.loc 1 237 9 is_stmt 1 view .LVU88
+ 282              		.loc 1 237 40 is_stmt 0 view .LVU89
+ 283 0026 0C68     		ldr	r4, [r1]
+ 284              		.loc 1 237 58 view .LVU90
+ 285 0028 0D69     		ldr	r5, [r1, #16]
+ 286              		.loc 1 237 43 view .LVU91
+ 287 002a 601B     		subs	r0, r4, r5
+ 288              		.loc 1 237 77 view .LVU92
+ 289 002c D468     		ldr	r4, [r2, #12]
+ 290              		.loc 1 237 94 view .LVU93
+ 291 002e 5669     		ldr	r6, [r2, #20]
+ 292              		.loc 1 237 80 view .LVU94
+ 293 0030 A41B     		subs	r4, r4, r6
+ 294              		.loc 1 237 62 view .LVU95
+ 295 0032 04FB00F4 		mul	r4, r4, r0
+ 238:Core/Src/Touch_ADS7843.c ****                           ((displayPtr[1].x - displayPtr[2].x) * (screenPtr[0].y - screenPtr[2].y))
+ 296              		.loc 1 238 42 view .LVU96
+ 297 0036 8868     		ldr	r0, [r1, #8]
+ 298              		.loc 1 238 45 view .LVU97
+ 299 0038 401B     		subs	r0, r0, r5
+ 300              		.loc 1 238 79 view .LVU98
+ 301 003a 5568     		ldr	r5, [r2, #4]
+ 302              		.loc 1 238 82 view .LVU99
+ 303 003c AD1B     		subs	r5, r5, r6
+ 237:Core/Src/Touch_ADS7843.c ****                           ((displayPtr[1].x - displayPtr[2].x) * (screenPtr[0].y - screenPtr[2].y))
+ 304              		.loc 1 237 99 view .LVU100
+ 305 003e 05FB1040 		mls	r0, r5, r0, r4
+ 237:Core/Src/Touch_ADS7843.c ****                           ((displayPtr[1].x - displayPtr[2].x) * (screenPtr[0].y - screenPtr[2].y))
+ 306              		.loc 1 237 23 view .LVU101
+ 307 0042 1860     		str	r0, [r3]
+ 239:Core/Src/Touch_ADS7843.c ****         //                 (Xs0 - Xs2)*(Xd1 - Xd2) - (Xd0 - Xd2)*(Xs1 - Xs2)
+ 240:Core/Src/Touch_ADS7843.c ****         //            B = ---------------------------------------------------
+ 241:Core/Src/Touch_ADS7843.c ****         //                                   K
+ 242:Core/Src/Touch_ADS7843.c ****         matrixPtr->Bn = ((screenPtr[0].x - screenPtr[2].x) * (displayPtr[1].x - displayPtr[2].x)) -
+ 308              		.loc 1 242 9 is_stmt 1 view .LVU102
+ 309              		.loc 1 242 39 is_stmt 0 view .LVU103
+ 310 0044 1468     		ldr	r4, [r2]
+ 311              		.loc 1 242 56 view .LVU104
+ 312 0046 1669     		ldr	r6, [r2, #16]
+ 313              		.loc 1 242 42 view .LVU105
+ 314 0048 A01B     		subs	r0, r4, r6
+ 315              		.loc 1 242 76 view .LVU106
+ 316 004a 8C68     		ldr	r4, [r1, #8]
+ 317              		.loc 1 242 94 view .LVU107
+ 318 004c 0D69     		ldr	r5, [r1, #16]
+ 319              		.loc 1 242 79 view .LVU108
+ 320 004e 641B     		subs	r4, r4, r5
+ 321              		.loc 1 242 60 view .LVU109
+ 322 0050 04FB00F4 		mul	r4, r4, r0
+ 243:Core/Src/Touch_ADS7843.c ****                         ((displayPtr[0].x - displayPtr[2].x) * (screenPtr[1].x - screenPtr[2].x)) ;
+ 323              		.loc 1 243 40 view .LVU110
+ 324 0054 0868     		ldr	r0, [r1]
+ 325              		.loc 1 243 43 view .LVU111
+ 326 0056 401B     		subs	r0, r0, r5
+ 327              		.loc 1 243 77 view .LVU112
+ 328 0058 9568     		ldr	r5, [r2, #8]
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 11
+
+
+ 329              		.loc 1 243 80 view .LVU113
+ 330 005a AD1B     		subs	r5, r5, r6
+ 242:Core/Src/Touch_ADS7843.c ****                         ((displayPtr[0].x - displayPtr[2].x) * (screenPtr[1].x - screenPtr[2].x)) ;
+ 331              		.loc 1 242 99 view .LVU114
+ 332 005c 05FB1040 		mls	r0, r5, r0, r4
+ 242:Core/Src/Touch_ADS7843.c ****                         ((displayPtr[0].x - displayPtr[2].x) * (screenPtr[1].x - screenPtr[2].x)) ;
+ 333              		.loc 1 242 23 view .LVU115
+ 334 0060 5860     		str	r0, [r3, #4]
+ 244:Core/Src/Touch_ADS7843.c ****         //                 Ys0*(Xs2*Xd1 - Xs1*Xd2) + Ys1*(Xs0*Xd2 - Xs2*Xd0) + Ys2*(Xs1*Xd0 - Xs0*X
+ 245:Core/Src/Touch_ADS7843.c ****         //            C = -------------------------------------------------------------------------
+ 246:Core/Src/Touch_ADS7843.c ****         //                                   K
+ 247:Core/Src/Touch_ADS7843.c ****         matrixPtr->Cn = (screenPtr[2].x * displayPtr[1].x - screenPtr[1].x * displayPtr[2].x) * scr
+ 335              		.loc 1 247 9 is_stmt 1 view .LVU116
+ 336              		.loc 1 247 38 is_stmt 0 view .LVU117
+ 337 0062 1569     		ldr	r5, [r2, #16]
+ 338              		.loc 1 247 56 view .LVU118
+ 339 0064 8868     		ldr	r0, [r1, #8]
+ 340              		.loc 1 247 41 view .LVU119
+ 341 0066 00FB05F6 		mul	r6, r0, r5
+ 342              		.loc 1 247 73 view .LVU120
+ 343 006a D2F808E0 		ldr	lr, [r2, #8]
+ 344              		.loc 1 247 91 view .LVU121
+ 345 006e 0F69     		ldr	r7, [r1, #16]
+ 346              		.loc 1 247 59 view .LVU122
+ 347 0070 07FB1E68 		mls	r8, r7, lr, r6
+ 348              		.loc 1 247 109 view .LVU123
+ 349 0074 5668     		ldr	r6, [r2, #4]
+ 248:Core/Src/Touch_ADS7843.c ****                         (screenPtr[0].x * displayPtr[2].x - screenPtr[2].x * displayPtr[0].x) * scr
+ 350              		.loc 1 248 38 view .LVU124
+ 351 0076 D2F800C0 		ldr	ip, [r2]
+ 352              		.loc 1 248 41 view .LVU125
+ 353 007a 0CFB07F7 		mul	r7, ip, r7
+ 354              		.loc 1 248 91 view .LVU126
+ 355 007e 0C68     		ldr	r4, [r1]
+ 356              		.loc 1 248 59 view .LVU127
+ 357 0080 04FB1575 		mls	r5, r4, r5, r7
+ 358              		.loc 1 248 109 view .LVU128
+ 359 0084 D768     		ldr	r7, [r2, #12]
+ 360              		.loc 1 248 95 view .LVU129
+ 361 0086 07FB05F5 		mul	r5, r7, r5
+ 247:Core/Src/Touch_ADS7843.c ****                         (screenPtr[0].x * displayPtr[2].x - screenPtr[2].x * displayPtr[0].x) * scr
+ 362              		.loc 1 247 112 view .LVU130
+ 363 008a 06FB0856 		mla	r6, r6, r8, r5
+ 249:Core/Src/Touch_ADS7843.c ****                         (screenPtr[1].x * displayPtr[0].x - screenPtr[0].x * displayPtr[1].x) * scr
+ 364              		.loc 1 249 41 view .LVU131
+ 365 008e 04FB0EF4 		mul	r4, r4, lr
+ 366              		.loc 1 249 59 view .LVU132
+ 367 0092 0CFB1040 		mls	r0, ip, r0, r4
+ 368              		.loc 1 249 109 view .LVU133
+ 369 0096 5469     		ldr	r4, [r2, #20]
+ 248:Core/Src/Touch_ADS7843.c ****                         (screenPtr[0].x * displayPtr[2].x - screenPtr[2].x * displayPtr[0].x) * scr
+ 370              		.loc 1 248 112 view .LVU134
+ 371 0098 04FB0060 		mla	r0, r4, r0, r6
+ 247:Core/Src/Touch_ADS7843.c ****                         (screenPtr[0].x * displayPtr[2].x - screenPtr[2].x * displayPtr[0].x) * scr
+ 372              		.loc 1 247 23 view .LVU135
+ 373 009c 9860     		str	r0, [r3, #8]
+ 250:Core/Src/Touch_ADS7843.c ****         //                 (Yd0 - Yd2)*(Ys1 - Ys2) - (Yd1 - Yd2)*(Ys0 - Ys2)
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 12
+
+
+ 251:Core/Src/Touch_ADS7843.c ****         //            D = ---------------------------------------------------
+ 252:Core/Src/Touch_ADS7843.c ****         //                                   K
+ 253:Core/Src/Touch_ADS7843.c ****         matrixPtr->Dn = ((displayPtr[0].y - displayPtr[2].y) * (screenPtr[1].y - screenPtr[2].y)) -
+ 374              		.loc 1 253 9 is_stmt 1 view .LVU136
+ 375              		.loc 1 253 40 is_stmt 0 view .LVU137
+ 376 009e 4C68     		ldr	r4, [r1, #4]
+ 377              		.loc 1 253 58 view .LVU138
+ 378 00a0 4D69     		ldr	r5, [r1, #20]
+ 379              		.loc 1 253 43 view .LVU139
+ 380 00a2 601B     		subs	r0, r4, r5
+ 381              		.loc 1 253 77 view .LVU140
+ 382 00a4 D468     		ldr	r4, [r2, #12]
+ 383              		.loc 1 253 94 view .LVU141
+ 384 00a6 5669     		ldr	r6, [r2, #20]
+ 385              		.loc 1 253 80 view .LVU142
+ 386 00a8 A41B     		subs	r4, r4, r6
+ 387              		.loc 1 253 62 view .LVU143
+ 388 00aa 04FB00F4 		mul	r4, r4, r0
+ 254:Core/Src/Touch_ADS7843.c ****                         ((displayPtr[1].y - displayPtr[2].y) * (screenPtr[0].y - screenPtr[2].y)) ;
+ 389              		.loc 1 254 40 view .LVU144
+ 390 00ae C868     		ldr	r0, [r1, #12]
+ 391              		.loc 1 254 43 view .LVU145
+ 392 00b0 401B     		subs	r0, r0, r5
+ 393              		.loc 1 254 77 view .LVU146
+ 394 00b2 5568     		ldr	r5, [r2, #4]
+ 395              		.loc 1 254 80 view .LVU147
+ 396 00b4 AD1B     		subs	r5, r5, r6
+ 253:Core/Src/Touch_ADS7843.c ****                         ((displayPtr[1].y - displayPtr[2].y) * (screenPtr[0].y - screenPtr[2].y)) ;
+ 397              		.loc 1 253 99 view .LVU148
+ 398 00b6 05FB1040 		mls	r0, r5, r0, r4
+ 253:Core/Src/Touch_ADS7843.c ****                         ((displayPtr[1].y - displayPtr[2].y) * (screenPtr[0].y - screenPtr[2].y)) ;
+ 399              		.loc 1 253 23 view .LVU149
+ 400 00ba D860     		str	r0, [r3, #12]
+ 255:Core/Src/Touch_ADS7843.c ****         //                 (Xs0 - Xs2)*(Yd1 - Yd2) - (Yd0 - Yd2)*(Xs1 - Xs2)
+ 256:Core/Src/Touch_ADS7843.c ****         //            E = ---------------------------------------------------
+ 257:Core/Src/Touch_ADS7843.c ****         //                                   K
+ 258:Core/Src/Touch_ADS7843.c ****         matrixPtr->En = ((screenPtr[0].x - screenPtr[2].x) * (displayPtr[1].y - displayPtr[2].y)) -
+ 401              		.loc 1 258 9 is_stmt 1 view .LVU150
+ 402              		.loc 1 258 39 is_stmt 0 view .LVU151
+ 403 00bc 1468     		ldr	r4, [r2]
+ 404              		.loc 1 258 56 view .LVU152
+ 405 00be 1669     		ldr	r6, [r2, #16]
+ 406              		.loc 1 258 42 view .LVU153
+ 407 00c0 A01B     		subs	r0, r4, r6
+ 408              		.loc 1 258 76 view .LVU154
+ 409 00c2 CC68     		ldr	r4, [r1, #12]
+ 410              		.loc 1 258 94 view .LVU155
+ 411 00c4 4D69     		ldr	r5, [r1, #20]
+ 412              		.loc 1 258 79 view .LVU156
+ 413 00c6 641B     		subs	r4, r4, r5
+ 414              		.loc 1 258 60 view .LVU157
+ 415 00c8 04FB00F4 		mul	r4, r4, r0
+ 259:Core/Src/Touch_ADS7843.c ****                         ((displayPtr[0].y - displayPtr[2].y) * (screenPtr[1].x - screenPtr[2].x)) ;
+ 416              		.loc 1 259 40 view .LVU158
+ 417 00cc 4868     		ldr	r0, [r1, #4]
+ 418              		.loc 1 259 43 view .LVU159
+ 419 00ce 401B     		subs	r0, r0, r5
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 13
+
+
+ 420              		.loc 1 259 77 view .LVU160
+ 421 00d0 9568     		ldr	r5, [r2, #8]
+ 422              		.loc 1 259 80 view .LVU161
+ 423 00d2 AD1B     		subs	r5, r5, r6
+ 258:Core/Src/Touch_ADS7843.c ****                         ((displayPtr[0].y - displayPtr[2].y) * (screenPtr[1].x - screenPtr[2].x)) ;
+ 424              		.loc 1 258 99 view .LVU162
+ 425 00d4 05FB1040 		mls	r0, r5, r0, r4
+ 258:Core/Src/Touch_ADS7843.c ****                         ((displayPtr[0].y - displayPtr[2].y) * (screenPtr[1].x - screenPtr[2].x)) ;
+ 426              		.loc 1 258 23 view .LVU163
+ 427 00d8 1861     		str	r0, [r3, #16]
+ 260:Core/Src/Touch_ADS7843.c ****         //                 Ys0*(Xs2*Yd1 - Xs1*Yd2) + Ys1*(Xs0*Yd2 - Xs2*Yd0) + Ys2*(Xs1*Yd0 - Xs0*Y
+ 261:Core/Src/Touch_ADS7843.c ****         //            F = -------------------------------------------------------------------------
+ 262:Core/Src/Touch_ADS7843.c ****         //                                   K
+ 263:Core/Src/Touch_ADS7843.c ****         matrixPtr->Fn = (screenPtr[2].x * displayPtr[1].y - screenPtr[1].x * displayPtr[2].y) * scr
+ 428              		.loc 1 263 9 is_stmt 1 view .LVU164
+ 429              		.loc 1 263 38 is_stmt 0 view .LVU165
+ 430 00da 1569     		ldr	r5, [r2, #16]
+ 431              		.loc 1 263 56 view .LVU166
+ 432 00dc C868     		ldr	r0, [r1, #12]
+ 433              		.loc 1 263 41 view .LVU167
+ 434 00de 00FB05F4 		mul	r4, r0, r5
+ 435              		.loc 1 263 73 view .LVU168
+ 436 00e2 D2F808E0 		ldr	lr, [r2, #8]
+ 437              		.loc 1 263 91 view .LVU169
+ 438 00e6 4F69     		ldr	r7, [r1, #20]
+ 439              		.loc 1 263 59 view .LVU170
+ 440 00e8 07FB1E44 		mls	r4, r7, lr, r4
+ 264:Core/Src/Touch_ADS7843.c ****                         (screenPtr[0].x * displayPtr[2].y - screenPtr[2].x * displayPtr[0].y) * scr
+ 441              		.loc 1 264 38 view .LVU171
+ 442 00ec 1668     		ldr	r6, [r2]
+ 443              		.loc 1 264 41 view .LVU172
+ 444 00ee 06FB07F7 		mul	r7, r6, r7
+ 445              		.loc 1 264 91 view .LVU173
+ 446 00f2 4968     		ldr	r1, [r1, #4]
+ 447              	.LVL31:
+ 448              		.loc 1 264 59 view .LVU174
+ 449 00f4 01FB1575 		mls	r5, r1, r5, r7
+ 450              		.loc 1 264 109 view .LVU175
+ 451 00f8 D768     		ldr	r7, [r2, #12]
+ 452              		.loc 1 264 95 view .LVU176
+ 453 00fa 07FB05F5 		mul	r5, r7, r5
+ 263:Core/Src/Touch_ADS7843.c ****                         (screenPtr[0].x * displayPtr[2].y - screenPtr[2].x * displayPtr[0].y) * scr
+ 454              		.loc 1 263 112 view .LVU177
+ 455 00fe 5768     		ldr	r7, [r2, #4]
+ 456 0100 07FB0454 		mla	r4, r7, r4, r5
+ 265:Core/Src/Touch_ADS7843.c ****                         (screenPtr[1].x * displayPtr[0].y - screenPtr[0].x * displayPtr[1].y) * scr
+ 457              		.loc 1 265 41 view .LVU178
+ 458 0104 01FB0EF1 		mul	r1, r1, lr
+ 459              		.loc 1 265 59 view .LVU179
+ 460 0108 06FB1010 		mls	r0, r6, r0, r1
+ 461              		.loc 1 265 109 view .LVU180
+ 462 010c 5269     		ldr	r2, [r2, #20]
+ 463              	.LVL32:
+ 264:Core/Src/Touch_ADS7843.c ****                         (screenPtr[0].x * displayPtr[2].y - screenPtr[2].x * displayPtr[0].y) * scr
+ 464              		.loc 1 264 112 view .LVU181
+ 465 010e 02FB0040 		mla	r0, r2, r0, r4
+ 263:Core/Src/Touch_ADS7843.c ****                         (screenPtr[0].x * displayPtr[2].y - screenPtr[2].x * displayPtr[0].y) * scr
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 14
+
+
+ 466              		.loc 1 263 23 view .LVU182
+ 467 0112 5861     		str	r0, [r3, #20]
+ 224:Core/Src/Touch_ADS7843.c ****     // K = (Xs0 - Xs2)*(Ys1 - Ys2) - (Xs1 - Xs2)*(Ys0 - Ys2)
+ 468              		.loc 1 224 13 view .LVU183
+ 469 0114 0020     		movs	r0, #0
+ 470 0116 00E0     		b	.L18
+ 471              	.LVL33:
+ 472              	.L19:
+ 230:Core/Src/Touch_ADS7843.c ****     }
+ 473              		.loc 1 230 22 view .LVU184
+ 474 0118 0120     		movs	r0, #1
+ 475              	.LVL34:
+ 476              	.L18:
+ 266:Core/Src/Touch_ADS7843.c ****     }
+ 267:Core/Src/Touch_ADS7843.c ****     return( retTHRESHOLD ) ;
+ 477              		.loc 1 267 5 is_stmt 1 view .LVU185
+ 268:Core/Src/Touch_ADS7843.c **** }
+ 478              		.loc 1 268 1 is_stmt 0 view .LVU186
+ 479 011a BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 480              		.cfi_endproc
+ 481              	.LFE6:
+ 483              		.section	.text.DrawCross,"ax",%progbits
+ 484              		.align	1
+ 485              		.syntax unified
+ 486              		.thumb
+ 487              		.thumb_func
+ 488              		.fpu fpv5-d16
+ 490              	DrawCross:
+ 491              	.LVL35:
+ 492              	.LFB4:
+ 138:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos-15,Ypos,Xpos-2,Ypos,White);
+ 493              		.loc 1 138 1 is_stmt 1 view -0
+ 494              		.cfi_startproc
+ 495              		@ args = 0, pretend = 0, frame = 8
+ 496              		@ frame_needed = 0, uses_anonymous_args = 0
+ 138:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos-15,Ypos,Xpos-2,Ypos,White);
+ 497              		.loc 1 138 1 is_stmt 0 view .LVU188
+ 498 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+ 499              	.LCFI3:
+ 500              		.cfi_def_cfa_offset 36
+ 501              		.cfi_offset 4, -36
+ 502              		.cfi_offset 5, -32
+ 503              		.cfi_offset 6, -28
+ 504              		.cfi_offset 7, -24
+ 505              		.cfi_offset 8, -20
+ 506              		.cfi_offset 9, -16
+ 507              		.cfi_offset 10, -12
+ 508              		.cfi_offset 11, -8
+ 509              		.cfi_offset 14, -4
+ 510 0004 85B0     		sub	sp, sp, #20
+ 511              	.LCFI4:
+ 512              		.cfi_def_cfa_offset 56
+ 513 0006 0546     		mov	r5, r0
+ 514 0008 0C46     		mov	r4, r1
+ 515 000a 1646     		mov	r6, r2
+ 139:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos+2,Ypos,Xpos+15,Ypos,White);
+ 516              		.loc 1 139 5 is_stmt 1 view .LVU189
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 15
+
+
+ 139:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos+2,Ypos,Xpos+15,Ypos,White);
+ 517              		.loc 1 139 42 is_stmt 0 view .LVU190
+ 518 000c A1F10F0A 		sub	r10, r1, #15
+ 139:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos+2,Ypos,Xpos+15,Ypos,White);
+ 519              		.loc 1 139 5 view .LVU191
+ 520 0010 4FF6FF77 		movw	r7, #65535
+ 521 0014 0197     		str	r7, [sp, #4]
+ 522 0016 0092     		str	r2, [sp]
+ 523 0018 8B1E     		subs	r3, r1, #2
+ 524 001a 5146     		mov	r1, r10
+ 525              	.LVL36:
+ 139:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos+2,Ypos,Xpos+15,Ypos,White);
+ 526              		.loc 1 139 5 view .LVU192
+ 527 001c 0069     		ldr	r0, [r0, #16]
+ 528              	.LVL37:
+ 139:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos+2,Ypos,Xpos+15,Ypos,White);
+ 529              		.loc 1 139 5 view .LVU193
+ 530 001e FFF7FEFF 		bl	SPI_TFT_ILI9341_line
+ 531              	.LVL38:
+ 140:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos,Ypos-15,Xpos,Ypos-2,White);
+ 532              		.loc 1 140 5 is_stmt 1 view .LVU194
+ 140:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos,Ypos-15,Xpos,Ypos-2,White);
+ 533              		.loc 1 140 54 is_stmt 0 view .LVU195
+ 534 0022 04F10F0B 		add	fp, r4, #15
+ 140:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos,Ypos-15,Xpos,Ypos-2,White);
+ 535              		.loc 1 140 5 view .LVU196
+ 536 0026 0197     		str	r7, [sp, #4]
+ 537 0028 0096     		str	r6, [sp]
+ 538 002a 5B46     		mov	r3, fp
+ 539 002c 3246     		mov	r2, r6
+ 540 002e A11C     		adds	r1, r4, #2
+ 541 0030 2869     		ldr	r0, [r5, #16]
+ 542 0032 FFF7FEFF 		bl	SPI_TFT_ILI9341_line
+ 543              	.LVL39:
+ 141:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos,Ypos+2,Xpos,Ypos+15,White);
+ 544              		.loc 1 141 5 is_stmt 1 view .LVU197
+ 141:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos,Ypos+2,Xpos,Ypos+15,White);
+ 545              		.loc 1 141 47 is_stmt 0 view .LVU198
+ 546 0036 A6F10F08 		sub	r8, r6, #15
+ 141:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos,Ypos+2,Xpos,Ypos+15,White);
+ 547              		.loc 1 141 60 view .LVU199
+ 548 003a B31E     		subs	r3, r6, #2
+ 141:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos,Ypos+2,Xpos,Ypos+15,White);
+ 549              		.loc 1 141 5 view .LVU200
+ 550 003c 0197     		str	r7, [sp, #4]
+ 551 003e 0093     		str	r3, [sp]
+ 552 0040 2346     		mov	r3, r4
+ 553 0042 4246     		mov	r2, r8
+ 554 0044 2146     		mov	r1, r4
+ 555 0046 2869     		ldr	r0, [r5, #16]
+ 556 0048 FFF7FEFF 		bl	SPI_TFT_ILI9341_line
+ 557              	.LVL40:
+ 142:Core/Src/Touch_ADS7843.c **** 
+ 558              		.loc 1 142 5 is_stmt 1 view .LVU201
+ 142:Core/Src/Touch_ADS7843.c **** 
+ 559              		.loc 1 142 59 is_stmt 0 view .LVU202
+ 560 004c 06F10F09 		add	r9, r6, #15
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 16
+
+
+ 142:Core/Src/Touch_ADS7843.c **** 
+ 561              		.loc 1 142 5 view .LVU203
+ 562 0050 0197     		str	r7, [sp, #4]
+ 563 0052 CDF80090 		str	r9, [sp]
+ 564 0056 2346     		mov	r3, r4
+ 565 0058 B21C     		adds	r2, r6, #2
+ 566 005a 2146     		mov	r1, r4
+ 567 005c 2869     		ldr	r0, [r5, #16]
+ 568 005e FFF7FEFF 		bl	SPI_TFT_ILI9341_line
+ 569              	.LVL41:
+ 144:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos-15,Ypos+7,Xpos-15,Ypos+15,DarkGrey);
+ 570              		.loc 1 144 5 is_stmt 1 view .LVU204
+ 144:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos-15,Ypos+7,Xpos-15,Ypos+15,DarkGrey);
+ 571              		.loc 1 144 58 is_stmt 0 view .LVU205
+ 572 0062 E31F     		subs	r3, r4, #7
+ 144:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos-15,Ypos+7,Xpos-15,Ypos+15,DarkGrey);
+ 573              		.loc 1 144 5 view .LVU206
+ 574 0064 47F6EF37 		movw	r7, #31727
+ 575 0068 0197     		str	r7, [sp, #4]
+ 576 006a CDF80090 		str	r9, [sp]
+ 577 006e 0293     		str	r3, [sp, #8]
+ 578 0070 4A46     		mov	r2, r9
+ 579 0072 5146     		mov	r1, r10
+ 580 0074 2869     		ldr	r0, [r5, #16]
+ 581 0076 FFF7FEFF 		bl	SPI_TFT_ILI9341_line
+ 582              	.LVL42:
+ 145:Core/Src/Touch_ADS7843.c **** 
+ 583              		.loc 1 145 5 is_stmt 1 view .LVU207
+ 145:Core/Src/Touch_ADS7843.c **** 
+ 584              		.loc 1 145 50 is_stmt 0 view .LVU208
+ 585 007a F21D     		adds	r2, r6, #7
+ 145:Core/Src/Touch_ADS7843.c **** 
+ 586              		.loc 1 145 5 view .LVU209
+ 587 007c 0197     		str	r7, [sp, #4]
+ 588 007e CDF80090 		str	r9, [sp]
+ 589 0082 5346     		mov	r3, r10
+ 590 0084 0392     		str	r2, [sp, #12]
+ 591 0086 5146     		mov	r1, r10
+ 592 0088 2869     		ldr	r0, [r5, #16]
+ 593 008a FFF7FEFF 		bl	SPI_TFT_ILI9341_line
+ 594              	.LVL43:
+ 147:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos-15,Ypos-7,Xpos-15,Ypos-15,DarkGrey);
+ 595              		.loc 1 147 5 is_stmt 1 view .LVU210
+ 596 008e 0197     		str	r7, [sp, #4]
+ 597 0090 CDF80080 		str	r8, [sp]
+ 598 0094 029B     		ldr	r3, [sp, #8]
+ 599 0096 4246     		mov	r2, r8
+ 600 0098 5146     		mov	r1, r10
+ 601 009a 2869     		ldr	r0, [r5, #16]
+ 602 009c FFF7FEFF 		bl	SPI_TFT_ILI9341_line
+ 603              	.LVL44:
+ 148:Core/Src/Touch_ADS7843.c **** 
+ 604              		.loc 1 148 5 view .LVU211
+ 148:Core/Src/Touch_ADS7843.c **** 
+ 605              		.loc 1 148 50 is_stmt 0 view .LVU212
+ 606 00a0 073E     		subs	r6, r6, #7
+ 607              	.LVL45:
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 17
+
+
+ 148:Core/Src/Touch_ADS7843.c **** 
+ 608              		.loc 1 148 5 view .LVU213
+ 609 00a2 0197     		str	r7, [sp, #4]
+ 610 00a4 CDF80080 		str	r8, [sp]
+ 611 00a8 5346     		mov	r3, r10
+ 612 00aa 3246     		mov	r2, r6
+ 613 00ac 5146     		mov	r1, r10
+ 614 00ae 2869     		ldr	r0, [r5, #16]
+ 615 00b0 FFF7FEFF 		bl	SPI_TFT_ILI9341_line
+ 616              	.LVL46:
+ 150:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos+15,Ypos+7,Xpos+15,Ypos+15,DarkGrey);
+ 617              		.loc 1 150 5 is_stmt 1 view .LVU214
+ 150:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos+15,Ypos+7,Xpos+15,Ypos+15,DarkGrey);
+ 618              		.loc 1 150 42 is_stmt 0 view .LVU215
+ 619 00b4 0734     		adds	r4, r4, #7
+ 620              	.LVL47:
+ 150:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos+15,Ypos+7,Xpos+15,Ypos+15,DarkGrey);
+ 621              		.loc 1 150 5 view .LVU216
+ 622 00b6 0197     		str	r7, [sp, #4]
+ 623 00b8 CDF80090 		str	r9, [sp]
+ 624 00bc 5B46     		mov	r3, fp
+ 625 00be 4A46     		mov	r2, r9
+ 626 00c0 2146     		mov	r1, r4
+ 627 00c2 2869     		ldr	r0, [r5, #16]
+ 628 00c4 FFF7FEFF 		bl	SPI_TFT_ILI9341_line
+ 629              	.LVL48:
+ 151:Core/Src/Touch_ADS7843.c **** 
+ 630              		.loc 1 151 5 is_stmt 1 view .LVU217
+ 631 00c8 0197     		str	r7, [sp, #4]
+ 632 00ca CDF80090 		str	r9, [sp]
+ 633 00ce 5B46     		mov	r3, fp
+ 634 00d0 039A     		ldr	r2, [sp, #12]
+ 635 00d2 5946     		mov	r1, fp
+ 636 00d4 2869     		ldr	r0, [r5, #16]
+ 637 00d6 FFF7FEFF 		bl	SPI_TFT_ILI9341_line
+ 638              	.LVL49:
+ 153:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_line(handle->LCD,Xpos+15,Ypos-15,Xpos+15,Ypos-7,DarkGrey);
+ 639              		.loc 1 153 5 view .LVU218
+ 640 00da 0197     		str	r7, [sp, #4]
+ 641 00dc CDF80080 		str	r8, [sp]
+ 642 00e0 5B46     		mov	r3, fp
+ 643 00e2 4246     		mov	r2, r8
+ 644 00e4 2146     		mov	r1, r4
+ 645 00e6 2869     		ldr	r0, [r5, #16]
+ 646 00e8 FFF7FEFF 		bl	SPI_TFT_ILI9341_line
+ 647              	.LVL50:
+ 154:Core/Src/Touch_ADS7843.c **** }
+ 648              		.loc 1 154 5 view .LVU219
+ 649 00ec 0197     		str	r7, [sp, #4]
+ 650 00ee 0096     		str	r6, [sp]
+ 651 00f0 5B46     		mov	r3, fp
+ 652 00f2 4246     		mov	r2, r8
+ 653 00f4 5946     		mov	r1, fp
+ 654 00f6 2869     		ldr	r0, [r5, #16]
+ 655 00f8 FFF7FEFF 		bl	SPI_TFT_ILI9341_line
+ 656              	.LVL51:
+ 155:Core/Src/Touch_ADS7843.c **** 
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 18
+
+
+ 657              		.loc 1 155 1 is_stmt 0 view .LVU220
+ 658 00fc 05B0     		add	sp, sp, #20
+ 659              	.LCFI5:
+ 660              		.cfi_def_cfa_offset 36
+ 661              		@ sp needed
+ 662 00fe BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 155:Core/Src/Touch_ADS7843.c **** 
+ 663              		.loc 1 155 1 view .LVU221
+ 664              		.cfi_endproc
+ 665              	.LFE4:
+ 667              		.section	.text.Touch_ADS7843,"ax",%progbits
+ 668              		.align	1
+ 669              		.global	Touch_ADS7843
+ 670              		.syntax unified
+ 671              		.thumb
+ 672              		.thumb_func
+ 673              		.fpu fpv5-d16
+ 675              	Touch_ADS7843:
+ 676              	.LVL52:
+ 677              	.LFB0:
+  66:Core/Src/Touch_ADS7843.c ****     handle->LCD = _LCD;
+ 678              		.loc 1 66 1 is_stmt 1 view -0
+ 679              		.cfi_startproc
+ 680              		@ args = 8, pretend = 0, frame = 0
+ 681              		@ frame_needed = 0, uses_anonymous_args = 0
+  66:Core/Src/Touch_ADS7843.c ****     handle->LCD = _LCD;
+ 682              		.loc 1 66 1 is_stmt 0 view .LVU223
+ 683 0000 10B5     		push	{r4, lr}
+ 684              	.LCFI6:
+ 685              		.cfi_def_cfa_offset 8
+ 686              		.cfi_offset 4, -8
+ 687              		.cfi_offset 14, -4
+  67:Core/Src/Touch_ADS7843.c ****     handle->_tp_spi = spi;
+ 688              		.loc 1 67 5 is_stmt 1 view .LVU224
+  67:Core/Src/Touch_ADS7843.c ****     handle->_tp_spi = spi;
+ 689              		.loc 1 67 17 is_stmt 0 view .LVU225
+ 690 0002 039C     		ldr	r4, [sp, #12]
+ 691 0004 0461     		str	r4, [r0, #16]
+  68:Core/Src/Touch_ADS7843.c ****     handle->_tp_cs = tp_cs;
+ 692              		.loc 1 68 5 is_stmt 1 view .LVU226
+  68:Core/Src/Touch_ADS7843.c ****     handle->_tp_cs = tp_cs;
+ 693              		.loc 1 68 21 is_stmt 0 view .LVU227
+ 694 0006 4161     		str	r1, [r0, #20]
+  69:Core/Src/Touch_ADS7843.c ****     handle->_tp_irq = tp_irq;
+ 695              		.loc 1 69 5 is_stmt 1 view .LVU228
+  69:Core/Src/Touch_ADS7843.c ****     handle->_tp_irq = tp_irq;
+ 696              		.loc 1 69 20 is_stmt 0 view .LVU229
+ 697 0008 8261     		str	r2, [r0, #24]
+  70:Core/Src/Touch_ADS7843.c ****     handle->_waitms = waitms;
+ 698              		.loc 1 70 5 is_stmt 1 view .LVU230
+  70:Core/Src/Touch_ADS7843.c ****     handle->_waitms = waitms;
+ 699              		.loc 1 70 21 is_stmt 0 view .LVU231
+ 700 000a C361     		str	r3, [r0, #28]
+  71:Core/Src/Touch_ADS7843.c ****     handle->DisplaySample[0].x=45;
+ 701              		.loc 1 71 5 is_stmt 1 view .LVU232
+  71:Core/Src/Touch_ADS7843.c ****     handle->DisplaySample[0].x=45;
+ 702              		.loc 1 71 21 is_stmt 0 view .LVU233
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 19
+
+
+ 703 000c 029B     		ldr	r3, [sp, #8]
+ 704              	.LVL53:
+  71:Core/Src/Touch_ADS7843.c ****     handle->DisplaySample[0].x=45;
+ 705              		.loc 1 71 21 view .LVU234
+ 706 000e 0362     		str	r3, [r0, #32]
+  72:Core/Src/Touch_ADS7843.c ****     handle->DisplaySample[0].y=45;
+ 707              		.loc 1 72 5 is_stmt 1 view .LVU235
+  72:Core/Src/Touch_ADS7843.c ****     handle->DisplaySample[0].y=45;
+ 708              		.loc 1 72 31 is_stmt 0 view .LVU236
+ 709 0010 2D23     		movs	r3, #45
+ 710 0012 4362     		str	r3, [r0, #36]
+  73:Core/Src/Touch_ADS7843.c ****     handle->DisplaySample[1].x=45;
+ 711              		.loc 1 73 5 is_stmt 1 view .LVU237
+  73:Core/Src/Touch_ADS7843.c ****     handle->DisplaySample[1].x=45;
+ 712              		.loc 1 73 31 is_stmt 0 view .LVU238
+ 713 0014 8362     		str	r3, [r0, #40]
+  74:Core/Src/Touch_ADS7843.c ****     handle->DisplaySample[1].y=210;
+ 714              		.loc 1 74 5 is_stmt 1 view .LVU239
+  74:Core/Src/Touch_ADS7843.c ****     handle->DisplaySample[1].y=210;
+ 715              		.loc 1 74 31 is_stmt 0 view .LVU240
+ 716 0016 C362     		str	r3, [r0, #44]
+  75:Core/Src/Touch_ADS7843.c ****     handle->DisplaySample[2].x=190;
+ 717              		.loc 1 75 5 is_stmt 1 view .LVU241
+  75:Core/Src/Touch_ADS7843.c ****     handle->DisplaySample[2].x=190;
+ 718              		.loc 1 75 31 is_stmt 0 view .LVU242
+ 719 0018 D224     		movs	r4, #210
+ 720 001a 0463     		str	r4, [r0, #48]
+  76:Core/Src/Touch_ADS7843.c ****     handle->DisplaySample[2].y=190;
+ 721              		.loc 1 76 5 is_stmt 1 view .LVU243
+  76:Core/Src/Touch_ADS7843.c ****     handle->DisplaySample[2].y=190;
+ 722              		.loc 1 76 31 is_stmt 0 view .LVU244
+ 723 001c BE21     		movs	r1, #190
+ 724              	.LVL54:
+  76:Core/Src/Touch_ADS7843.c ****     handle->DisplaySample[2].y=190;
+ 725              		.loc 1 76 31 view .LVU245
+ 726 001e 4163     		str	r1, [r0, #52]
+  77:Core/Src/Touch_ADS7843.c ****     handle->ScreenSample[0].x=45;
+ 727              		.loc 1 77 5 is_stmt 1 view .LVU246
+  77:Core/Src/Touch_ADS7843.c ****     handle->ScreenSample[0].x=45;
+ 728              		.loc 1 77 31 is_stmt 0 view .LVU247
+ 729 0020 8163     		str	r1, [r0, #56]
+  78:Core/Src/Touch_ADS7843.c ****     handle->ScreenSample[0].y=45;
+ 730              		.loc 1 78 5 is_stmt 1 view .LVU248
+  78:Core/Src/Touch_ADS7843.c ****     handle->ScreenSample[0].y=45;
+ 731              		.loc 1 78 30 is_stmt 0 view .LVU249
+ 732 0022 C363     		str	r3, [r0, #60]
+  79:Core/Src/Touch_ADS7843.c ****     handle->ScreenSample[1].x=45;
+ 733              		.loc 1 79 5 is_stmt 1 view .LVU250
+  79:Core/Src/Touch_ADS7843.c ****     handle->ScreenSample[1].x=45;
+ 734              		.loc 1 79 30 is_stmt 0 view .LVU251
+ 735 0024 0364     		str	r3, [r0, #64]
+  80:Core/Src/Touch_ADS7843.c ****     handle->ScreenSample[1].y=210;
+ 736              		.loc 1 80 5 is_stmt 1 view .LVU252
+  80:Core/Src/Touch_ADS7843.c ****     handle->ScreenSample[1].y=210;
+ 737              		.loc 1 80 30 is_stmt 0 view .LVU253
+ 738 0026 4364     		str	r3, [r0, #68]
+  81:Core/Src/Touch_ADS7843.c ****     handle->ScreenSample[2].x=190;
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 20
+
+
+ 739              		.loc 1 81 5 is_stmt 1 view .LVU254
+  81:Core/Src/Touch_ADS7843.c ****     handle->ScreenSample[2].x=190;
+ 740              		.loc 1 81 30 is_stmt 0 view .LVU255
+ 741 0028 8464     		str	r4, [r0, #72]
+  82:Core/Src/Touch_ADS7843.c ****     handle->ScreenSample[2].y=190;
+ 742              		.loc 1 82 5 is_stmt 1 view .LVU256
+  82:Core/Src/Touch_ADS7843.c ****     handle->ScreenSample[2].y=190;
+ 743              		.loc 1 82 30 is_stmt 0 view .LVU257
+ 744 002a C164     		str	r1, [r0, #76]
+  83:Core/Src/Touch_ADS7843.c ****     handle->_tp_cs(1);
+ 745              		.loc 1 83 5 is_stmt 1 view .LVU258
+  83:Core/Src/Touch_ADS7843.c ****     handle->_tp_cs(1);
+ 746              		.loc 1 83 30 is_stmt 0 view .LVU259
+ 747 002c 0165     		str	r1, [r0, #80]
+  84:Core/Src/Touch_ADS7843.c ****     //handle->_tp_spi->frequency(850000);  //500000
+ 748              		.loc 1 84 5 is_stmt 1 view .LVU260
+ 749 002e 0120     		movs	r0, #1
+ 750              	.LVL55:
+  84:Core/Src/Touch_ADS7843.c ****     //handle->_tp_spi->frequency(850000);  //500000
+ 751              		.loc 1 84 5 is_stmt 0 view .LVU261
+ 752 0030 9047     		blx	r2
+ 753              	.LVL56:
+  87:Core/Src/Touch_ADS7843.c **** 
+ 754              		.loc 1 87 1 view .LVU262
+ 755 0032 10BD     		pop	{r4, pc}
+  87:Core/Src/Touch_ADS7843.c **** 
+ 756              		.loc 1 87 1 view .LVU263
+ 757              		.cfi_endproc
+ 758              	.LFE0:
+ 760              		.section	.text.Touch_ADS7843_OnTouch,"ax",%progbits
+ 761              		.align	1
+ 762              		.global	Touch_ADS7843_OnTouch
+ 763              		.syntax unified
+ 764              		.thumb
+ 765              		.thumb_func
+ 766              		.fpu fpv5-d16
+ 768              	Touch_ADS7843_OnTouch:
+ 769              	.LVL57:
+ 770              	.LFB1:
+  89:Core/Src/Touch_ADS7843.c **** 
+ 771              		.loc 1 89 67 is_stmt 1 view -0
+ 772              		.cfi_startproc
+ 773              		@ args = 0, pretend = 0, frame = 0
+ 774              		@ frame_needed = 0, uses_anonymous_args = 0
+  89:Core/Src/Touch_ADS7843.c **** 
+ 775              		.loc 1 89 67 is_stmt 0 view .LVU265
+ 776 0000 08B5     		push	{r3, lr}
+ 777              	.LCFI7:
+ 778              		.cfi_def_cfa_offset 8
+ 779              		.cfi_offset 3, -8
+ 780              		.cfi_offset 14, -4
+  89:Core/Src/Touch_ADS7843.c **** 
+ 781              		.loc 1 89 69 is_stmt 1 view .LVU266
+  89:Core/Src/Touch_ADS7843.c **** 
+ 782              		.loc 1 89 84 is_stmt 0 view .LVU267
+ 783 0002 C369     		ldr	r3, [r0, #28]
+  89:Core/Src/Touch_ADS7843.c **** 
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 21
+
+
+ 784              		.loc 1 89 78 view .LVU268
+ 785 0004 9847     		blx	r3
+ 786              	.LVL58:
+  89:Core/Src/Touch_ADS7843.c **** 
+ 787              		.loc 1 89 1 view .LVU269
+ 788 0006 B0FA80F0 		clz	r0, r0
+ 789 000a 4009     		lsrs	r0, r0, #5
+ 790 000c 08BD     		pop	{r3, pc}
+ 791              		.cfi_endproc
+ 792              	.LFE1:
+ 794              		.section	.text.Touch_ADS7843_ReadADS7843,"ax",%progbits
+ 795              		.align	1
+ 796              		.global	Touch_ADS7843_ReadADS7843
+ 797              		.syntax unified
+ 798              		.thumb
+ 799              		.thumb_func
+ 800              		.fpu fpv5-d16
+ 802              	Touch_ADS7843_ReadADS7843:
+ 803              	.LVL59:
+ 804              	.LFB5:
+ 158:Core/Src/Touch_ADS7843.c ****     int m0,m1,m2,TP_X[1],TP_Y[1],temp[3];
+ 805              		.loc 1 158 1 is_stmt 1 view -0
+ 806              		.cfi_startproc
+ 807              		@ args = 0, pretend = 0, frame = 80
+ 808              		@ frame_needed = 0, uses_anonymous_args = 0
+ 158:Core/Src/Touch_ADS7843.c ****     int m0,m1,m2,TP_X[1],TP_Y[1],temp[3];
+ 809              		.loc 1 158 1 is_stmt 0 view .LVU271
+ 810 0000 70B5     		push	{r4, r5, r6, lr}
+ 811              	.LCFI8:
+ 812              		.cfi_def_cfa_offset 16
+ 813              		.cfi_offset 4, -16
+ 814              		.cfi_offset 5, -12
+ 815              		.cfi_offset 6, -8
+ 816              		.cfi_offset 14, -4
+ 817 0002 94B0     		sub	sp, sp, #80
+ 818              	.LCFI9:
+ 819              		.cfi_def_cfa_offset 96
+ 820 0004 0546     		mov	r5, r0
+ 821 0006 0E46     		mov	r6, r1
+ 159:Core/Src/Touch_ADS7843.c ****     uint8_t count=0;
+ 822              		.loc 1 159 5 is_stmt 1 view .LVU272
+ 160:Core/Src/Touch_ADS7843.c ****     int buffer[2][9]={{0},{0}};
+ 823              		.loc 1 160 5 view .LVU273
+ 824              	.LVL60:
+ 161:Core/Src/Touch_ADS7843.c ****     if (!screenPtr) screenPtr = &(handle->screen);
+ 825              		.loc 1 161 5 view .LVU274
+ 161:Core/Src/Touch_ADS7843.c ****     if (!screenPtr) screenPtr = &(handle->screen);
+ 826              		.loc 1 161 9 is_stmt 0 view .LVU275
+ 827 0008 4822     		movs	r2, #72
+ 828 000a 0021     		movs	r1, #0
+ 829              	.LVL61:
+ 161:Core/Src/Touch_ADS7843.c ****     if (!screenPtr) screenPtr = &(handle->screen);
+ 830              		.loc 1 161 9 view .LVU276
+ 831 000c 6846     		mov	r0, sp
+ 832              	.LVL62:
+ 161:Core/Src/Touch_ADS7843.c ****     if (!screenPtr) screenPtr = &(handle->screen);
+ 833              		.loc 1 161 9 view .LVU277
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 22
+
+
+ 834 000e FFF7FEFF 		bl	memset
+ 835              	.LVL63:
+ 162:Core/Src/Touch_ADS7843.c ****     do
+ 836              		.loc 1 162 5 is_stmt 1 view .LVU278
+ 162:Core/Src/Touch_ADS7843.c ****     do
+ 837              		.loc 1 162 8 is_stmt 0 view .LVU279
+ 838 0012 FEB1     		cbz	r6, .L54
+ 839              	.L28:
+ 158:Core/Src/Touch_ADS7843.c ****     int m0,m1,m2,TP_X[1],TP_Y[1],temp[3];
+ 840              		.loc 1 158 1 discriminator 2 view .LVU280
+ 841 0014 0024     		movs	r4, #0
+ 842              	.LVL64:
+ 843              	.L30:
+ 163:Core/Src/Touch_ADS7843.c ****     {
+ 844              		.loc 1 163 5 is_stmt 1 discriminator 2 view .LVU281
+ 165:Core/Src/Touch_ADS7843.c ****         buffer[0][count]=TP_X[0];
+ 845              		.loc 1 165 9 discriminator 2 view .LVU282
+ 846 0016 12AA     		add	r2, sp, #72
+ 847 0018 13A9     		add	r1, sp, #76
+ 848 001a 2846     		mov	r0, r5
+ 849 001c FFF7FEFF 		bl	TP_GetAdXY
+ 850              	.LVL65:
+ 166:Core/Src/Touch_ADS7843.c ****         buffer[1][count]=TP_Y[0];
+ 851              		.loc 1 166 9 discriminator 2 view .LVU283
+ 166:Core/Src/Touch_ADS7843.c ****         buffer[1][count]=TP_Y[0];
+ 852              		.loc 1 166 25 is_stmt 0 discriminator 2 view .LVU284
+ 853 0020 14AB     		add	r3, sp, #80
+ 854 0022 03EB8403 		add	r3, r3, r4, lsl #2
+ 855 0026 139A     		ldr	r2, [sp, #76]
+ 856 0028 43F8502C 		str	r2, [r3, #-80]
+ 167:Core/Src/Touch_ADS7843.c ****         count++;
+ 857              		.loc 1 167 9 is_stmt 1 discriminator 2 view .LVU285
+ 167:Core/Src/Touch_ADS7843.c ****         count++;
+ 858              		.loc 1 167 25 is_stmt 0 discriminator 2 view .LVU286
+ 859 002c 04F10903 		add	r3, r4, #9
+ 860 0030 14AA     		add	r2, sp, #80
+ 861 0032 02EB8303 		add	r3, r2, r3, lsl #2
+ 862 0036 129A     		ldr	r2, [sp, #72]
+ 863 0038 43F8502C 		str	r2, [r3, #-80]
+ 168:Core/Src/Touch_ADS7843.c ****     }
+ 864              		.loc 1 168 9 is_stmt 1 discriminator 2 view .LVU287
+ 168:Core/Src/Touch_ADS7843.c ****     }
+ 865              		.loc 1 168 14 is_stmt 0 discriminator 2 view .LVU288
+ 866 003c 0134     		adds	r4, r4, #1
+ 867              	.LVL66:
+ 168:Core/Src/Touch_ADS7843.c ****     }
+ 868              		.loc 1 168 14 discriminator 2 view .LVU289
+ 869 003e E4B2     		uxtb	r4, r4
+ 870              	.LVL67:
+ 170:Core/Src/Touch_ADS7843.c ****     if(count==9)
+ 871              		.loc 1 170 18 discriminator 2 view .LVU290
+ 872 0040 EB69     		ldr	r3, [r5, #28]
+ 170:Core/Src/Touch_ADS7843.c ****     if(count==9)
+ 873              		.loc 1 170 12 discriminator 2 view .LVU291
+ 874 0042 9847     		blx	r3
+ 875              	.LVL68:
+ 170:Core/Src/Touch_ADS7843.c ****     if(count==9)
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 23
+
+
+ 876              		.loc 1 170 5 discriminator 2 view .LVU292
+ 877 0044 08B9     		cbnz	r0, .L29
+ 170:Core/Src/Touch_ADS7843.c ****     if(count==9)
+ 878              		.loc 1 170 30 discriminator 1 view .LVU293
+ 879 0046 082C     		cmp	r4, #8
+ 880 0048 E5D9     		bls	.L30
+ 881              	.L29:
+ 171:Core/Src/Touch_ADS7843.c ****     {
+ 882              		.loc 1 171 5 is_stmt 1 view .LVU294
+ 171:Core/Src/Touch_ADS7843.c ****     {
+ 883              		.loc 1 171 7 is_stmt 0 view .LVU295
+ 884 004a 092C     		cmp	r4, #9
+ 885 004c 05D0     		beq	.L55
+ 219:Core/Src/Touch_ADS7843.c **** }
+ 886              		.loc 1 219 12 view .LVU296
+ 887 004e 0020     		movs	r0, #0
+ 888              	.LVL69:
+ 889              	.L31:
+ 220:Core/Src/Touch_ADS7843.c **** 
+ 890              		.loc 1 220 1 view .LVU297
+ 891 0050 14B0     		add	sp, sp, #80
+ 892              	.LCFI10:
+ 893              		.cfi_remember_state
+ 894              		.cfi_def_cfa_offset 16
+ 895              		@ sp needed
+ 896 0052 70BD     		pop	{r4, r5, r6, pc}
+ 897              	.LVL70:
+ 898              	.L54:
+ 899              	.LCFI11:
+ 900              		.cfi_restore_state
+ 162:Core/Src/Touch_ADS7843.c ****     do
+ 901              		.loc 1 162 21 is_stmt 1 discriminator 1 view .LVU298
+ 162:Core/Src/Touch_ADS7843.c ****     do
+ 902              		.loc 1 162 31 is_stmt 0 discriminator 1 view .LVU299
+ 903 0054 05F10806 		add	r6, r5, #8
+ 904              	.LVL71:
+ 162:Core/Src/Touch_ADS7843.c ****     do
+ 905              		.loc 1 162 31 discriminator 1 view .LVU300
+ 906 0058 DCE7     		b	.L28
+ 907              	.LVL72:
+ 908              	.L55:
+ 173:Core/Src/Touch_ADS7843.c ****         temp[1]=(buffer[0][3]+buffer[0][4]+buffer[0][5])/3;
+ 909              		.loc 1 173 9 is_stmt 1 view .LVU301
+ 173:Core/Src/Touch_ADS7843.c ****         temp[1]=(buffer[0][3]+buffer[0][4]+buffer[0][5])/3;
+ 910              		.loc 1 173 30 is_stmt 0 view .LVU302
+ 911 005a 009B     		ldr	r3, [sp]
+ 912 005c 0198     		ldr	r0, [sp, #4]
+ 913 005e 0344     		add	r3, r3, r0
+ 173:Core/Src/Touch_ADS7843.c ****         temp[1]=(buffer[0][3]+buffer[0][4]+buffer[0][5])/3;
+ 914              		.loc 1 173 53 view .LVU303
+ 915 0060 0298     		ldr	r0, [sp, #8]
+ 173:Core/Src/Touch_ADS7843.c ****         temp[1]=(buffer[0][3]+buffer[0][4]+buffer[0][5])/3;
+ 916              		.loc 1 173 43 view .LVU304
+ 917 0062 0344     		add	r3, r3, r0
+ 173:Core/Src/Touch_ADS7843.c ****         temp[1]=(buffer[0][3]+buffer[0][4]+buffer[0][5])/3;
+ 918              		.loc 1 173 57 view .LVU305
+ 919 0064 4F4A     		ldr	r2, .L64
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 24
+
+
+ 920 0066 82FB0310 		smull	r1, r0, r2, r3
+ 921 006a A0EBE370 		sub	r0, r0, r3, asr #31
+ 174:Core/Src/Touch_ADS7843.c ****         temp[2]=(buffer[0][6]+buffer[0][7]+buffer[0][8])/3;
+ 922              		.loc 1 174 9 is_stmt 1 view .LVU306
+ 174:Core/Src/Touch_ADS7843.c ****         temp[2]=(buffer[0][6]+buffer[0][7]+buffer[0][8])/3;
+ 923              		.loc 1 174 30 is_stmt 0 view .LVU307
+ 924 006e 039B     		ldr	r3, [sp, #12]
+ 925 0070 0499     		ldr	r1, [sp, #16]
+ 926 0072 0B44     		add	r3, r3, r1
+ 174:Core/Src/Touch_ADS7843.c ****         temp[2]=(buffer[0][6]+buffer[0][7]+buffer[0][8])/3;
+ 927              		.loc 1 174 53 view .LVU308
+ 928 0074 0599     		ldr	r1, [sp, #20]
+ 174:Core/Src/Touch_ADS7843.c ****         temp[2]=(buffer[0][6]+buffer[0][7]+buffer[0][8])/3;
+ 929              		.loc 1 174 43 view .LVU309
+ 930 0076 0B44     		add	r3, r3, r1
+ 174:Core/Src/Touch_ADS7843.c ****         temp[2]=(buffer[0][6]+buffer[0][7]+buffer[0][8])/3;
+ 931              		.loc 1 174 57 view .LVU310
+ 932 0078 82FB0341 		smull	r4, r1, r2, r3
+ 933              	.LVL73:
+ 174:Core/Src/Touch_ADS7843.c ****         temp[2]=(buffer[0][6]+buffer[0][7]+buffer[0][8])/3;
+ 934              		.loc 1 174 57 view .LVU311
+ 935 007c A1EBE371 		sub	r1, r1, r3, asr #31
+ 175:Core/Src/Touch_ADS7843.c ****         m0=temp[0]-temp[1];
+ 936              		.loc 1 175 9 is_stmt 1 view .LVU312
+ 175:Core/Src/Touch_ADS7843.c ****         m0=temp[0]-temp[1];
+ 937              		.loc 1 175 30 is_stmt 0 view .LVU313
+ 938 0080 069B     		ldr	r3, [sp, #24]
+ 939 0082 079C     		ldr	r4, [sp, #28]
+ 940 0084 2344     		add	r3, r3, r4
+ 175:Core/Src/Touch_ADS7843.c ****         m0=temp[0]-temp[1];
+ 941              		.loc 1 175 53 view .LVU314
+ 942 0086 089C     		ldr	r4, [sp, #32]
+ 175:Core/Src/Touch_ADS7843.c ****         m0=temp[0]-temp[1];
+ 943              		.loc 1 175 43 view .LVU315
+ 944 0088 1C44     		add	r4, r4, r3
+ 175:Core/Src/Touch_ADS7843.c ****         m0=temp[0]-temp[1];
+ 945              		.loc 1 175 57 view .LVU316
+ 946 008a 82FB0423 		smull	r2, r3, r2, r4
+ 947 008e A3EBE473 		sub	r3, r3, r4, asr #31
+ 176:Core/Src/Touch_ADS7843.c ****         m1=temp[1]-temp[2];
+ 948              		.loc 1 176 9 is_stmt 1 view .LVU317
+ 176:Core/Src/Touch_ADS7843.c ****         m1=temp[1]-temp[2];
+ 949              		.loc 1 176 11 is_stmt 0 view .LVU318
+ 950 0092 441A     		subs	r4, r0, r1
+ 951              	.LVL74:
+ 177:Core/Src/Touch_ADS7843.c ****         m2=temp[2]-temp[0];
+ 952              		.loc 1 177 9 is_stmt 1 view .LVU319
+ 177:Core/Src/Touch_ADS7843.c ****         m2=temp[2]-temp[0];
+ 953              		.loc 1 177 11 is_stmt 0 view .LVU320
+ 954 0094 CA1A     		subs	r2, r1, r3
+ 955              	.LVL75:
+ 178:Core/Src/Touch_ADS7843.c ****         m0=m0>0?m0:(-m0);
+ 956              		.loc 1 178 9 is_stmt 1 view .LVU321
+ 178:Core/Src/Touch_ADS7843.c ****         m0=m0>0?m0:(-m0);
+ 957              		.loc 1 178 11 is_stmt 0 view .LVU322
+ 958 0096 1D1A     		subs	r5, r3, r0
+ 959              	.LVL76:
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 25
+
+
+ 179:Core/Src/Touch_ADS7843.c ****         m1=m1>0?m1:(-m1);
+ 960              		.loc 1 179 9 is_stmt 1 view .LVU323
+ 179:Core/Src/Touch_ADS7843.c ****         m1=m1>0?m1:(-m1);
+ 961              		.loc 1 179 11 is_stmt 0 view .LVU324
+ 962 0098 002C     		cmp	r4, #0
+ 963 009a B8BF     		it	lt
+ 964 009c 6442     		rsblt	r4, r4, #0
+ 965              	.LVL77:
+ 180:Core/Src/Touch_ADS7843.c ****         m2=m2>0?m2:(-m2);
+ 966              		.loc 1 180 9 is_stmt 1 view .LVU325
+ 180:Core/Src/Touch_ADS7843.c ****         m2=m2>0?m2:(-m2);
+ 967              		.loc 1 180 11 is_stmt 0 view .LVU326
+ 968 009e 002A     		cmp	r2, #0
+ 969 00a0 B8BF     		it	lt
+ 970 00a2 5242     		rsblt	r2, r2, #0
+ 971              	.LVL78:
+ 181:Core/Src/Touch_ADS7843.c ****         if( (m0>THRESHOLD)  &&  (m1>THRESHOLD)  &&  (m2>THRESHOLD) ) return 0;
+ 972              		.loc 1 181 9 is_stmt 1 view .LVU327
+ 181:Core/Src/Touch_ADS7843.c ****         if( (m0>THRESHOLD)  &&  (m1>THRESHOLD)  &&  (m2>THRESHOLD) ) return 0;
+ 973              		.loc 1 181 11 is_stmt 0 view .LVU328
+ 974 00a4 002D     		cmp	r5, #0
+ 975 00a6 B8BF     		it	lt
+ 976 00a8 6D42     		rsblt	r5, r5, #0
+ 977              	.LVL79:
+ 182:Core/Src/Touch_ADS7843.c ****         if(m0<m1)
+ 978              		.loc 1 182 9 is_stmt 1 view .LVU329
+ 182:Core/Src/Touch_ADS7843.c ****         if(m0<m1)
+ 979              		.loc 1 182 11 is_stmt 0 view .LVU330
+ 980 00aa 022C     		cmp	r4, #2
+ 981 00ac C8BF     		it	gt
+ 982 00ae 022A     		cmpgt	r2, #2
+ 983 00b0 01DD     		ble	.L32
+ 182:Core/Src/Touch_ADS7843.c ****         if(m0<m1)
+ 984              		.loc 1 182 49 discriminator 1 view .LVU331
+ 985 00b2 022D     		cmp	r5, #2
+ 986 00b4 71DC     		bgt	.L51
+ 987              	.L32:
+ 183:Core/Src/Touch_ADS7843.c ****         {
+ 988              		.loc 1 183 9 is_stmt 1 view .LVU332
+ 183:Core/Src/Touch_ADS7843.c ****         {
+ 989              		.loc 1 183 11 is_stmt 0 view .LVU333
+ 990 00b6 9442     		cmp	r4, r2
+ 991 00b8 46DA     		bge	.L33
+ 185:Core/Src/Touch_ADS7843.c ****                 screenPtr->x=(temp[0]+temp[2])/2;
+ 992              		.loc 1 185 13 is_stmt 1 view .LVU334
+ 185:Core/Src/Touch_ADS7843.c ****                 screenPtr->x=(temp[0]+temp[2])/2;
+ 993              		.loc 1 185 15 is_stmt 0 view .LVU335
+ 994 00ba AC42     		cmp	r4, r5
+ 995 00bc 3DDD     		ble	.L34
+ 186:Core/Src/Touch_ADS7843.c ****             else
+ 996              		.loc 1 186 17 is_stmt 1 view .LVU336
+ 186:Core/Src/Touch_ADS7843.c ****             else
+ 997              		.loc 1 186 47 is_stmt 0 view .LVU337
+ 998 00be C318     		adds	r3, r0, r3
+ 999 00c0 39D4     		bmi	.L56
+ 1000              	.L35:
+ 1001 00c2 5B10     		asrs	r3, r3, #1
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 26
+
+
+ 186:Core/Src/Touch_ADS7843.c ****             else
+ 1002              		.loc 1 186 29 view .LVU338
+ 1003 00c4 3360     		str	r3, [r6]
+ 1004              	.L36:
+ 195:Core/Src/Touch_ADS7843.c ****         temp[1]=(buffer[1][3]+buffer[1][4]+buffer[1][5])/3;
+ 1005              		.loc 1 195 9 is_stmt 1 view .LVU339
+ 195:Core/Src/Touch_ADS7843.c ****         temp[1]=(buffer[1][3]+buffer[1][4]+buffer[1][5])/3;
+ 1006              		.loc 1 195 30 is_stmt 0 view .LVU340
+ 1007 00c6 099A     		ldr	r2, [sp, #36]
+ 1008              	.LVL80:
+ 195:Core/Src/Touch_ADS7843.c ****         temp[1]=(buffer[1][3]+buffer[1][4]+buffer[1][5])/3;
+ 1009              		.loc 1 195 30 view .LVU341
+ 1010 00c8 0A9B     		ldr	r3, [sp, #40]
+ 1011 00ca 1A44     		add	r2, r2, r3
+ 195:Core/Src/Touch_ADS7843.c ****         temp[1]=(buffer[1][3]+buffer[1][4]+buffer[1][5])/3;
+ 1012              		.loc 1 195 53 view .LVU342
+ 1013 00cc 0B9B     		ldr	r3, [sp, #44]
+ 195:Core/Src/Touch_ADS7843.c ****         temp[1]=(buffer[1][3]+buffer[1][4]+buffer[1][5])/3;
+ 1014              		.loc 1 195 43 view .LVU343
+ 1015 00ce 1A44     		add	r2, r2, r3
+ 195:Core/Src/Touch_ADS7843.c ****         temp[1]=(buffer[1][3]+buffer[1][4]+buffer[1][5])/3;
+ 1016              		.loc 1 195 57 view .LVU344
+ 1017 00d0 344B     		ldr	r3, .L64
+ 1018              	.LVL81:
+ 195:Core/Src/Touch_ADS7843.c ****         temp[1]=(buffer[1][3]+buffer[1][4]+buffer[1][5])/3;
+ 1019              		.loc 1 195 57 view .LVU345
+ 1020 00d2 83FB0210 		smull	r1, r0, r3, r2
+ 1021              	.LVL82:
+ 195:Core/Src/Touch_ADS7843.c ****         temp[1]=(buffer[1][3]+buffer[1][4]+buffer[1][5])/3;
+ 1022              		.loc 1 195 57 view .LVU346
+ 1023 00d6 A0EBE270 		sub	r0, r0, r2, asr #31
+ 196:Core/Src/Touch_ADS7843.c ****         temp[2]=(buffer[1][6]+buffer[1][7]+buffer[1][8])/3;
+ 1024              		.loc 1 196 9 is_stmt 1 view .LVU347
+ 196:Core/Src/Touch_ADS7843.c ****         temp[2]=(buffer[1][6]+buffer[1][7]+buffer[1][8])/3;
+ 1025              		.loc 1 196 30 is_stmt 0 view .LVU348
+ 1026 00da 0C9A     		ldr	r2, [sp, #48]
+ 1027 00dc 0D99     		ldr	r1, [sp, #52]
+ 1028 00de 0A44     		add	r2, r2, r1
+ 196:Core/Src/Touch_ADS7843.c ****         temp[2]=(buffer[1][6]+buffer[1][7]+buffer[1][8])/3;
+ 1029              		.loc 1 196 53 view .LVU349
+ 1030 00e0 0E99     		ldr	r1, [sp, #56]
+ 196:Core/Src/Touch_ADS7843.c ****         temp[2]=(buffer[1][6]+buffer[1][7]+buffer[1][8])/3;
+ 1031              		.loc 1 196 43 view .LVU350
+ 1032 00e2 0A44     		add	r2, r2, r1
+ 196:Core/Src/Touch_ADS7843.c ****         temp[2]=(buffer[1][6]+buffer[1][7]+buffer[1][8])/3;
+ 1033              		.loc 1 196 57 view .LVU351
+ 1034 00e4 83FB0241 		smull	r4, r1, r3, r2
+ 1035              	.LVL83:
+ 196:Core/Src/Touch_ADS7843.c ****         temp[2]=(buffer[1][6]+buffer[1][7]+buffer[1][8])/3;
+ 1036              		.loc 1 196 57 view .LVU352
+ 1037 00e8 A1EBE272 		sub	r2, r1, r2, asr #31
+ 197:Core/Src/Touch_ADS7843.c ****         m0=temp[0]-temp[1];
+ 1038              		.loc 1 197 9 is_stmt 1 view .LVU353
+ 197:Core/Src/Touch_ADS7843.c ****         m0=temp[0]-temp[1];
+ 1039              		.loc 1 197 30 is_stmt 0 view .LVU354
+ 1040 00ec 0F99     		ldr	r1, [sp, #60]
+ 1041 00ee 109C     		ldr	r4, [sp, #64]
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 27
+
+
+ 1042 00f0 2144     		add	r1, r1, r4
+ 197:Core/Src/Touch_ADS7843.c ****         m0=temp[0]-temp[1];
+ 1043              		.loc 1 197 53 view .LVU355
+ 1044 00f2 119C     		ldr	r4, [sp, #68]
+ 197:Core/Src/Touch_ADS7843.c ****         m0=temp[0]-temp[1];
+ 1045              		.loc 1 197 43 view .LVU356
+ 1046 00f4 2144     		add	r1, r1, r4
+ 197:Core/Src/Touch_ADS7843.c ****         m0=temp[0]-temp[1];
+ 1047              		.loc 1 197 57 view .LVU357
+ 1048 00f6 83FB0143 		smull	r4, r3, r3, r1
+ 1049              	.LVL84:
+ 197:Core/Src/Touch_ADS7843.c ****         m0=temp[0]-temp[1];
+ 1050              		.loc 1 197 57 view .LVU358
+ 1051 00fa A3EBE173 		sub	r3, r3, r1, asr #31
+ 198:Core/Src/Touch_ADS7843.c ****         m1=temp[1]-temp[2];
+ 1052              		.loc 1 198 9 is_stmt 1 view .LVU359
+ 198:Core/Src/Touch_ADS7843.c ****         m1=temp[1]-temp[2];
+ 1053              		.loc 1 198 11 is_stmt 0 view .LVU360
+ 1054 00fe 841A     		subs	r4, r0, r2
+ 1055              	.LVL85:
+ 199:Core/Src/Touch_ADS7843.c ****         m2=temp[2]-temp[0];
+ 1056              		.loc 1 199 9 is_stmt 1 view .LVU361
+ 199:Core/Src/Touch_ADS7843.c ****         m2=temp[2]-temp[0];
+ 1057              		.loc 1 199 11 is_stmt 0 view .LVU362
+ 1058 0100 D11A     		subs	r1, r2, r3
+ 1059              	.LVL86:
+ 200:Core/Src/Touch_ADS7843.c ****         m0=m0>0?m0:(-m0);
+ 1060              		.loc 1 200 9 is_stmt 1 view .LVU363
+ 200:Core/Src/Touch_ADS7843.c ****         m0=m0>0?m0:(-m0);
+ 1061              		.loc 1 200 11 is_stmt 0 view .LVU364
+ 1062 0102 1D1A     		subs	r5, r3, r0
+ 1063              	.LVL87:
+ 201:Core/Src/Touch_ADS7843.c ****         m1=m1>0?m1:(-m1);
+ 1064              		.loc 1 201 9 is_stmt 1 view .LVU365
+ 201:Core/Src/Touch_ADS7843.c ****         m1=m1>0?m1:(-m1);
+ 1065              		.loc 1 201 11 is_stmt 0 view .LVU366
+ 1066 0104 002C     		cmp	r4, #0
+ 1067 0106 B8BF     		it	lt
+ 1068 0108 6442     		rsblt	r4, r4, #0
+ 1069              	.LVL88:
+ 202:Core/Src/Touch_ADS7843.c ****         m2=m2>0?m2:(-m2);
+ 1070              		.loc 1 202 9 is_stmt 1 view .LVU367
+ 202:Core/Src/Touch_ADS7843.c ****         m2=m2>0?m2:(-m2);
+ 1071              		.loc 1 202 11 is_stmt 0 view .LVU368
+ 1072 010a 0029     		cmp	r1, #0
+ 1073 010c B8BF     		it	lt
+ 1074 010e 4942     		rsblt	r1, r1, #0
+ 1075              	.LVL89:
+ 203:Core/Src/Touch_ADS7843.c ****         if( (m0>THRESHOLD)  &&  (m1>THRESHOLD)  &&  (m2>THRESHOLD) ) return 0;
+ 1076              		.loc 1 203 9 is_stmt 1 view .LVU369
+ 203:Core/Src/Touch_ADS7843.c ****         if( (m0>THRESHOLD)  &&  (m1>THRESHOLD)  &&  (m2>THRESHOLD) ) return 0;
+ 1077              		.loc 1 203 11 is_stmt 0 view .LVU370
+ 1078 0110 002D     		cmp	r5, #0
+ 1079 0112 B8BF     		it	lt
+ 1080 0114 6D42     		rsblt	r5, r5, #0
+ 1081              	.LVL90:
+ 204:Core/Src/Touch_ADS7843.c **** 
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 28
+
+
+ 1082              		.loc 1 204 9 is_stmt 1 view .LVU371
+ 204:Core/Src/Touch_ADS7843.c **** 
+ 1083              		.loc 1 204 11 is_stmt 0 view .LVU372
+ 1084 0116 022C     		cmp	r4, #2
+ 1085 0118 C8BF     		it	gt
+ 1086 011a 0229     		cmpgt	r1, #2
+ 1087 011c 01DD     		ble	.L41
+ 204:Core/Src/Touch_ADS7843.c **** 
+ 1088              		.loc 1 204 49 discriminator 1 view .LVU373
+ 1089 011e 022D     		cmp	r5, #2
+ 1090 0120 3DDC     		bgt	.L52
+ 1091              	.L41:
+ 206:Core/Src/Touch_ADS7843.c ****         {
+ 1092              		.loc 1 206 9 is_stmt 1 view .LVU374
+ 206:Core/Src/Touch_ADS7843.c ****         {
+ 1093              		.loc 1 206 11 is_stmt 0 view .LVU375
+ 1094 0122 8C42     		cmp	r4, r1
+ 1095 0124 29DA     		bge	.L42
+ 208:Core/Src/Touch_ADS7843.c ****                 screenPtr->y=(temp[0]+temp[2])/2;
+ 1096              		.loc 1 208 13 is_stmt 1 view .LVU376
+ 208:Core/Src/Touch_ADS7843.c ****                 screenPtr->y=(temp[0]+temp[2])/2;
+ 1097              		.loc 1 208 15 is_stmt 0 view .LVU377
+ 1098 0126 AC42     		cmp	r4, r5
+ 1099 0128 20DD     		ble	.L43
+ 209:Core/Src/Touch_ADS7843.c ****             else
+ 1100              		.loc 1 209 17 is_stmt 1 view .LVU378
+ 209:Core/Src/Touch_ADS7843.c ****             else
+ 1101              		.loc 1 209 47 is_stmt 0 view .LVU379
+ 1102 012a C318     		adds	r3, r0, r3
+ 1103 012c 1CD4     		bmi	.L57
+ 1104              	.L44:
+ 1105 012e 5B10     		asrs	r3, r3, #1
+ 209:Core/Src/Touch_ADS7843.c ****             else
+ 1106              		.loc 1 209 29 view .LVU380
+ 1107 0130 7360     		str	r3, [r6, #4]
+ 1108              	.L45:
+ 217:Core/Src/Touch_ADS7843.c ****     }
+ 1109              		.loc 1 217 9 is_stmt 1 view .LVU381
+ 217:Core/Src/Touch_ADS7843.c ****     }
+ 1110              		.loc 1 217 16 is_stmt 0 view .LVU382
+ 1111 0132 0120     		movs	r0, #1
+ 1112 0134 8CE7     		b	.L31
+ 1113              	.LVL91:
+ 1114              	.L56:
+ 186:Core/Src/Touch_ADS7843.c ****             else
+ 1115              		.loc 1 186 47 view .LVU383
+ 1116 0136 0133     		adds	r3, r3, #1
+ 1117 0138 C3E7     		b	.L35
+ 1118              	.L34:
+ 188:Core/Src/Touch_ADS7843.c ****         }
+ 1119              		.loc 1 188 17 is_stmt 1 view .LVU384
+ 188:Core/Src/Touch_ADS7843.c ****         }
+ 1120              		.loc 1 188 47 is_stmt 0 view .LVU385
+ 1121 013a 4318     		adds	r3, r0, r1
+ 1122 013c 02D4     		bmi	.L58
+ 1123              	.L37:
+ 1124 013e 5B10     		asrs	r3, r3, #1
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 29
+
+
+ 188:Core/Src/Touch_ADS7843.c ****         }
+ 1125              		.loc 1 188 29 view .LVU386
+ 1126 0140 3360     		str	r3, [r6]
+ 1127 0142 C0E7     		b	.L36
+ 1128              	.L58:
+ 188:Core/Src/Touch_ADS7843.c ****         }
+ 1129              		.loc 1 188 47 view .LVU387
+ 1130 0144 0133     		adds	r3, r3, #1
+ 1131 0146 FAE7     		b	.L37
+ 1132              	.L33:
+ 190:Core/Src/Touch_ADS7843.c ****             screenPtr->x=(temp[0]+temp[2])/2;
+ 1133              		.loc 1 190 14 is_stmt 1 view .LVU388
+ 190:Core/Src/Touch_ADS7843.c ****             screenPtr->x=(temp[0]+temp[2])/2;
+ 1134              		.loc 1 190 16 is_stmt 0 view .LVU389
+ 1135 0148 AA42     		cmp	r2, r5
+ 1136 014a 06DD     		ble	.L38
+ 191:Core/Src/Touch_ADS7843.c ****         else
+ 1137              		.loc 1 191 13 is_stmt 1 view .LVU390
+ 191:Core/Src/Touch_ADS7843.c ****         else
+ 1138              		.loc 1 191 43 is_stmt 0 view .LVU391
+ 1139 014c C318     		adds	r3, r0, r3
+ 1140 014e 02D4     		bmi	.L59
+ 1141              	.L39:
+ 1142 0150 5B10     		asrs	r3, r3, #1
+ 191:Core/Src/Touch_ADS7843.c ****         else
+ 1143              		.loc 1 191 25 view .LVU392
+ 1144 0152 3360     		str	r3, [r6]
+ 1145 0154 B7E7     		b	.L36
+ 1146              	.L59:
+ 191:Core/Src/Touch_ADS7843.c ****         else
+ 1147              		.loc 1 191 43 view .LVU393
+ 1148 0156 0133     		adds	r3, r3, #1
+ 1149 0158 FAE7     		b	.L39
+ 1150              	.L38:
+ 193:Core/Src/Touch_ADS7843.c **** 
+ 1151              		.loc 1 193 13 is_stmt 1 view .LVU394
+ 193:Core/Src/Touch_ADS7843.c **** 
+ 1152              		.loc 1 193 43 is_stmt 0 view .LVU395
+ 1153 015a CB18     		adds	r3, r1, r3
+ 1154 015c 02D4     		bmi	.L60
+ 1155              	.L40:
+ 1156 015e 5B10     		asrs	r3, r3, #1
+ 193:Core/Src/Touch_ADS7843.c **** 
+ 1157              		.loc 1 193 25 view .LVU396
+ 1158 0160 3360     		str	r3, [r6]
+ 1159 0162 B0E7     		b	.L36
+ 1160              	.L60:
+ 193:Core/Src/Touch_ADS7843.c **** 
+ 1161              		.loc 1 193 43 view .LVU397
+ 1162 0164 0133     		adds	r3, r3, #1
+ 1163 0166 FAE7     		b	.L40
+ 1164              	.LVL92:
+ 1165              	.L57:
+ 209:Core/Src/Touch_ADS7843.c ****             else
+ 1166              		.loc 1 209 47 view .LVU398
+ 1167 0168 0133     		adds	r3, r3, #1
+ 1168 016a E0E7     		b	.L44
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 30
+
+
+ 1169              	.L43:
+ 211:Core/Src/Touch_ADS7843.c ****         }
+ 1170              		.loc 1 211 17 is_stmt 1 view .LVU399
+ 211:Core/Src/Touch_ADS7843.c ****         }
+ 1171              		.loc 1 211 47 is_stmt 0 view .LVU400
+ 1172 016c 8218     		adds	r2, r0, r2
+ 1173 016e 02D4     		bmi	.L61
+ 1174              	.L46:
+ 1175 0170 5210     		asrs	r2, r2, #1
+ 211:Core/Src/Touch_ADS7843.c ****         }
+ 1176              		.loc 1 211 29 view .LVU401
+ 1177 0172 7260     		str	r2, [r6, #4]
+ 1178 0174 DDE7     		b	.L45
+ 1179              	.L61:
+ 211:Core/Src/Touch_ADS7843.c ****         }
+ 1180              		.loc 1 211 47 view .LVU402
+ 1181 0176 0132     		adds	r2, r2, #1
+ 1182 0178 FAE7     		b	.L46
+ 1183              	.L42:
+ 213:Core/Src/Touch_ADS7843.c ****             screenPtr->y=(temp[0]+temp[2])/2;
+ 1184              		.loc 1 213 14 is_stmt 1 view .LVU403
+ 213:Core/Src/Touch_ADS7843.c ****             screenPtr->y=(temp[0]+temp[2])/2;
+ 1185              		.loc 1 213 16 is_stmt 0 view .LVU404
+ 1186 017a A942     		cmp	r1, r5
+ 1187 017c 06DD     		ble	.L47
+ 214:Core/Src/Touch_ADS7843.c ****         else
+ 1188              		.loc 1 214 13 is_stmt 1 view .LVU405
+ 214:Core/Src/Touch_ADS7843.c ****         else
+ 1189              		.loc 1 214 43 is_stmt 0 view .LVU406
+ 1190 017e C318     		adds	r3, r0, r3
+ 1191 0180 02D4     		bmi	.L62
+ 1192              	.L48:
+ 1193 0182 5B10     		asrs	r3, r3, #1
+ 214:Core/Src/Touch_ADS7843.c ****         else
+ 1194              		.loc 1 214 25 view .LVU407
+ 1195 0184 7360     		str	r3, [r6, #4]
+ 1196 0186 D4E7     		b	.L45
+ 1197              	.L62:
+ 214:Core/Src/Touch_ADS7843.c ****         else
+ 1198              		.loc 1 214 43 view .LVU408
+ 1199 0188 0133     		adds	r3, r3, #1
+ 1200 018a FAE7     		b	.L48
+ 1201              	.L47:
+ 216:Core/Src/Touch_ADS7843.c ****         return 1;
+ 1202              		.loc 1 216 13 is_stmt 1 view .LVU409
+ 216:Core/Src/Touch_ADS7843.c ****         return 1;
+ 1203              		.loc 1 216 43 is_stmt 0 view .LVU410
+ 1204 018c D318     		adds	r3, r2, r3
+ 1205 018e 02D4     		bmi	.L63
+ 1206              	.L49:
+ 1207 0190 5B10     		asrs	r3, r3, #1
+ 216:Core/Src/Touch_ADS7843.c ****         return 1;
+ 1208              		.loc 1 216 25 view .LVU411
+ 1209 0192 7360     		str	r3, [r6, #4]
+ 1210 0194 CDE7     		b	.L45
+ 1211              	.L63:
+ 216:Core/Src/Touch_ADS7843.c ****         return 1;
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 31
+
+
+ 1212              		.loc 1 216 43 view .LVU412
+ 1213 0196 0133     		adds	r3, r3, #1
+ 1214 0198 FAE7     		b	.L49
+ 1215              	.LVL93:
+ 1216              	.L51:
+ 182:Core/Src/Touch_ADS7843.c ****         if(m0<m1)
+ 1217              		.loc 1 182 77 view .LVU413
+ 1218 019a 0020     		movs	r0, #0
+ 1219 019c 58E7     		b	.L31
+ 1220              	.LVL94:
+ 1221              	.L52:
+ 204:Core/Src/Touch_ADS7843.c **** 
+ 1222              		.loc 1 204 77 view .LVU414
+ 1223 019e 0020     		movs	r0, #0
+ 1224 01a0 56E7     		b	.L31
+ 1225              	.L65:
+ 1226 01a2 00BF     		.align	2
+ 1227              	.L64:
+ 1228 01a4 56555555 		.word	1431655766
+ 1229              		.cfi_endproc
+ 1230              	.LFE5:
+ 1232              		.section	.text.Touch_ADS7843_GetDisplayPoint,"ax",%progbits
+ 1233              		.align	1
+ 1234              		.global	Touch_ADS7843_GetDisplayPoint
+ 1235              		.syntax unified
+ 1236              		.thumb
+ 1237              		.thumb_func
+ 1238              		.fpu fpv5-d16
+ 1240              	Touch_ADS7843_GetDisplayPoint:
+ 1241              	.LVL95:
+ 1242              	.LFB7:
+ 269:Core/Src/Touch_ADS7843.c **** 
+ 270:Core/Src/Touch_ADS7843.c **** uint8_t Touch_ADS7843_GetDisplayPoint(Touch_ADS7843_DriverStruct *handle)
+ 271:Core/Src/Touch_ADS7843.c **** {
+ 1243              		.loc 1 271 1 is_stmt 1 view -0
+ 1244              		.cfi_startproc
+ 1245              		@ args = 0, pretend = 0, frame = 0
+ 1246              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1247              		@ link register save eliminated.
+ 272:Core/Src/Touch_ADS7843.c ****     uint8_t retTHRESHOLD = 0 ;
+ 1248              		.loc 1 272 5 view .LVU416
+ 273:Core/Src/Touch_ADS7843.c **** 
+ 274:Core/Src/Touch_ADS7843.c ****     if( handle->matrix.Divider != 0 )
+ 1249              		.loc 1 274 5 view .LVU417
+ 1250              		.loc 1 274 23 is_stmt 0 view .LVU418
+ 1251 0000 C16E     		ldr	r1, [r0, #108]
+ 1252              		.loc 1 274 7 view .LVU419
+ 1253 0002 D9B1     		cbz	r1, .L68
+ 271:Core/Src/Touch_ADS7843.c ****     uint8_t retTHRESHOLD = 0 ;
+ 1254              		.loc 1 271 1 view .LVU420
+ 1255 0004 30B4     		push	{r4, r5}
+ 1256              	.LCFI12:
+ 1257              		.cfi_def_cfa_offset 8
+ 1258              		.cfi_offset 4, -8
+ 1259              		.cfi_offset 5, -4
+ 275:Core/Src/Touch_ADS7843.c ****     {
+ 276:Core/Src/Touch_ADS7843.c ****         // XD = AX+BY+C
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 32
+
+
+ 277:Core/Src/Touch_ADS7843.c ****         handle->display.x = ( (handle->matrix.An * handle->screen.x) +
+ 1260              		.loc 1 277 9 is_stmt 1 view .LVU421
+ 1261              		.loc 1 277 46 is_stmt 0 view .LVU422
+ 1262 0006 426D     		ldr	r2, [r0, #84]
+ 1263              		.loc 1 277 66 view .LVU423
+ 1264 0008 8368     		ldr	r3, [r0, #8]
+ 278:Core/Src/Touch_ADS7843.c ****                               (handle->matrix.Bn * handle->screen.y) +
+ 1265              		.loc 1 278 46 view .LVU424
+ 1266 000a 846D     		ldr	r4, [r0, #88]
+ 1267              		.loc 1 278 66 view .LVU425
+ 1268 000c C568     		ldr	r5, [r0, #12]
+ 1269              		.loc 1 278 50 view .LVU426
+ 1270 000e 05FB04F4 		mul	r4, r5, r4
+ 277:Core/Src/Touch_ADS7843.c ****                               (handle->matrix.Bn * handle->screen.y) +
+ 1271              		.loc 1 277 70 view .LVU427
+ 1272 0012 03FB0242 		mla	r2, r3, r2, r4
+ 279:Core/Src/Touch_ADS7843.c ****                                handle->matrix.Cn
+ 1273              		.loc 1 279 46 view .LVU428
+ 1274 0016 C46D     		ldr	r4, [r0, #92]
+ 278:Core/Src/Touch_ADS7843.c ****                               (handle->matrix.Bn * handle->screen.y) +
+ 1275              		.loc 1 278 70 view .LVU429
+ 1276 0018 2244     		add	r2, r2, r4
+ 280:Core/Src/Touch_ADS7843.c ****                             ) / handle->matrix.Divider ;
+ 1277              		.loc 1 280 31 view .LVU430
+ 1278 001a 92FBF1F2 		sdiv	r2, r2, r1
+ 277:Core/Src/Touch_ADS7843.c ****                               (handle->matrix.Bn * handle->screen.y) +
+ 1279              		.loc 1 277 27 view .LVU431
+ 1280 001e 0260     		str	r2, [r0]
+ 281:Core/Src/Touch_ADS7843.c ****         // YD = DX+EY+F
+ 282:Core/Src/Touch_ADS7843.c ****         handle->display.y = ( (handle->matrix.Dn * handle->screen.x) +
+ 1281              		.loc 1 282 9 is_stmt 1 view .LVU432
+ 1282              		.loc 1 282 46 is_stmt 0 view .LVU433
+ 1283 0020 046E     		ldr	r4, [r0, #96]
+ 283:Core/Src/Touch_ADS7843.c ****                       (handle->matrix.En * handle->screen.y) +
+ 1284              		.loc 1 283 38 view .LVU434
+ 1285 0022 426E     		ldr	r2, [r0, #100]
+ 1286              		.loc 1 283 42 view .LVU435
+ 1287 0024 02FB05F2 		mul	r2, r2, r5
+ 282:Core/Src/Touch_ADS7843.c ****                       (handle->matrix.En * handle->screen.y) +
+ 1288              		.loc 1 282 70 view .LVU436
+ 1289 0028 04FB0323 		mla	r3, r4, r3, r2
+ 284:Core/Src/Touch_ADS7843.c ****                        handle->matrix.Fn
+ 1290              		.loc 1 284 38 view .LVU437
+ 1291 002c 826E     		ldr	r2, [r0, #104]
+ 283:Core/Src/Touch_ADS7843.c ****                       (handle->matrix.En * handle->screen.y) +
+ 1292              		.loc 1 283 62 view .LVU438
+ 1293 002e 1344     		add	r3, r3, r2
+ 285:Core/Src/Touch_ADS7843.c ****                     ) / handle->matrix.Divider ;
+ 1294              		.loc 1 285 23 view .LVU439
+ 1295 0030 93FBF1F3 		sdiv	r3, r3, r1
+ 282:Core/Src/Touch_ADS7843.c ****                       (handle->matrix.En * handle->screen.y) +
+ 1296              		.loc 1 282 27 view .LVU440
+ 1297 0034 4360     		str	r3, [r0, #4]
+ 272:Core/Src/Touch_ADS7843.c **** 
+ 1298              		.loc 1 272 13 view .LVU441
+ 1299 0036 0020     		movs	r0, #0
+ 1300              	.LVL96:
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 33
+
+
+ 286:Core/Src/Touch_ADS7843.c ****     }
+ 287:Core/Src/Touch_ADS7843.c ****     else
+ 288:Core/Src/Touch_ADS7843.c ****     {
+ 289:Core/Src/Touch_ADS7843.c ****         retTHRESHOLD = 1;
+ 290:Core/Src/Touch_ADS7843.c ****     }
+ 291:Core/Src/Touch_ADS7843.c ****     return(retTHRESHOLD);
+ 1301              		.loc 1 291 5 is_stmt 1 view .LVU442
+ 292:Core/Src/Touch_ADS7843.c **** }
+ 1302              		.loc 1 292 1 is_stmt 0 view .LVU443
+ 1303 0038 30BC     		pop	{r4, r5}
+ 1304              	.LCFI13:
+ 1305              		.cfi_restore 5
+ 1306              		.cfi_restore 4
+ 1307              		.cfi_def_cfa_offset 0
+ 1308 003a 7047     		bx	lr
+ 1309              	.LVL97:
+ 1310              	.L68:
+ 289:Core/Src/Touch_ADS7843.c ****     }
+ 1311              		.loc 1 289 22 view .LVU444
+ 1312 003c 0120     		movs	r0, #1
+ 1313              	.LVL98:
+ 291:Core/Src/Touch_ADS7843.c **** }
+ 1314              		.loc 1 291 5 is_stmt 1 view .LVU445
+ 1315              		.loc 1 292 1 is_stmt 0 view .LVU446
+ 1316 003e 7047     		bx	lr
+ 1317              		.cfi_endproc
+ 1318              	.LFE7:
+ 1320              		.section	.text.Touch_ADS7843_TouchPanelCalibrate,"ax",%progbits
+ 1321              		.align	1
+ 1322              		.global	Touch_ADS7843_TouchPanelCalibrate
+ 1323              		.syntax unified
+ 1324              		.thumb
+ 1325              		.thumb_func
+ 1326              		.fpu fpv5-d16
+ 1328              	Touch_ADS7843_TouchPanelCalibrate:
+ 1329              	.LVL99:
+ 1330              	.LFB8:
+ 293:Core/Src/Touch_ADS7843.c **** 
+ 294:Core/Src/Touch_ADS7843.c **** void Touch_ADS7843_TouchPanelCalibrate(Touch_ADS7843_DriverStruct *handle, const unsigned char *p_A
+ 295:Core/Src/Touch_ADS7843.c **** {
+ 1331              		.loc 1 295 1 is_stmt 1 view -0
+ 1332              		.cfi_startproc
+ 1333              		@ args = 0, pretend = 0, frame = 8
+ 1334              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1335              		.loc 1 295 1 is_stmt 0 view .LVU448
+ 1336 0000 2DE9F043 		push	{r4, r5, r6, r7, r8, r9, lr}
+ 1337              	.LCFI14:
+ 1338              		.cfi_def_cfa_offset 28
+ 1339              		.cfi_offset 4, -28
+ 1340              		.cfi_offset 5, -24
+ 1341              		.cfi_offset 6, -20
+ 1342              		.cfi_offset 7, -16
+ 1343              		.cfi_offset 8, -12
+ 1344              		.cfi_offset 9, -8
+ 1345              		.cfi_offset 14, -4
+ 1346 0004 83B0     		sub	sp, sp, #12
+ 1347              	.LCFI15:
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 34
+
+
+ 1348              		.cfi_def_cfa_offset 40
+ 1349 0006 0446     		mov	r4, r0
+ 1350 0008 0D46     		mov	r5, r1
+ 296:Core/Src/Touch_ADS7843.c ****     uint8_t i;
+ 1351              		.loc 1 296 5 is_stmt 1 view .LVU449
+ 297:Core/Src/Touch_ADS7843.c ****     Touch_ADS7843_Coordinate screen_cal;
+ 1352              		.loc 1 297 5 view .LVU450
+ 298:Core/Src/Touch_ADS7843.c ****     setCalibrationMatrix(handle, &(handle->DisplaySample[0]), &(handle->ScreenSample[0]), &(handle-
+ 1353              		.loc 1 298 5 view .LVU451
+ 1354 000a 00F12407 		add	r7, r0, #36
+ 1355 000e 00F13C08 		add	r8, r0, #60
+ 1356 0012 00F15409 		add	r9, r0, #84
+ 1357 0016 4B46     		mov	r3, r9
+ 1358 0018 4246     		mov	r2, r8
+ 1359 001a 3946     		mov	r1, r7
+ 1360              	.LVL100:
+ 1361              		.loc 1 298 5 is_stmt 0 view .LVU452
+ 1362 001c FFF7FEFF 		bl	setCalibrationMatrix
+ 1363              	.LVL101:
+ 299:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_set_font(handle->LCD, (unsigned char*) p_Arial12x12);
+ 1364              		.loc 1 299 5 is_stmt 1 view .LVU453
+ 1365 0020 2946     		mov	r1, r5
+ 1366 0022 2069     		ldr	r0, [r4, #16]
+ 1367 0024 FFF7FEFF 		bl	SPI_TFT_ILI9341_set_font
+ 1368              	.LVL102:
+ 300:Core/Src/Touch_ADS7843.c ****     for(i=0;i<3;i++)
+ 1369              		.loc 1 300 5 view .LVU454
+ 1370              		.loc 1 300 10 is_stmt 0 view .LVU455
+ 1371 0028 0025     		movs	r5, #0
+ 1372              	.LVL103:
+ 1373              		.loc 1 300 5 view .LVU456
+ 1374 002a 08E0     		b	.L74
+ 1375              	.LVL104:
+ 1376              	.L79:
+ 301:Core/Src/Touch_ADS7843.c ****     {
+ 302:Core/Src/Touch_ADS7843.c ****         SPI_TFT_ILI9341_cls(handle->LCD);
+ 303:Core/Src/Touch_ADS7843.c ****         SPI_TFT_ILI9341_locate(handle->LCD, 10, 10);
+ 304:Core/Src/Touch_ADS7843.c ****         SPI_TFT_ILI9341_printf(handle->LCD, "Touch crosshair to calibrate");
+ 305:Core/Src/Touch_ADS7843.c ****         //wait_ms(500);
+ 306:Core/Src/Touch_ADS7843.c ****         handle->_waitms(500);
+ 307:Core/Src/Touch_ADS7843.c ****         DrawCross(handle, handle->DisplaySample[i].x, handle->DisplaySample[i].y);
+ 308:Core/Src/Touch_ADS7843.c ****         do {} while (!Touch_ADS7843_ReadADS7843(handle,&screen_cal));
+ 309:Core/Src/Touch_ADS7843.c ****         handle->ScreenSample[i].x = screen_cal.x;
+ 1377              		.loc 1 309 9 is_stmt 1 discriminator 2 view .LVU457
+ 1378              		.loc 1 309 35 is_stmt 0 discriminator 2 view .LVU458
+ 1379 002c F31D     		adds	r3, r6, #7
+ 1380 002e 04EBC303 		add	r3, r4, r3, lsl #3
+ 1381 0032 009A     		ldr	r2, [sp]
+ 1382 0034 5A60     		str	r2, [r3, #4]
+ 310:Core/Src/Touch_ADS7843.c ****         handle->ScreenSample[i].y = screen_cal.y;
+ 1383              		.loc 1 310 9 is_stmt 1 discriminator 2 view .LVU459
+ 1384              		.loc 1 310 47 is_stmt 0 discriminator 2 view .LVU460
+ 1385 0036 019A     		ldr	r2, [sp, #4]
+ 1386              		.loc 1 310 35 discriminator 2 view .LVU461
+ 1387 0038 9A60     		str	r2, [r3, #8]
+ 300:Core/Src/Touch_ADS7843.c ****     for(i=0;i<3;i++)
+ 1388              		.loc 1 300 18 discriminator 2 view .LVU462
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 35
+
+
+ 1389 003a 0135     		adds	r5, r5, #1
+ 1390              	.LVL105:
+ 300:Core/Src/Touch_ADS7843.c ****     for(i=0;i<3;i++)
+ 1391              		.loc 1 300 18 discriminator 2 view .LVU463
+ 1392 003c EDB2     		uxtb	r5, r5
+ 1393              	.LVL106:
+ 1394              	.L74:
+ 300:Core/Src/Touch_ADS7843.c ****     for(i=0;i<3;i++)
+ 1395              		.loc 1 300 5 discriminator 1 view .LVU464
+ 1396 003e 022D     		cmp	r5, #2
+ 1397 0040 1FD8     		bhi	.L78
+ 302:Core/Src/Touch_ADS7843.c ****         SPI_TFT_ILI9341_locate(handle->LCD, 10, 10);
+ 1398              		.loc 1 302 9 is_stmt 1 view .LVU465
+ 1399 0042 2069     		ldr	r0, [r4, #16]
+ 1400 0044 FFF7FEFF 		bl	SPI_TFT_ILI9341_cls
+ 1401              	.LVL107:
+ 303:Core/Src/Touch_ADS7843.c ****         SPI_TFT_ILI9341_printf(handle->LCD, "Touch crosshair to calibrate");
+ 1402              		.loc 1 303 9 view .LVU466
+ 1403 0048 0A22     		movs	r2, #10
+ 1404 004a 1146     		mov	r1, r2
+ 1405 004c 2069     		ldr	r0, [r4, #16]
+ 1406 004e FFF7FEFF 		bl	SPI_TFT_ILI9341_locate
+ 1407              	.LVL108:
+ 304:Core/Src/Touch_ADS7843.c ****         //wait_ms(500);
+ 1408              		.loc 1 304 9 view .LVU467
+ 1409 0052 1249     		ldr	r1, .L80
+ 1410 0054 2069     		ldr	r0, [r4, #16]
+ 1411 0056 FFF7FEFF 		bl	SPI_TFT_ILI9341_printf
+ 1412              	.LVL109:
+ 306:Core/Src/Touch_ADS7843.c ****         DrawCross(handle, handle->DisplaySample[i].x, handle->DisplaySample[i].y);
+ 1413              		.loc 1 306 9 view .LVU468
+ 306:Core/Src/Touch_ADS7843.c ****         DrawCross(handle, handle->DisplaySample[i].x, handle->DisplaySample[i].y);
+ 1414              		.loc 1 306 15 is_stmt 0 view .LVU469
+ 1415 005a 236A     		ldr	r3, [r4, #32]
+ 306:Core/Src/Touch_ADS7843.c ****         DrawCross(handle, handle->DisplaySample[i].x, handle->DisplaySample[i].y);
+ 1416              		.loc 1 306 9 view .LVU470
+ 1417 005c 4FF4FA70 		mov	r0, #500
+ 1418 0060 9847     		blx	r3
+ 1419              	.LVL110:
+ 307:Core/Src/Touch_ADS7843.c ****         do {} while (!Touch_ADS7843_ReadADS7843(handle,&screen_cal));
+ 1420              		.loc 1 307 9 is_stmt 1 view .LVU471
+ 307:Core/Src/Touch_ADS7843.c ****         do {} while (!Touch_ADS7843_ReadADS7843(handle,&screen_cal));
+ 1421              		.loc 1 307 51 is_stmt 0 view .LVU472
+ 1422 0062 2E46     		mov	r6, r5
+ 1423 0064 2B1D     		adds	r3, r5, #4
+ 1424 0066 04EBC303 		add	r3, r4, r3, lsl #3
+ 307:Core/Src/Touch_ADS7843.c ****         do {} while (!Touch_ADS7843_ReadADS7843(handle,&screen_cal));
+ 1425              		.loc 1 307 9 view .LVU473
+ 1426 006a 9A68     		ldr	r2, [r3, #8]
+ 1427 006c 5968     		ldr	r1, [r3, #4]
+ 1428 006e 2046     		mov	r0, r4
+ 1429 0070 FFF7FEFF 		bl	DrawCross
+ 1430              	.LVL111:
+ 1431              	.L75:
+ 308:Core/Src/Touch_ADS7843.c ****         handle->ScreenSample[i].x = screen_cal.x;
+ 1432              		.loc 1 308 9 is_stmt 1 discriminator 1 view .LVU474
+ 308:Core/Src/Touch_ADS7843.c ****         handle->ScreenSample[i].x = screen_cal.x;
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 36
+
+
+ 1433              		.loc 1 308 13 discriminator 1 view .LVU475
+ 308:Core/Src/Touch_ADS7843.c ****         handle->ScreenSample[i].x = screen_cal.x;
+ 1434              		.loc 1 308 23 is_stmt 0 discriminator 1 view .LVU476
+ 1435 0074 6946     		mov	r1, sp
+ 1436 0076 2046     		mov	r0, r4
+ 1437 0078 FFF7FEFF 		bl	Touch_ADS7843_ReadADS7843
+ 1438              	.LVL112:
+ 308:Core/Src/Touch_ADS7843.c ****         handle->ScreenSample[i].x = screen_cal.x;
+ 1439              		.loc 1 308 9 discriminator 1 view .LVU477
+ 1440 007c 0028     		cmp	r0, #0
+ 1441 007e F9D0     		beq	.L75
+ 1442 0080 D4E7     		b	.L79
+ 1443              	.L78:
+ 311:Core/Src/Touch_ADS7843.c ****     }
+ 312:Core/Src/Touch_ADS7843.c ****     setCalibrationMatrix(handle, &(handle->DisplaySample[0]), &(handle->ScreenSample[0]), &(handle-
+ 1444              		.loc 1 312 5 is_stmt 1 view .LVU478
+ 1445 0082 4B46     		mov	r3, r9
+ 1446 0084 4246     		mov	r2, r8
+ 1447 0086 3946     		mov	r1, r7
+ 1448 0088 2046     		mov	r0, r4
+ 1449 008a FFF7FEFF 		bl	setCalibrationMatrix
+ 1450              	.LVL113:
+ 313:Core/Src/Touch_ADS7843.c ****     SPI_TFT_ILI9341_cls(handle->LCD);
+ 1451              		.loc 1 313 5 view .LVU479
+ 1452 008e 2069     		ldr	r0, [r4, #16]
+ 1453 0090 FFF7FEFF 		bl	SPI_TFT_ILI9341_cls
+ 1454              	.LVL114:
+ 314:Core/Src/Touch_ADS7843.c **** }
+ 1455              		.loc 1 314 1 is_stmt 0 view .LVU480
+ 1456 0094 03B0     		add	sp, sp, #12
+ 1457              	.LCFI16:
+ 1458              		.cfi_def_cfa_offset 28
+ 1459              		@ sp needed
+ 1460 0096 BDE8F083 		pop	{r4, r5, r6, r7, r8, r9, pc}
+ 1461              	.LVL115:
+ 1462              	.L81:
+ 1463              		.loc 1 314 1 view .LVU481
+ 1464 009a 00BF     		.align	2
+ 1465              	.L80:
+ 1466 009c 00000000 		.word	.LC0
+ 1467              		.cfi_endproc
+ 1468              	.LFE8:
+ 1470              		.section	.text.Touch_ADS7843_GetCalibration,"ax",%progbits
+ 1471              		.align	1
+ 1472              		.global	Touch_ADS7843_GetCalibration
+ 1473              		.syntax unified
+ 1474              		.thumb
+ 1475              		.thumb_func
+ 1476              		.fpu fpv5-d16
+ 1478              	Touch_ADS7843_GetCalibration:
+ 1479              	.LVL116:
+ 1480              	.LFB9:
+ 315:Core/Src/Touch_ADS7843.c **** 
+ 316:Core/Src/Touch_ADS7843.c **** void Touch_ADS7843_GetCalibration(Touch_ADS7843_DriverStruct *handle, Touch_ADS7843_Matrix *matrixP
+ 317:Core/Src/Touch_ADS7843.c **** {
+ 1481              		.loc 1 317 1 is_stmt 1 view -0
+ 1482              		.cfi_startproc
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 37
+
+
+ 1483              		@ args = 0, pretend = 0, frame = 0
+ 1484              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1485              		@ link register save eliminated.
+ 1486              		.loc 1 317 1 is_stmt 0 view .LVU483
+ 1487 0000 F0B4     		push	{r4, r5, r6, r7}
+ 1488              	.LCFI17:
+ 1489              		.cfi_def_cfa_offset 16
+ 1490              		.cfi_offset 4, -16
+ 1491              		.cfi_offset 5, -12
+ 1492              		.cfi_offset 6, -8
+ 1493              		.cfi_offset 7, -4
+ 1494 0002 0746     		mov	r7, r0
+ 1495 0004 1646     		mov	r6, r2
+ 318:Core/Src/Touch_ADS7843.c ****     uint8_t i;
+ 1496              		.loc 1 318 5 is_stmt 1 view .LVU484
+ 319:Core/Src/Touch_ADS7843.c ****     Touch_ADS7843_Matrix * mp1;
+ 1497              		.loc 1 319 5 view .LVU485
+ 320:Core/Src/Touch_ADS7843.c ****     mp1 = &(handle->matrix);
+ 1498              		.loc 1 320 5 view .LVU486
+ 1499              	.LVL117:
+ 321:Core/Src/Touch_ADS7843.c ****     *matrixPtr = *mp1;
+ 1500              		.loc 1 321 5 view .LVU487
+ 1501              		.loc 1 321 16 is_stmt 0 view .LVU488
+ 1502 0006 0C46     		mov	r4, r1
+ 1503 0008 00F15405 		add	r5, r0, #84
+ 1504              	.LVL118:
+ 1505              		.loc 1 321 16 view .LVU489
+ 1506 000c 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 1507              	.LVL119:
+ 1508              		.loc 1 321 16 view .LVU490
+ 1509 000e 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 1510              	.LVL120:
+ 1511              		.loc 1 321 16 view .LVU491
+ 1512 0010 95E80700 		ldm	r5, {r0, r1, r2}
+ 1513 0014 84E80700 		stm	r4, {r0, r1, r2}
+ 322:Core/Src/Touch_ADS7843.c ****     for(i=0;i<3;i++)
+ 1514              		.loc 1 322 5 is_stmt 1 view .LVU492
+ 1515              	.LVL121:
+ 1516              		.loc 1 322 10 is_stmt 0 view .LVU493
+ 1517 0018 0023     		movs	r3, #0
+ 1518              	.LVL122:
+ 1519              	.L83:
+ 1520              		.loc 1 322 5 discriminator 1 view .LVU494
+ 1521 001a 022B     		cmp	r3, #2
+ 1522 001c 0CD8     		bhi	.L86
+ 323:Core/Src/Touch_ADS7843.c ****     {
+ 324:Core/Src/Touch_ADS7843.c ****         screenPtr[i].x = handle->ScreenSample[i].x;
+ 1523              		.loc 1 324 9 is_stmt 1 discriminator 3 view .LVU495
+ 1524              		.loc 1 324 18 is_stmt 0 discriminator 3 view .LVU496
+ 1525 001e 06EBC301 		add	r1, r6, r3, lsl #3
+ 1526              		.loc 1 324 49 discriminator 3 view .LVU497
+ 1527 0022 DA1D     		adds	r2, r3, #7
+ 1528 0024 07EBC202 		add	r2, r7, r2, lsl #3
+ 1529 0028 5068     		ldr	r0, [r2, #4]
+ 1530              		.loc 1 324 24 discriminator 3 view .LVU498
+ 1531 002a 46F83300 		str	r0, [r6, r3, lsl #3]
+ 325:Core/Src/Touch_ADS7843.c ****         screenPtr[i].y = handle->ScreenSample[i].y;
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 38
+
+
+ 1532              		.loc 1 325 9 is_stmt 1 discriminator 3 view .LVU499
+ 1533              		.loc 1 325 49 is_stmt 0 discriminator 3 view .LVU500
+ 1534 002e 9268     		ldr	r2, [r2, #8]
+ 1535              		.loc 1 325 24 discriminator 3 view .LVU501
+ 1536 0030 4A60     		str	r2, [r1, #4]
+ 322:Core/Src/Touch_ADS7843.c ****     for(i=0;i<3;i++)
+ 1537              		.loc 1 322 18 discriminator 3 view .LVU502
+ 1538 0032 0133     		adds	r3, r3, #1
+ 1539              	.LVL123:
+ 322:Core/Src/Touch_ADS7843.c ****     for(i=0;i<3;i++)
+ 1540              		.loc 1 322 18 discriminator 3 view .LVU503
+ 1541 0034 DBB2     		uxtb	r3, r3
+ 1542              	.LVL124:
+ 322:Core/Src/Touch_ADS7843.c ****     for(i=0;i<3;i++)
+ 1543              		.loc 1 322 18 discriminator 3 view .LVU504
+ 1544 0036 F0E7     		b	.L83
+ 1545              	.L86:
+ 326:Core/Src/Touch_ADS7843.c ****     }
+ 327:Core/Src/Touch_ADS7843.c **** }
+ 1546              		.loc 1 327 1 view .LVU505
+ 1547 0038 F0BC     		pop	{r4, r5, r6, r7}
+ 1548              	.LCFI18:
+ 1549              		.cfi_restore 7
+ 1550              		.cfi_restore 6
+ 1551              		.cfi_restore 5
+ 1552              		.cfi_restore 4
+ 1553              		.cfi_def_cfa_offset 0
+ 1554              	.LVL125:
+ 1555              		.loc 1 327 1 view .LVU506
+ 1556 003a 7047     		bx	lr
+ 1557              		.cfi_endproc
+ 1558              	.LFE9:
+ 1560              		.section	.text.Touch_ADS7843_SetCalibration,"ax",%progbits
+ 1561              		.align	1
+ 1562              		.global	Touch_ADS7843_SetCalibration
+ 1563              		.syntax unified
+ 1564              		.thumb
+ 1565              		.thumb_func
+ 1566              		.fpu fpv5-d16
+ 1568              	Touch_ADS7843_SetCalibration:
+ 1569              	.LVL126:
+ 1570              	.LFB10:
+ 328:Core/Src/Touch_ADS7843.c **** 
+ 329:Core/Src/Touch_ADS7843.c **** void Touch_ADS7843_SetCalibration(Touch_ADS7843_DriverStruct *handle, Touch_ADS7843_Matrix *matrixP
+ 330:Core/Src/Touch_ADS7843.c **** {
+ 1571              		.loc 1 330 1 is_stmt 1 view -0
+ 1572              		.cfi_startproc
+ 1573              		@ args = 0, pretend = 0, frame = 0
+ 1574              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1575              		.loc 1 330 1 is_stmt 0 view .LVU508
+ 1576 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 1577              	.LCFI19:
+ 1578              		.cfi_def_cfa_offset 24
+ 1579              		.cfi_offset 3, -24
+ 1580              		.cfi_offset 4, -20
+ 1581              		.cfi_offset 5, -16
+ 1582              		.cfi_offset 6, -12
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 39
+
+
+ 1583              		.cfi_offset 7, -8
+ 1584              		.cfi_offset 14, -4
+ 1585 0002 0646     		mov	r6, r0
+ 1586 0004 1746     		mov	r7, r2
+ 331:Core/Src/Touch_ADS7843.c ****     uint8_t i;
+ 1587              		.loc 1 331 5 is_stmt 1 view .LVU509
+ 332:Core/Src/Touch_ADS7843.c ****     Touch_ADS7843_Matrix * mp1;
+ 1588              		.loc 1 332 5 view .LVU510
+ 333:Core/Src/Touch_ADS7843.c ****     mp1 = &(handle->matrix);
+ 1589              		.loc 1 333 5 view .LVU511
+ 1590              	.LVL127:
+ 334:Core/Src/Touch_ADS7843.c ****     *mp1 = *matrixPtr;
+ 1591              		.loc 1 334 5 view .LVU512
+ 1592              		.loc 1 334 10 is_stmt 0 view .LVU513
+ 1593 0006 00F15404 		add	r4, r0, #84
+ 1594              	.LVL128:
+ 1595              		.loc 1 334 10 view .LVU514
+ 1596 000a 0D46     		mov	r5, r1
+ 1597 000c 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 1598              	.LVL129:
+ 1599              		.loc 1 334 10 view .LVU515
+ 1600 000e 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 1601              	.LVL130:
+ 1602              		.loc 1 334 10 view .LVU516
+ 1603 0010 95E80700 		ldm	r5, {r0, r1, r2}
+ 1604 0014 84E80700 		stm	r4, {r0, r1, r2}
+ 335:Core/Src/Touch_ADS7843.c ****     for(i=0;i<3;i++)
+ 1605              		.loc 1 335 5 is_stmt 1 view .LVU517
+ 1606              	.LVL131:
+ 1607              		.loc 1 335 10 is_stmt 0 view .LVU518
+ 1608 0018 0023     		movs	r3, #0
+ 1609              	.LVL132:
+ 1610              	.L88:
+ 1611              		.loc 1 335 5 discriminator 1 view .LVU519
+ 1612 001a 022B     		cmp	r3, #2
+ 1613 001c 0CD8     		bhi	.L91
+ 336:Core/Src/Touch_ADS7843.c ****     {
+ 337:Core/Src/Touch_ADS7843.c ****         handle->ScreenSample[i].x = screenPtr[i].x;
+ 1614              		.loc 1 337 9 is_stmt 1 discriminator 3 view .LVU520
+ 1615              		.loc 1 337 46 is_stmt 0 discriminator 3 view .LVU521
+ 1616 001e 07EBC301 		add	r1, r7, r3, lsl #3
+ 1617              		.loc 1 337 49 discriminator 3 view .LVU522
+ 1618 0022 57F83300 		ldr	r0, [r7, r3, lsl #3]
+ 1619              		.loc 1 337 35 discriminator 3 view .LVU523
+ 1620 0026 DA1D     		adds	r2, r3, #7
+ 1621 0028 06EBC202 		add	r2, r6, r2, lsl #3
+ 1622 002c 5060     		str	r0, [r2, #4]
+ 338:Core/Src/Touch_ADS7843.c ****         handle->ScreenSample[i].y = screenPtr[i].y;
+ 1623              		.loc 1 338 9 is_stmt 1 discriminator 3 view .LVU524
+ 1624              		.loc 1 338 49 is_stmt 0 discriminator 3 view .LVU525
+ 1625 002e 4968     		ldr	r1, [r1, #4]
+ 1626              		.loc 1 338 35 discriminator 3 view .LVU526
+ 1627 0030 9160     		str	r1, [r2, #8]
+ 335:Core/Src/Touch_ADS7843.c ****     for(i=0;i<3;i++)
+ 1628              		.loc 1 335 18 discriminator 3 view .LVU527
+ 1629 0032 0133     		adds	r3, r3, #1
+ 1630              	.LVL133:
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 40
+
+
+ 335:Core/Src/Touch_ADS7843.c ****     for(i=0;i<3;i++)
+ 1631              		.loc 1 335 18 discriminator 3 view .LVU528
+ 1632 0034 DBB2     		uxtb	r3, r3
+ 1633              	.LVL134:
+ 335:Core/Src/Touch_ADS7843.c ****     for(i=0;i<3;i++)
+ 1634              		.loc 1 335 18 discriminator 3 view .LVU529
+ 1635 0036 F0E7     		b	.L88
+ 1636              	.L91:
+ 339:Core/Src/Touch_ADS7843.c ****     }
+ 340:Core/Src/Touch_ADS7843.c ****     setCalibrationMatrix(handle, &(handle->DisplaySample[0]), &(handle->ScreenSample[0]), &(handle-
+ 1637              		.loc 1 340 5 is_stmt 1 view .LVU530
+ 1638 0038 06F15403 		add	r3, r6, #84
+ 1639              	.LVL135:
+ 1640              		.loc 1 340 5 is_stmt 0 view .LVU531
+ 1641 003c 06F13C02 		add	r2, r6, #60
+ 1642 0040 06F12401 		add	r1, r6, #36
+ 1643 0044 3046     		mov	r0, r6
+ 1644 0046 FFF7FEFF 		bl	setCalibrationMatrix
+ 1645              	.LVL136:
+ 341:Core/Src/Touch_ADS7843.c **** }
+ 1646              		.loc 1 341 1 view .LVU532
+ 1647 004a F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 1648              		.loc 1 341 1 view .LVU533
+ 1649              		.cfi_endproc
+ 1650              	.LFE10:
+ 1652              		.section	.rodata.Touch_ADS7843_TouchPanelCalibrate.str1.4,"aMS",%progbits,1
+ 1653              		.align	2
+ 1654              	.LC0:
+ 1655 0000 546F7563 		.ascii	"Touch crosshair to calibrate\000"
+ 1655      68206372 
+ 1655      6F737368 
+ 1655      61697220 
+ 1655      746F2063 
+ 1656              		.text
+ 1657              	.Letext0:
+ 1658              		.file 2 "/usr/local/Cellar/arm-none-eabi-gcc/8-2018-q4-major/gcc/arm-none-eabi/include/machine/_de
+ 1659              		.file 3 "/usr/local/Cellar/arm-none-eabi-gcc/8-2018-q4-major/gcc/arm-none-eabi/include/sys/_stdint
+ 1660              		.file 4 "Core/Inc/SPI_TFT_ILI9341.h"
+ 1661              		.file 5 "Core/Inc/Touch_ADS7843.h"
+ 1662              		.file 6 "<built-in>"
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s 			page 41
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 Touch_ADS7843.c
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s:17     .text.Read_XY:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s:24     .text.Read_XY:0000000000000000 Read_XY
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s:151    .text.TP_GetAdXY:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s:157    .text.TP_GetAdXY:0000000000000000 TP_GetAdXY
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s:224    .text.setCalibrationMatrix:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s:230    .text.setCalibrationMatrix:0000000000000000 setCalibrationMatrix
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s:484    .text.DrawCross:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s:490    .text.DrawCross:0000000000000000 DrawCross
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s:668    .text.Touch_ADS7843:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s:675    .text.Touch_ADS7843:0000000000000000 Touch_ADS7843
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s:761    .text.Touch_ADS7843_OnTouch:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s:768    .text.Touch_ADS7843_OnTouch:0000000000000000 Touch_ADS7843_OnTouch
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s:795    .text.Touch_ADS7843_ReadADS7843:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s:802    .text.Touch_ADS7843_ReadADS7843:0000000000000000 Touch_ADS7843_ReadADS7843
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s:1228   .text.Touch_ADS7843_ReadADS7843:00000000000001a4 $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s:1233   .text.Touch_ADS7843_GetDisplayPoint:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s:1240   .text.Touch_ADS7843_GetDisplayPoint:0000000000000000 Touch_ADS7843_GetDisplayPoint
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s:1321   .text.Touch_ADS7843_TouchPanelCalibrate:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s:1328   .text.Touch_ADS7843_TouchPanelCalibrate:0000000000000000 Touch_ADS7843_TouchPanelCalibrate
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s:1466   .text.Touch_ADS7843_TouchPanelCalibrate:000000000000009c $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s:1471   .text.Touch_ADS7843_GetCalibration:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s:1478   .text.Touch_ADS7843_GetCalibration:0000000000000000 Touch_ADS7843_GetCalibration
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s:1561   .text.Touch_ADS7843_SetCalibration:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s:1568   .text.Touch_ADS7843_SetCalibration:0000000000000000 Touch_ADS7843_SetCalibration
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccDJx9Qx.s:1653   .rodata.Touch_ADS7843_TouchPanelCalibrate.str1.4:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+SPI_TFT_ILI9341_line
+memset
+SPI_TFT_ILI9341_set_font
+SPI_TFT_ILI9341_cls
+SPI_TFT_ILI9341_locate
+SPI_TFT_ILI9341_printf

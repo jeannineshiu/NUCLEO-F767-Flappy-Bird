@@ -1,0 +1,638 @@
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccjKlqgO.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"stm32f7xx_hal_i2c_ex.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.HAL_I2CEx_ConfigAnalogFilter,"ax",%progbits
+  17              		.align	1
+  18              		.global	HAL_I2CEx_ConfigAnalogFilter
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	HAL_I2CEx_ConfigAnalogFilter:
+  26              	.LVL0:
+  27              	.LFB141:
+  28              		.file 1 "/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_D
+   1:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** /**
+   2:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   ******************************************************************************
+   3:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @file    stm32f7xx_hal_i2c_ex.c
+   4:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @author  MCD Application Team
+   5:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @brief   I2C Extended HAL module driver.
+   6:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   *          This file provides firmware functions to manage the following
+   7:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   *          functionalities of I2C Extended peripheral:
+   8:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   *           + Extended features functions
+   9:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   *
+  10:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   @verbatim
+  11:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   ==============================================================================
+  12:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****                ##### I2C peripheral Extended features  #####
+  13:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   ==============================================================================
+  14:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+  15:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   [..] Comparing to other previous devices, the I2C interface for STM32F7xx
+  16:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****        devices contains the following additional features
+  17:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+  18:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****        (+) Possibility to disable or enable Analog Noise Filter
+  19:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****        (+) Use of a configured Digital Noise Filter
+  20:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****        (+) Disable or enable Fast Mode Plus
+  21:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+  22:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****                      ##### How to use this driver #####
+  23:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   ==============================================================================
+  24:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   [..] This driver provides functions to:
+  25:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     (#) Configure I2C Analog noise filter using the function HAL_I2CEx_ConfigAnalogFilter()
+  26:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     (#) Configure I2C Digital noise filter using the function HAL_I2CEx_ConfigDigitalFilter()
+  27:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     (#) Configure the enable or disable of fast mode plus driving capability using the functions :
+  28:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****           (++) HAL_I2CEx_EnableFastModePlus()
+  29:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****           (++) HAL_I2CEx_DisableFastModePlus()
+  30:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   @endverbatim
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccjKlqgO.s 			page 2
+
+
+  31:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   ******************************************************************************
+  32:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @attention
+  33:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   *
+  34:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+  35:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * All rights reserved.</center></h2>
+  36:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   *
+  37:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * This software component is licensed by ST under BSD 3-Clause license,
+  38:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * the "License"; You may not use this file except in compliance with the
+  39:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * License. You may obtain a copy of the License at:
+  40:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   *                        opensource.org/licenses/BSD-3-Clause
+  41:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   *
+  42:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   ******************************************************************************
+  43:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   */
+  44:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+  45:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** /* Includes ------------------------------------------------------------------*/
+  46:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** #include "stm32f7xx_hal.h"
+  47:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+  48:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** /** @addtogroup STM32F7xx_HAL_Driver
+  49:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @{
+  50:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   */
+  51:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+  52:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** /** @defgroup I2CEx I2CEx
+  53:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @brief I2C Extended HAL module driver
+  54:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @{
+  55:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   */
+  56:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+  57:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** #ifdef HAL_I2C_MODULE_ENABLED
+  58:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+  59:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** /* Private typedef -----------------------------------------------------------*/
+  60:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** /* Private define ------------------------------------------------------------*/
+  61:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** /* Private macro -------------------------------------------------------------*/
+  62:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** /* Private variables ---------------------------------------------------------*/
+  63:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** /* Private function prototypes -----------------------------------------------*/
+  64:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** /* Private functions ---------------------------------------------------------*/
+  65:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+  66:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** /** @defgroup I2CEx_Exported_Functions I2C Extended Exported Functions
+  67:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @{
+  68:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   */
+  69:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+  70:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** /** @defgroup I2CEx_Exported_Functions_Group1 Extended features functions
+  71:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @brief    Extended features functions
+  72:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****  *
+  73:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** @verbatim
+  74:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****  ===============================================================================
+  75:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****                       ##### Extended features functions #####
+  76:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****  ===============================================================================
+  77:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     [..] This section provides functions allowing to:
+  78:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****       (+) Configure Noise Filters
+  79:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****       (+) Configure Fast Mode Plus
+  80:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+  81:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** @endverbatim
+  82:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @{
+  83:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   */
+  84:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+  85:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** /**
+  86:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @brief  Configure I2C Analog noise filter.
+  87:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @param  hi2c Pointer to a I2C_HandleTypeDef structure that contains
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccjKlqgO.s 			page 3
+
+
+  88:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   *                the configuration information for the specified I2Cx peripheral.
+  89:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @param  AnalogFilter New state of the Analog filter.
+  90:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @retval HAL status
+  91:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   */
+  92:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** HAL_StatusTypeDef HAL_I2CEx_ConfigAnalogFilter(I2C_HandleTypeDef *hi2c, uint32_t AnalogFilter)
+  93:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** {
+  29              		.loc 1 93 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  94:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   /* Check the parameters */
+  95:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   assert_param(IS_I2C_ALL_INSTANCE(hi2c->Instance));
+  34              		.loc 1 95 3 view .LVU1
+  96:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   assert_param(IS_I2C_ANALOG_FILTER(AnalogFilter));
+  35              		.loc 1 96 3 view .LVU2
+  97:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+  98:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   if (hi2c->State == HAL_I2C_STATE_READY)
+  36              		.loc 1 98 3 view .LVU3
+  37              		.loc 1 98 11 is_stmt 0 view .LVU4
+  38 0000 90F84130 		ldrb	r3, [r0, #65]	@ zero_extendqisi2
+  39 0004 DBB2     		uxtb	r3, r3
+  40              		.loc 1 98 6 view .LVU5
+  41 0006 202B     		cmp	r3, #32
+  42 0008 27D1     		bne	.L3
+  99:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   {
+ 100:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     /* Process Locked */
+ 101:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     __HAL_LOCK(hi2c);
+  43              		.loc 1 101 5 is_stmt 1 view .LVU6
+  44              		.loc 1 101 5 view .LVU7
+  45 000a 90F84030 		ldrb	r3, [r0, #64]	@ zero_extendqisi2
+  46 000e 012B     		cmp	r3, #1
+  47 0010 25D0     		beq	.L4
+  93:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   /* Check the parameters */
+  48              		.loc 1 93 1 is_stmt 0 discriminator 2 view .LVU8
+  49 0012 10B4     		push	{r4}
+  50              	.LCFI0:
+  51              		.cfi_def_cfa_offset 4
+  52              		.cfi_offset 4, -4
+  53              		.loc 1 101 5 is_stmt 1 discriminator 2 view .LVU9
+  54 0014 0123     		movs	r3, #1
+  55 0016 80F84030 		strb	r3, [r0, #64]
+ 102:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 103:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     hi2c->State = HAL_I2C_STATE_BUSY;
+  56              		.loc 1 103 5 discriminator 2 view .LVU10
+  57              		.loc 1 103 17 is_stmt 0 discriminator 2 view .LVU11
+  58 001a 2423     		movs	r3, #36
+  59 001c 80F84130 		strb	r3, [r0, #65]
+ 104:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 105:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     /* Disable the selected I2C peripheral */
+ 106:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     __HAL_I2C_DISABLE(hi2c);
+  60              		.loc 1 106 5 is_stmt 1 discriminator 2 view .LVU12
+  61 0020 0468     		ldr	r4, [r0]
+  62 0022 2268     		ldr	r2, [r4]
+  63 0024 22F00102 		bic	r2, r2, #1
+  64 0028 2260     		str	r2, [r4]
+ 107:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccjKlqgO.s 			page 4
+
+
+ 108:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     /* Reset I2Cx ANOFF bit */
+ 109:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     hi2c->Instance->CR1 &= ~(I2C_CR1_ANFOFF);
+  65              		.loc 1 109 5 discriminator 2 view .LVU13
+  66              		.loc 1 109 9 is_stmt 0 discriminator 2 view .LVU14
+  67 002a 0468     		ldr	r4, [r0]
+  68              		.loc 1 109 25 discriminator 2 view .LVU15
+  69 002c 2268     		ldr	r2, [r4]
+  70 002e 22F48052 		bic	r2, r2, #4096
+  71 0032 2260     		str	r2, [r4]
+ 110:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 111:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     /* Set analog filter bit*/
+ 112:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     hi2c->Instance->CR1 |= AnalogFilter;
+  72              		.loc 1 112 5 is_stmt 1 discriminator 2 view .LVU16
+  73              		.loc 1 112 9 is_stmt 0 discriminator 2 view .LVU17
+  74 0034 0268     		ldr	r2, [r0]
+  75              		.loc 1 112 25 discriminator 2 view .LVU18
+  76 0036 1368     		ldr	r3, [r2]
+  77 0038 0B43     		orrs	r3, r3, r1
+  78 003a 1360     		str	r3, [r2]
+ 113:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 114:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     __HAL_I2C_ENABLE(hi2c);
+  79              		.loc 1 114 5 is_stmt 1 discriminator 2 view .LVU19
+  80 003c 0268     		ldr	r2, [r0]
+  81 003e 1368     		ldr	r3, [r2]
+  82 0040 43F00103 		orr	r3, r3, #1
+  83 0044 1360     		str	r3, [r2]
+ 115:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 116:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     hi2c->State = HAL_I2C_STATE_READY;
+  84              		.loc 1 116 5 discriminator 2 view .LVU20
+  85              		.loc 1 116 17 is_stmt 0 discriminator 2 view .LVU21
+  86 0046 2023     		movs	r3, #32
+  87 0048 80F84130 		strb	r3, [r0, #65]
+ 117:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 118:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     /* Process Unlocked */
+ 119:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     __HAL_UNLOCK(hi2c);
+  88              		.loc 1 119 5 is_stmt 1 discriminator 2 view .LVU22
+  89              		.loc 1 119 5 discriminator 2 view .LVU23
+  90 004c 0023     		movs	r3, #0
+  91 004e 80F84030 		strb	r3, [r0, #64]
+ 120:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 121:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     return HAL_OK;
+  92              		.loc 1 121 5 discriminator 2 view .LVU24
+  93              		.loc 1 121 12 is_stmt 0 discriminator 2 view .LVU25
+  94 0052 1846     		mov	r0, r3
+  95              	.LVL1:
+ 122:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   }
+ 123:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   else
+ 124:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   {
+ 125:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     return HAL_BUSY;
+ 126:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   }
+ 127:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** }
+  96              		.loc 1 127 1 discriminator 2 view .LVU26
+  97 0054 5DF8044B 		ldr	r4, [sp], #4
+  98              	.LCFI1:
+  99              		.cfi_restore 4
+ 100              		.cfi_def_cfa_offset 0
+ 101 0058 7047     		bx	lr
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccjKlqgO.s 			page 5
+
+
+ 102              	.LVL2:
+ 103              	.L3:
+ 125:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   }
+ 104              		.loc 1 125 12 view .LVU27
+ 105 005a 0220     		movs	r0, #2
+ 106              	.LVL3:
+ 125:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   }
+ 107              		.loc 1 125 12 view .LVU28
+ 108 005c 7047     		bx	lr
+ 109              	.LVL4:
+ 110              	.L4:
+ 101:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 111              		.loc 1 101 5 view .LVU29
+ 112 005e 0220     		movs	r0, #2
+ 113              	.LVL5:
+ 114              		.loc 1 127 1 view .LVU30
+ 115 0060 7047     		bx	lr
+ 116              		.cfi_endproc
+ 117              	.LFE141:
+ 119              		.section	.text.HAL_I2CEx_ConfigDigitalFilter,"ax",%progbits
+ 120              		.align	1
+ 121              		.global	HAL_I2CEx_ConfigDigitalFilter
+ 122              		.syntax unified
+ 123              		.thumb
+ 124              		.thumb_func
+ 125              		.fpu fpv5-d16
+ 127              	HAL_I2CEx_ConfigDigitalFilter:
+ 128              	.LVL6:
+ 129              	.LFB142:
+ 128:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 129:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** /**
+ 130:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @brief  Configure I2C Digital noise filter.
+ 131:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @param  hi2c Pointer to a I2C_HandleTypeDef structure that contains
+ 132:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   *                the configuration information for the specified I2Cx peripheral.
+ 133:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @param  DigitalFilter Coefficient of digital noise filter between Min_Data=0x00 and Max_Data=0x
+ 134:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @retval HAL status
+ 135:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   */
+ 136:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** HAL_StatusTypeDef HAL_I2CEx_ConfigDigitalFilter(I2C_HandleTypeDef *hi2c, uint32_t DigitalFilter)
+ 137:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** {
+ 130              		.loc 1 137 1 is_stmt 1 view -0
+ 131              		.cfi_startproc
+ 132              		@ args = 0, pretend = 0, frame = 0
+ 133              		@ frame_needed = 0, uses_anonymous_args = 0
+ 134              		@ link register save eliminated.
+ 138:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   uint32_t tmpreg;
+ 135              		.loc 1 138 3 view .LVU32
+ 139:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 140:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   /* Check the parameters */
+ 141:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   assert_param(IS_I2C_ALL_INSTANCE(hi2c->Instance));
+ 136              		.loc 1 141 3 view .LVU33
+ 142:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   assert_param(IS_I2C_DIGITAL_FILTER(DigitalFilter));
+ 137              		.loc 1 142 3 view .LVU34
+ 143:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 144:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   if (hi2c->State == HAL_I2C_STATE_READY)
+ 138              		.loc 1 144 3 view .LVU35
+ 139              		.loc 1 144 11 is_stmt 0 view .LVU36
+ 140 0000 90F84130 		ldrb	r3, [r0, #65]	@ zero_extendqisi2
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccjKlqgO.s 			page 6
+
+
+ 141 0004 DBB2     		uxtb	r3, r3
+ 142              		.loc 1 144 6 view .LVU37
+ 143 0006 202B     		cmp	r3, #32
+ 144 0008 25D1     		bne	.L11
+ 145:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   {
+ 146:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     /* Process Locked */
+ 147:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     __HAL_LOCK(hi2c);
+ 145              		.loc 1 147 5 is_stmt 1 view .LVU38
+ 146              		.loc 1 147 5 view .LVU39
+ 147 000a 90F84030 		ldrb	r3, [r0, #64]	@ zero_extendqisi2
+ 148 000e 012B     		cmp	r3, #1
+ 149 0010 23D0     		beq	.L12
+ 137:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   uint32_t tmpreg;
+ 150              		.loc 1 137 1 is_stmt 0 discriminator 2 view .LVU40
+ 151 0012 10B4     		push	{r4}
+ 152              	.LCFI2:
+ 153              		.cfi_def_cfa_offset 4
+ 154              		.cfi_offset 4, -4
+ 155              		.loc 1 147 5 is_stmt 1 discriminator 2 view .LVU41
+ 156 0014 0123     		movs	r3, #1
+ 157 0016 80F84030 		strb	r3, [r0, #64]
+ 148:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 149:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     hi2c->State = HAL_I2C_STATE_BUSY;
+ 158              		.loc 1 149 5 discriminator 2 view .LVU42
+ 159              		.loc 1 149 17 is_stmt 0 discriminator 2 view .LVU43
+ 160 001a 2423     		movs	r3, #36
+ 161 001c 80F84130 		strb	r3, [r0, #65]
+ 150:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 151:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     /* Disable the selected I2C peripheral */
+ 152:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     __HAL_I2C_DISABLE(hi2c);
+ 162              		.loc 1 152 5 is_stmt 1 discriminator 2 view .LVU44
+ 163 0020 0468     		ldr	r4, [r0]
+ 164 0022 2268     		ldr	r2, [r4]
+ 165 0024 22F00102 		bic	r2, r2, #1
+ 166 0028 2260     		str	r2, [r4]
+ 153:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 154:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     /* Get the old register value */
+ 155:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     tmpreg = hi2c->Instance->CR1;
+ 167              		.loc 1 155 5 discriminator 2 view .LVU45
+ 168              		.loc 1 155 18 is_stmt 0 discriminator 2 view .LVU46
+ 169 002a 0268     		ldr	r2, [r0]
+ 170              		.loc 1 155 12 discriminator 2 view .LVU47
+ 171 002c 1368     		ldr	r3, [r2]
+ 172              	.LVL7:
+ 156:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 157:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     /* Reset I2Cx DNF bits [11:8] */
+ 158:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     tmpreg &= ~(I2C_CR1_DNF);
+ 173              		.loc 1 158 5 is_stmt 1 discriminator 2 view .LVU48
+ 174              		.loc 1 158 12 is_stmt 0 discriminator 2 view .LVU49
+ 175 002e 23F47063 		bic	r3, r3, #3840
+ 176              	.LVL8:
+ 159:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 160:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     /* Set I2Cx DNF coefficient */
+ 161:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     tmpreg |= DigitalFilter << 8U;
+ 177              		.loc 1 161 5 is_stmt 1 discriminator 2 view .LVU50
+ 178              		.loc 1 161 12 is_stmt 0 discriminator 2 view .LVU51
+ 179 0032 43EA0123 		orr	r3, r3, r1, lsl #8
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccjKlqgO.s 			page 7
+
+
+ 180              	.LVL9:
+ 162:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 163:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     /* Store the new register value */
+ 164:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     hi2c->Instance->CR1 = tmpreg;
+ 181              		.loc 1 164 5 is_stmt 1 discriminator 2 view .LVU52
+ 182              		.loc 1 164 25 is_stmt 0 discriminator 2 view .LVU53
+ 183 0036 1360     		str	r3, [r2]
+ 165:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 166:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     __HAL_I2C_ENABLE(hi2c);
+ 184              		.loc 1 166 5 is_stmt 1 discriminator 2 view .LVU54
+ 185 0038 0268     		ldr	r2, [r0]
+ 186 003a 1368     		ldr	r3, [r2]
+ 187              	.LVL10:
+ 188              		.loc 1 166 5 is_stmt 0 discriminator 2 view .LVU55
+ 189 003c 43F00103 		orr	r3, r3, #1
+ 190 0040 1360     		str	r3, [r2]
+ 167:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 168:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     hi2c->State = HAL_I2C_STATE_READY;
+ 191              		.loc 1 168 5 is_stmt 1 discriminator 2 view .LVU56
+ 192              		.loc 1 168 17 is_stmt 0 discriminator 2 view .LVU57
+ 193 0042 2023     		movs	r3, #32
+ 194 0044 80F84130 		strb	r3, [r0, #65]
+ 169:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 170:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     /* Process Unlocked */
+ 171:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     __HAL_UNLOCK(hi2c);
+ 195              		.loc 1 171 5 is_stmt 1 discriminator 2 view .LVU58
+ 196              		.loc 1 171 5 discriminator 2 view .LVU59
+ 197 0048 0023     		movs	r3, #0
+ 198 004a 80F84030 		strb	r3, [r0, #64]
+ 172:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 173:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     return HAL_OK;
+ 199              		.loc 1 173 5 discriminator 2 view .LVU60
+ 200              		.loc 1 173 12 is_stmt 0 discriminator 2 view .LVU61
+ 201 004e 1846     		mov	r0, r3
+ 202              	.LVL11:
+ 174:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   }
+ 175:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   else
+ 176:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   {
+ 177:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****     return HAL_BUSY;
+ 178:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   }
+ 179:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** }
+ 203              		.loc 1 179 1 discriminator 2 view .LVU62
+ 204 0050 5DF8044B 		ldr	r4, [sp], #4
+ 205              	.LCFI3:
+ 206              		.cfi_restore 4
+ 207              		.cfi_def_cfa_offset 0
+ 208 0054 7047     		bx	lr
+ 209              	.LVL12:
+ 210              	.L11:
+ 177:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   }
+ 211              		.loc 1 177 12 view .LVU63
+ 212 0056 0220     		movs	r0, #2
+ 213              	.LVL13:
+ 177:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   }
+ 214              		.loc 1 177 12 view .LVU64
+ 215 0058 7047     		bx	lr
+ 216              	.LVL14:
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccjKlqgO.s 			page 8
+
+
+ 217              	.L12:
+ 147:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 218              		.loc 1 147 5 view .LVU65
+ 219 005a 0220     		movs	r0, #2
+ 220              	.LVL15:
+ 221              		.loc 1 179 1 view .LVU66
+ 222 005c 7047     		bx	lr
+ 223              		.cfi_endproc
+ 224              	.LFE142:
+ 226              		.section	.text.HAL_I2CEx_EnableFastModePlus,"ax",%progbits
+ 227              		.align	1
+ 228              		.global	HAL_I2CEx_EnableFastModePlus
+ 229              		.syntax unified
+ 230              		.thumb
+ 231              		.thumb_func
+ 232              		.fpu fpv5-d16
+ 234              	HAL_I2CEx_EnableFastModePlus:
+ 235              	.LVL16:
+ 236              	.LFB143:
+ 180:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 181:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** #if  (defined(SYSCFG_PMC_I2C_PB6_FMP) || defined(SYSCFG_PMC_I2C_PB7_FMP)) || (defined(SYSCFG_PMC_I2
+ 182:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** /**
+ 183:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @brief Enable the I2C fast mode plus driving capability.
+ 184:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @param ConfigFastModePlus Selects the pin.
+ 185:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   *   This parameter can be one of the @ref I2CEx_FastModePlus values
+ 186:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @note  For I2C1, fast mode plus driving capability can be enabled on all selected
+ 187:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   *        I2C1 pins using I2C_FASTMODEPLUS_I2C1 parameter or independently
+ 188:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   *        on each one of the following pins PB6, PB7, PB8 and PB9.
+ 189:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @note  For remaining I2C1 pins (PA14, PA15...) fast mode plus driving capability
+ 190:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   *        can be enabled only by using I2C_FASTMODEPLUS_I2C1 parameter.
+ 191:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @note  For all I2C2 pins fast mode plus driving capability can be enabled
+ 192:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   *        only by using I2C_FASTMODEPLUS_I2C2 parameter.
+ 193:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @note  For all I2C3 pins fast mode plus driving capability can be enabled
+ 194:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   *        only by using I2C_FASTMODEPLUS_I2C3 parameter.
+ 195:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @note  For all I2C4 pins fast mode plus driving capability can be enabled
+ 196:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   *        only by using I2C_FASTMODEPLUS_I2C4 parameter.
+ 197:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @retval None
+ 198:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   */
+ 199:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** void HAL_I2CEx_EnableFastModePlus(uint32_t ConfigFastModePlus)
+ 200:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** {
+ 237              		.loc 1 200 1 is_stmt 1 view -0
+ 238              		.cfi_startproc
+ 239              		@ args = 0, pretend = 0, frame = 8
+ 240              		@ frame_needed = 0, uses_anonymous_args = 0
+ 241              		@ link register save eliminated.
+ 242              		.loc 1 200 1 is_stmt 0 view .LVU68
+ 243 0000 82B0     		sub	sp, sp, #8
+ 244              	.LCFI4:
+ 245              		.cfi_def_cfa_offset 8
+ 201:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   /* Check the parameter */
+ 202:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   assert_param(IS_I2C_FASTMODEPLUS(ConfigFastModePlus));
+ 246              		.loc 1 202 3 is_stmt 1 view .LVU69
+ 203:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 204:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   /* Enable SYSCFG clock */
+ 205:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   __HAL_RCC_SYSCFG_CLK_ENABLE();
+ 247              		.loc 1 205 3 view .LVU70
+ 248              	.LBB2:
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccjKlqgO.s 			page 9
+
+
+ 249              		.loc 1 205 3 view .LVU71
+ 250              		.loc 1 205 3 view .LVU72
+ 251 0002 084B     		ldr	r3, .L19
+ 252 0004 5A6C     		ldr	r2, [r3, #68]
+ 253 0006 42F48042 		orr	r2, r2, #16384
+ 254 000a 5A64     		str	r2, [r3, #68]
+ 255              		.loc 1 205 3 view .LVU73
+ 256 000c 5B6C     		ldr	r3, [r3, #68]
+ 257 000e 03F48043 		and	r3, r3, #16384
+ 258 0012 0193     		str	r3, [sp, #4]
+ 259              		.loc 1 205 3 view .LVU74
+ 260 0014 019B     		ldr	r3, [sp, #4]
+ 261              	.LBE2:
+ 206:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 207:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   /* Enable fast mode plus driving capability for selected pin */
+ 208:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   SET_BIT(SYSCFG->PMC, (uint32_t)ConfigFastModePlus);
+ 262              		.loc 1 208 3 view .LVU75
+ 263 0016 044A     		ldr	r2, .L19+4
+ 264 0018 5368     		ldr	r3, [r2, #4]
+ 265 001a 1843     		orrs	r0, r0, r3
+ 266              	.LVL17:
+ 267              		.loc 1 208 3 is_stmt 0 view .LVU76
+ 268 001c 5060     		str	r0, [r2, #4]
+ 209:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** }
+ 269              		.loc 1 209 1 view .LVU77
+ 270 001e 02B0     		add	sp, sp, #8
+ 271              	.LCFI5:
+ 272              		.cfi_def_cfa_offset 0
+ 273              		@ sp needed
+ 274 0020 7047     		bx	lr
+ 275              	.L20:
+ 276 0022 00BF     		.align	2
+ 277              	.L19:
+ 278 0024 00380240 		.word	1073887232
+ 279 0028 00380140 		.word	1073821696
+ 280              		.cfi_endproc
+ 281              	.LFE143:
+ 283              		.section	.text.HAL_I2CEx_DisableFastModePlus,"ax",%progbits
+ 284              		.align	1
+ 285              		.global	HAL_I2CEx_DisableFastModePlus
+ 286              		.syntax unified
+ 287              		.thumb
+ 288              		.thumb_func
+ 289              		.fpu fpv5-d16
+ 291              	HAL_I2CEx_DisableFastModePlus:
+ 292              	.LVL18:
+ 293              	.LFB144:
+ 210:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 211:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** /**
+ 212:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @brief Disable the I2C fast mode plus driving capability.
+ 213:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @param ConfigFastModePlus Selects the pin.
+ 214:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   *   This parameter can be one of the @ref I2CEx_FastModePlus values
+ 215:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @note  For I2C1, fast mode plus driving capability can be disabled on all selected
+ 216:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   *        I2C1 pins using I2C_FASTMODEPLUS_I2C1 parameter or independently
+ 217:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   *        on each one of the following pins PB6, PB7, PB8 and PB9.
+ 218:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @note  For remaining I2C1 pins (PA14, PA15...) fast mode plus driving capability
+ 219:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   *        can be disabled only by using I2C_FASTMODEPLUS_I2C1 parameter.
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccjKlqgO.s 			page 10
+
+
+ 220:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @note  For all I2C2 pins fast mode plus driving capability can be disabled
+ 221:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   *        only by using I2C_FASTMODEPLUS_I2C2 parameter.
+ 222:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @note  For all I2C3 pins fast mode plus driving capability can be disabled
+ 223:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   *        only by using I2C_FASTMODEPLUS_I2C3 parameter.
+ 224:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @note  For all I2C4 pins fast mode plus driving capability can be disabled
+ 225:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   *        only by using I2C_FASTMODEPLUS_I2C4 parameter.
+ 226:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   * @retval None
+ 227:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   */
+ 228:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** void HAL_I2CEx_DisableFastModePlus(uint32_t ConfigFastModePlus)
+ 229:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** {
+ 294              		.loc 1 229 1 is_stmt 1 view -0
+ 295              		.cfi_startproc
+ 296              		@ args = 0, pretend = 0, frame = 8
+ 297              		@ frame_needed = 0, uses_anonymous_args = 0
+ 298              		@ link register save eliminated.
+ 299              		.loc 1 229 1 is_stmt 0 view .LVU79
+ 300 0000 82B0     		sub	sp, sp, #8
+ 301              	.LCFI6:
+ 302              		.cfi_def_cfa_offset 8
+ 230:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   /* Check the parameter */
+ 231:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   assert_param(IS_I2C_FASTMODEPLUS(ConfigFastModePlus));
+ 303              		.loc 1 231 3 is_stmt 1 view .LVU80
+ 232:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 233:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   /* Enable SYSCFG clock */
+ 234:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   __HAL_RCC_SYSCFG_CLK_ENABLE();
+ 304              		.loc 1 234 3 view .LVU81
+ 305              	.LBB3:
+ 306              		.loc 1 234 3 view .LVU82
+ 307              		.loc 1 234 3 view .LVU83
+ 308 0002 084B     		ldr	r3, .L23
+ 309 0004 5A6C     		ldr	r2, [r3, #68]
+ 310 0006 42F48042 		orr	r2, r2, #16384
+ 311 000a 5A64     		str	r2, [r3, #68]
+ 312              		.loc 1 234 3 view .LVU84
+ 313 000c 5B6C     		ldr	r3, [r3, #68]
+ 314 000e 03F48043 		and	r3, r3, #16384
+ 315 0012 0193     		str	r3, [sp, #4]
+ 316              		.loc 1 234 3 view .LVU85
+ 317 0014 019B     		ldr	r3, [sp, #4]
+ 318              	.LBE3:
+ 235:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** 
+ 236:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   /* Disable fast mode plus driving capability for selected pin */
+ 237:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c ****   CLEAR_BIT(SYSCFG->PMC, (uint32_t)ConfigFastModePlus);
+ 319              		.loc 1 237 3 view .LVU86
+ 320 0016 044A     		ldr	r2, .L23+4
+ 321 0018 5368     		ldr	r3, [r2, #4]
+ 322 001a 23EA0000 		bic	r0, r3, r0
+ 323              	.LVL19:
+ 324              		.loc 1 237 3 is_stmt 0 view .LVU87
+ 325 001e 5060     		str	r0, [r2, #4]
+ 238:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_i2c_ex.c **** }
+ 326              		.loc 1 238 1 view .LVU88
+ 327 0020 02B0     		add	sp, sp, #8
+ 328              	.LCFI7:
+ 329              		.cfi_def_cfa_offset 0
+ 330              		@ sp needed
+ 331 0022 7047     		bx	lr
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccjKlqgO.s 			page 11
+
+
+ 332              	.L24:
+ 333              		.align	2
+ 334              	.L23:
+ 335 0024 00380240 		.word	1073887232
+ 336 0028 00380140 		.word	1073821696
+ 337              		.cfi_endproc
+ 338              	.LFE144:
+ 340              		.text
+ 341              	.Letext0:
+ 342              		.file 2 "/usr/local/Cellar/arm-none-eabi-gcc/8-2018-q4-major/gcc/arm-none-eabi/include/machine/_de
+ 343              		.file 3 "/usr/local/Cellar/arm-none-eabi-gcc/8-2018-q4-major/gcc/arm-none-eabi/include/sys/_stdint
+ 344              		.file 4 "/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/CMSIS/Include/c
+ 345              		.file 5 "/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/CMSIS/Device/ST
+ 346              		.file 6 "/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/CMSIS/Device/ST
+ 347              		.file 7 "/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_D
+ 348              		.file 8 "/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_D
+ 349              		.file 9 "/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_D
+ 350              		.file 10 "/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccjKlqgO.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 stm32f7xx_hal_i2c_ex.c
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccjKlqgO.s:17     .text.HAL_I2CEx_ConfigAnalogFilter:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccjKlqgO.s:25     .text.HAL_I2CEx_ConfigAnalogFilter:0000000000000000 HAL_I2CEx_ConfigAnalogFilter
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccjKlqgO.s:120    .text.HAL_I2CEx_ConfigDigitalFilter:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccjKlqgO.s:127    .text.HAL_I2CEx_ConfigDigitalFilter:0000000000000000 HAL_I2CEx_ConfigDigitalFilter
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccjKlqgO.s:227    .text.HAL_I2CEx_EnableFastModePlus:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccjKlqgO.s:234    .text.HAL_I2CEx_EnableFastModePlus:0000000000000000 HAL_I2CEx_EnableFastModePlus
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccjKlqgO.s:278    .text.HAL_I2CEx_EnableFastModePlus:0000000000000024 $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccjKlqgO.s:284    .text.HAL_I2CEx_DisableFastModePlus:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccjKlqgO.s:291    .text.HAL_I2CEx_DisableFastModePlus:0000000000000000 HAL_I2CEx_DisableFastModePlus
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccjKlqgO.s:335    .text.HAL_I2CEx_DisableFastModePlus:0000000000000024 $d
+
+NO UNDEFINED SYMBOLS

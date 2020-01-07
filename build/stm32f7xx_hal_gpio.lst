@@ -1,0 +1,1811 @@
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"stm32f7xx_hal_gpio.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.HAL_GPIO_Init,"ax",%progbits
+  17              		.align	1
+  18              		.global	HAL_GPIO_Init
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	HAL_GPIO_Init:
+  26              	.LVL0:
+  27              	.LFB141:
+  28              		.file 1 "/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_D
+   1:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** /**
+   2:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   ******************************************************************************
+   3:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @file    stm32f7xx_hal_gpio.c
+   4:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @author  MCD Application Team
+   5:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @brief   GPIO HAL module driver.
+   6:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   *          This file provides firmware functions to manage the following 
+   7:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   *          functionalities of the General Purpose Input/Output (GPIO) peripheral:
+   8:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   *           + Initialization and de-initialization functions
+   9:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   *           + IO operation functions
+  10:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   *
+  11:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   @verbatim
+  12:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   ==============================================================================
+  13:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****                     ##### GPIO Peripheral features #####
+  14:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   ==============================================================================
+  15:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   [..] 
+  16:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   Subject to the specific hardware characteristics of each I/O port listed in the datasheet, each
+  17:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   port bit of the General Purpose IO (GPIO) Ports, can be individually configured by software
+  18:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   in several modes:
+  19:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   (+) Input mode 
+  20:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   (+) Analog mode
+  21:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   (+) Output mode
+  22:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   (+) Alternate function mode
+  23:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   (+) External interrupt/event lines
+  24:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+  25:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   [..]  
+  26:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   During and just after reset, the alternate functions and external interrupt  
+  27:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   lines are not active and the I/O ports are configured in input floating mode.
+  28:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   
+  29:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   [..]   
+  30:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   All GPIO pins have weak internal pull-up and pull-down resistors, which can be 
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 2
+
+
+  31:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   activated or not.
+  32:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+  33:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   [..]
+  34:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   In Output or Alternate mode, each IO can be configured on open-drain or push-pull
+  35:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   type and the IO speed can be selected depending on the VDD value.
+  36:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+  37:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   [..]  
+  38:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   All ports have external interrupt/event capability. To use external interrupt 
+  39:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   lines, the port must be configured in input mode. All available GPIO pins are 
+  40:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   connected to the 16 external interrupt/event lines from EXTI0 to EXTI15.
+  41:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   
+  42:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   [..]
+  43:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   The external interrupt/event controller consists of up to 23 edge detectors 
+  44:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   (16 lines are connected to GPIO) for generating event/interrupt requests (each 
+  45:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   input line can be independently configured to select the type (interrupt or event) 
+  46:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   and the corresponding trigger event (rising or falling or both). Each line can 
+  47:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   also be masked independently. 
+  48:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+  49:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****                      ##### How to use this driver #####
+  50:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   ==============================================================================  
+  51:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   [..]
+  52:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     (#) Enable the GPIO AHB clock using the following function: __HAL_RCC_GPIOx_CLK_ENABLE(). 
+  53:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+  54:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     (#) Configure the GPIO pin(s) using HAL_GPIO_Init().
+  55:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         (++) Configure the IO mode using "Mode" member from GPIO_InitTypeDef structure
+  56:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         (++) Activate Pull-up, Pull-down resistor using "Pull" member from GPIO_InitTypeDef 
+  57:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****              structure.
+  58:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         (++) In case of Output or alternate function mode selection: the speed is 
+  59:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****              configured through "Speed" member from GPIO_InitTypeDef structure.
+  60:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         (++) In alternate mode is selection, the alternate function connected to the IO
+  61:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****              is configured through "Alternate" member from GPIO_InitTypeDef structure.
+  62:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         (++) Analog mode is required when a pin is to be used as ADC channel 
+  63:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****              or DAC output.
+  64:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         (++) In case of external interrupt/event selection the "Mode" member from 
+  65:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****              GPIO_InitTypeDef structure select the type (interrupt or event) and 
+  66:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****              the corresponding trigger event (rising or falling or both).
+  67:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+  68:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     (#) In case of external interrupt/event mode selection, configure NVIC IRQ priority 
+  69:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         mapped to the EXTI line using HAL_NVIC_SetPriority() and enable it using
+  70:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         HAL_NVIC_EnableIRQ().
+  71:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****          
+  72:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     (#) To get the level of a pin configured in input mode use HAL_GPIO_ReadPin().
+  73:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****             
+  74:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     (#) To set/reset the level of a pin configured in output mode use 
+  75:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         HAL_GPIO_WritePin()/HAL_GPIO_TogglePin().
+  76:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     
+  77:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     (#) To lock pin configuration until next reset use HAL_GPIO_LockPin().
+  78:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+  79:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****                  
+  80:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     (#) During and just after reset, the alternate functions are not 
+  81:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         active and the GPIO pins are configured in input floating mode (except JTAG
+  82:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         pins).
+  83:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   
+  84:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     (#) The LSE oscillator pins OSC32_IN and OSC32_OUT can be used as general purpose 
+  85:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         (PC14 and PC15, respectively) when the LSE oscillator is off. The LSE has 
+  86:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         priority over the GPIO function.
+  87:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 3
+
+
+  88:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     (#) The HSE oscillator pins OSC_IN/OSC_OUT can be used as 
+  89:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         general purpose PH0 and PH1, respectively, when the HSE oscillator is off. 
+  90:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         The HSE has priority over the GPIO function.
+  91:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   
+  92:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   @endverbatim
+  93:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   ******************************************************************************
+  94:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @attention
+  95:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   *
+  96:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+  97:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * All rights reserved.</center></h2>
+  98:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   *
+  99:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * This software component is licensed by ST under BSD 3-Clause license,
+ 100:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * the "License"; You may not use this file except in compliance with the
+ 101:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * License. You may obtain a copy of the License at:
+ 102:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   *                        opensource.org/licenses/BSD-3-Clause
+ 103:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   *
+ 104:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   ******************************************************************************
+ 105:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   */ 
+ 106:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 107:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** /* Includes ------------------------------------------------------------------*/
+ 108:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** #include "stm32f7xx_hal.h"
+ 109:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 110:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** /** @addtogroup STM32F7xx_HAL_Driver
+ 111:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @{
+ 112:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   */
+ 113:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 114:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** /** @defgroup GPIO GPIO
+ 115:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @brief GPIO HAL module driver
+ 116:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @{
+ 117:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   */
+ 118:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 119:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** #ifdef HAL_GPIO_MODULE_ENABLED
+ 120:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 121:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** /* Private typedef -----------------------------------------------------------*/
+ 122:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** /* Private define ------------------------------------------------------------*/
+ 123:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** /** @addtogroup GPIO_Private_Constants GPIO Private Constants
+ 124:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @{
+ 125:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   */
+ 126:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** #define GPIO_MODE             ((uint32_t)0x00000003U)
+ 127:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** #define EXTI_MODE             ((uint32_t)0x10000000U)
+ 128:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** #define GPIO_MODE_IT          ((uint32_t)0x00010000U)
+ 129:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** #define GPIO_MODE_EVT         ((uint32_t)0x00020000U)
+ 130:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** #define RISING_EDGE           ((uint32_t)0x00100000U)
+ 131:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** #define FALLING_EDGE          ((uint32_t)0x00200000U)
+ 132:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** #define GPIO_OUTPUT_TYPE      ((uint32_t)0x00000010U)
+ 133:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 134:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** #define GPIO_NUMBER           ((uint32_t)16U)
+ 135:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** /**
+ 136:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @}
+ 137:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   */
+ 138:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** /* Private macro -------------------------------------------------------------*/
+ 139:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** /* Private variables ---------------------------------------------------------*/
+ 140:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** /* Private function prototypes -----------------------------------------------*/
+ 141:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** /* Private functions ---------------------------------------------------------*/
+ 142:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** /* Exported functions --------------------------------------------------------*/
+ 143:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** /** @defgroup GPIO_Exported_Functions GPIO Exported Functions
+ 144:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @{
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 4
+
+
+ 145:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   */
+ 146:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 147:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** /** @defgroup GPIO_Exported_Functions_Group1 Initialization and de-initialization functions
+ 148:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****  *  @brief    Initialization and Configuration functions
+ 149:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****  *
+ 150:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** @verbatim
+ 151:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****  ===============================================================================
+ 152:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****               ##### Initialization and de-initialization functions #####
+ 153:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****  ===============================================================================
+ 154:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   [..]
+ 155:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     This section provides functions allowing to initialize and de-initialize the GPIOs
+ 156:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     to be ready for use.
+ 157:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****  
+ 158:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** @endverbatim
+ 159:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @{
+ 160:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   */
+ 161:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 162:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** /**
+ 163:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @brief  Initializes the GPIOx peripheral according to the specified parameters in the GPIO_Init
+ 164:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @param  GPIOx where x can be (A..K) to select the GPIO peripheral.
+ 165:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @param  GPIO_Init pointer to a GPIO_InitTypeDef structure that contains
+ 166:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   *         the configuration information for the specified GPIO peripheral.
+ 167:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @retval None
+ 168:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   */
+ 169:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** void HAL_GPIO_Init(GPIO_TypeDef  *GPIOx, GPIO_InitTypeDef *GPIO_Init)
+ 170:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** {
+  29              		.loc 1 170 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 8
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+ 171:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   uint32_t position = 0x00;
+  34              		.loc 1 171 3 view .LVU1
+ 172:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   uint32_t ioposition = 0x00;
+  35              		.loc 1 172 3 view .LVU2
+ 173:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   uint32_t iocurrent = 0x00;
+  36              		.loc 1 173 3 view .LVU3
+ 174:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   uint32_t temp = 0x00;
+  37              		.loc 1 174 3 view .LVU4
+ 175:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 176:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   /* Check the parameters */
+ 177:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   assert_param(IS_GPIO_ALL_INSTANCE(GPIOx));
+  38              		.loc 1 177 3 view .LVU5
+ 178:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   assert_param(IS_GPIO_PIN(GPIO_Init->Pin));
+  39              		.loc 1 178 3 view .LVU6
+ 179:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   assert_param(IS_GPIO_MODE(GPIO_Init->Mode));
+  40              		.loc 1 179 3 view .LVU7
+ 180:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   assert_param(IS_GPIO_PULL(GPIO_Init->Pull));
+  41              		.loc 1 180 3 view .LVU8
+ 181:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 182:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   /* Configure the port pins */
+ 183:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   for(position = 0; position < GPIO_NUMBER; position++)
+  42              		.loc 1 183 3 view .LVU9
+  43              		.loc 1 183 16 is_stmt 0 view .LVU10
+  44 0000 0023     		movs	r3, #0
+  45              	.LVL1:
+  46              		.loc 1 183 3 view .LVU11
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 5
+
+
+  47 0002 0F2B     		cmp	r3, #15
+  48 0004 00F2E280 		bhi	.L26
+ 170:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   uint32_t position = 0x00;
+  49              		.loc 1 170 1 view .LVU12
+  50 0008 F0B4     		push	{r4, r5, r6, r7}
+  51              	.LCFI0:
+  52              		.cfi_def_cfa_offset 16
+  53              		.cfi_offset 4, -16
+  54              		.cfi_offset 5, -12
+  55              		.cfi_offset 6, -8
+  56              		.cfi_offset 7, -4
+  57 000a 82B0     		sub	sp, sp, #8
+  58              	.LCFI1:
+  59              		.cfi_def_cfa_offset 24
+  60 000c 39E0     		b	.L12
+  61              	.LVL2:
+  62              	.L28:
+ 184:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   {
+ 185:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     /* Get the IO position */
+ 186:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     ioposition = ((uint32_t)0x01) << position;
+ 187:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     /* Get the current IO position */
+ 188:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     iocurrent = (uint32_t)(GPIO_Init->Pin) & ioposition;
+ 189:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 190:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     if(iocurrent == ioposition)
+ 191:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     {
+ 192:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       /*--------------------- GPIO Mode Configuration ------------------------*/
+ 193:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       /* In case of Alternate function mode selection */
+ 194:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       if((GPIO_Init->Mode == GPIO_MODE_AF_PP) || (GPIO_Init->Mode == GPIO_MODE_AF_OD))
+ 195:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       {
+ 196:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         /* Check the Alternate function parameter */
+ 197:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         assert_param(IS_GPIO_AF(GPIO_Init->Alternate));
+ 198:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         
+ 199:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         /* Configure Alternate function mapped with the current IO */
+ 200:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp = GPIOx->AFR[position >> 3];
+ 201:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp &= ~((uint32_t)0xF << ((uint32_t)(position & (uint32_t)0x07) * 4)) ;
+ 202:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp |= ((uint32_t)(GPIO_Init->Alternate) << (((uint32_t)position & (uint32_t)0x07) * 4));
+ 203:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         GPIOx->AFR[position >> 3] = temp;
+ 204:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       }
+ 205:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 206:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       /* Configure IO Direction mode (Input, Output, Alternate or Analog) */
+ 207:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       temp = GPIOx->MODER;
+ 208:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       temp &= ~(GPIO_MODER_MODER0 << (position * 2));
+ 209:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       temp |= ((GPIO_Init->Mode & GPIO_MODE) << (position * 2));
+ 210:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       GPIOx->MODER = temp;
+ 211:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 212:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       /* In case of Output or Alternate function mode selection */
+ 213:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       if((GPIO_Init->Mode == GPIO_MODE_OUTPUT_PP) || (GPIO_Init->Mode == GPIO_MODE_AF_PP) ||
+ 214:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****          (GPIO_Init->Mode == GPIO_MODE_OUTPUT_OD) || (GPIO_Init->Mode == GPIO_MODE_AF_OD))
+ 215:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       {
+ 216:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         /* Check the Speed parameter */
+ 217:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         assert_param(IS_GPIO_SPEED(GPIO_Init->Speed));
+ 218:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         /* Configure the IO Speed */
+ 219:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp = GPIOx->OSPEEDR; 
+ 220:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp &= ~(GPIO_OSPEEDER_OSPEEDR0 << (position * 2));
+ 221:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp |= (GPIO_Init->Speed << (position * 2));
+ 222:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         GPIOx->OSPEEDR = temp;
+ 223:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 6
+
+
+ 224:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         /* Configure the IO Output Type */
+ 225:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp = GPIOx->OTYPER;
+ 226:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp &= ~(GPIO_OTYPER_OT_0 << position) ;
+ 227:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp |= (((GPIO_Init->Mode & GPIO_OUTPUT_TYPE) >> 4) << position);
+ 228:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         GPIOx->OTYPER = temp;
+ 229:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       }
+ 230:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 231:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       /* Activate the Pull-up or Pull down resistor for the current IO */
+ 232:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       temp = GPIOx->PUPDR;
+ 233:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       temp &= ~(GPIO_PUPDR_PUPDR0 << (position * 2));
+ 234:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       temp |= ((GPIO_Init->Pull) << (position * 2));
+ 235:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       GPIOx->PUPDR = temp;
+ 236:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 237:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       /*--------------------- EXTI Mode Configuration ------------------------*/
+ 238:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       /* Configure the External Interrupt or event for the current IO */
+ 239:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       if((GPIO_Init->Mode & EXTI_MODE) == EXTI_MODE)
+ 240:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       {
+ 241:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         /* Enable SYSCFG Clock */
+ 242:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         __HAL_RCC_SYSCFG_CLK_ENABLE();
+ 243:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 244:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp = SYSCFG->EXTICR[position >> 2];
+ 245:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp &= ~(((uint32_t)0x0F) << (4 * (position & 0x03)));
+ 246:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp |= ((uint32_t)(GPIO_GET_INDEX(GPIOx)) << (4 * (position & 0x03)));
+  63              		.loc 1 246 29 view .LVU13
+  64 000e 0922     		movs	r2, #9
+  65 0010 00E0     		b	.L7
+  66              	.L13:
+  67              		.loc 1 246 18 view .LVU14
+  68 0012 0022     		movs	r2, #0
+  69              	.L7:
+  70              		.loc 1 246 52 discriminator 40 view .LVU15
+  71 0014 B240     		lsls	r2, r2, r6
+  72              		.loc 1 246 14 discriminator 40 view .LVU16
+  73 0016 3A43     		orrs	r2, r2, r7
+  74              	.LVL3:
+ 247:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         SYSCFG->EXTICR[position >> 2] = temp;
+  75              		.loc 1 247 9 is_stmt 1 discriminator 40 view .LVU17
+  76              		.loc 1 247 39 is_stmt 0 discriminator 40 view .LVU18
+  77 0018 0234     		adds	r4, r4, #2
+  78 001a 6D4E     		ldr	r6, .L29
+  79 001c 46F82420 		str	r2, [r6, r4, lsl #2]
+ 248:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 249:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         /* Clear EXTI line configuration */
+ 250:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp = EXTI->IMR;
+  80              		.loc 1 250 9 is_stmt 1 discriminator 40 view .LVU19
+  81              		.loc 1 250 14 is_stmt 0 discriminator 40 view .LVU20
+  82 0020 6C4A     		ldr	r2, .L29+4
+  83              	.LVL4:
+  84              		.loc 1 250 14 discriminator 40 view .LVU21
+  85 0022 1468     		ldr	r4, [r2]
+  86              	.LVL5:
+ 251:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp &= ~((uint32_t)iocurrent);
+  87              		.loc 1 251 9 is_stmt 1 discriminator 40 view .LVU22
+  88              		.loc 1 251 17 is_stmt 0 discriminator 40 view .LVU23
+  89 0024 EA43     		mvns	r2, r5
+  90              		.loc 1 251 14 discriminator 40 view .LVU24
+  91 0026 02EA0406 		and	r6, r2, r4
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 7
+
+
+  92              	.LVL6:
+ 252:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         if((GPIO_Init->Mode & GPIO_MODE_IT) == GPIO_MODE_IT)
+  93              		.loc 1 252 9 is_stmt 1 discriminator 40 view .LVU25
+  94              		.loc 1 252 22 is_stmt 0 discriminator 40 view .LVU26
+  95 002a 4F68     		ldr	r7, [r1, #4]
+  96              		.loc 1 252 11 discriminator 40 view .LVU27
+  97 002c 17F4803F 		tst	r7, #65536
+  98 0030 01D0     		beq	.L8
+ 253:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         {
+ 254:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****           temp |= iocurrent;
+  99              		.loc 1 254 11 is_stmt 1 view .LVU28
+ 100              		.loc 1 254 16 is_stmt 0 view .LVU29
+ 101 0032 45EA0406 		orr	r6, r5, r4
+ 102              	.LVL7:
+ 103              	.L8:
+ 255:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         }
+ 256:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         EXTI->IMR = temp;
+ 104              		.loc 1 256 9 is_stmt 1 view .LVU30
+ 105              		.loc 1 256 19 is_stmt 0 view .LVU31
+ 106 0036 674C     		ldr	r4, .L29+4
+ 107 0038 2660     		str	r6, [r4]
+ 257:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 258:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp = EXTI->EMR;
+ 108              		.loc 1 258 9 is_stmt 1 view .LVU32
+ 109              		.loc 1 258 14 is_stmt 0 view .LVU33
+ 110 003a 6468     		ldr	r4, [r4, #4]
+ 111              	.LVL8:
+ 259:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp &= ~((uint32_t)iocurrent);
+ 112              		.loc 1 259 9 is_stmt 1 view .LVU34
+ 113              		.loc 1 259 14 is_stmt 0 view .LVU35
+ 114 003c 02EA0406 		and	r6, r2, r4
+ 115              	.LVL9:
+ 260:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         if((GPIO_Init->Mode & GPIO_MODE_EVT) == GPIO_MODE_EVT)
+ 116              		.loc 1 260 9 is_stmt 1 view .LVU36
+ 117              		.loc 1 260 22 is_stmt 0 view .LVU37
+ 118 0040 4F68     		ldr	r7, [r1, #4]
+ 119              		.loc 1 260 11 view .LVU38
+ 120 0042 17F4003F 		tst	r7, #131072
+ 121 0046 01D0     		beq	.L9
+ 261:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         {
+ 262:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****           temp |= iocurrent;
+ 122              		.loc 1 262 11 is_stmt 1 view .LVU39
+ 123              		.loc 1 262 16 is_stmt 0 view .LVU40
+ 124 0048 45EA0406 		orr	r6, r5, r4
+ 125              	.LVL10:
+ 126              	.L9:
+ 263:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         }
+ 264:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         EXTI->EMR = temp;
+ 127              		.loc 1 264 9 is_stmt 1 view .LVU41
+ 128              		.loc 1 264 19 is_stmt 0 view .LVU42
+ 129 004c 614C     		ldr	r4, .L29+4
+ 130 004e 6660     		str	r6, [r4, #4]
+ 265:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 266:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         /* Clear Rising Falling edge configuration */
+ 267:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp = EXTI->RTSR;
+ 131              		.loc 1 267 9 is_stmt 1 view .LVU43
+ 132              		.loc 1 267 14 is_stmt 0 view .LVU44
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 8
+
+
+ 133 0050 A468     		ldr	r4, [r4, #8]
+ 134              	.LVL11:
+ 268:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp &= ~((uint32_t)iocurrent);
+ 135              		.loc 1 268 9 is_stmt 1 view .LVU45
+ 136              		.loc 1 268 14 is_stmt 0 view .LVU46
+ 137 0052 02EA0406 		and	r6, r2, r4
+ 138              	.LVL12:
+ 269:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         if((GPIO_Init->Mode & RISING_EDGE) == RISING_EDGE)
+ 139              		.loc 1 269 9 is_stmt 1 view .LVU47
+ 140              		.loc 1 269 22 is_stmt 0 view .LVU48
+ 141 0056 4F68     		ldr	r7, [r1, #4]
+ 142              		.loc 1 269 11 view .LVU49
+ 143 0058 17F4801F 		tst	r7, #1048576
+ 144 005c 01D0     		beq	.L10
+ 270:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         {
+ 271:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****           temp |= iocurrent;
+ 145              		.loc 1 271 11 is_stmt 1 view .LVU50
+ 146              		.loc 1 271 16 is_stmt 0 view .LVU51
+ 147 005e 45EA0406 		orr	r6, r5, r4
+ 148              	.LVL13:
+ 149              	.L10:
+ 272:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         }
+ 273:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         EXTI->RTSR = temp;
+ 150              		.loc 1 273 9 is_stmt 1 view .LVU52
+ 151              		.loc 1 273 20 is_stmt 0 view .LVU53
+ 152 0062 5C4C     		ldr	r4, .L29+4
+ 153 0064 A660     		str	r6, [r4, #8]
+ 274:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 275:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp = EXTI->FTSR;
+ 154              		.loc 1 275 9 is_stmt 1 view .LVU54
+ 155              		.loc 1 275 14 is_stmt 0 view .LVU55
+ 156 0066 E468     		ldr	r4, [r4, #12]
+ 157              	.LVL14:
+ 276:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp &= ~((uint32_t)iocurrent);
+ 158              		.loc 1 276 9 is_stmt 1 view .LVU56
+ 159              		.loc 1 276 14 is_stmt 0 view .LVU57
+ 160 0068 2240     		ands	r2, r2, r4
+ 161              	.LVL15:
+ 277:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         if((GPIO_Init->Mode & FALLING_EDGE) == FALLING_EDGE)
+ 162              		.loc 1 277 9 is_stmt 1 view .LVU58
+ 163              		.loc 1 277 22 is_stmt 0 view .LVU59
+ 164 006a 4E68     		ldr	r6, [r1, #4]
+ 165              		.loc 1 277 11 view .LVU60
+ 166 006c 16F4001F 		tst	r6, #2097152
+ 167 0070 01D0     		beq	.L11
+ 278:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         {
+ 279:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****           temp |= iocurrent;
+ 168              		.loc 1 279 11 is_stmt 1 view .LVU61
+ 169              		.loc 1 279 16 is_stmt 0 view .LVU62
+ 170 0072 45EA0402 		orr	r2, r5, r4
+ 171              	.LVL16:
+ 172              	.L11:
+ 280:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         }
+ 281:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         EXTI->FTSR = temp;
+ 173              		.loc 1 281 9 is_stmt 1 view .LVU63
+ 174              		.loc 1 281 20 is_stmt 0 view .LVU64
+ 175 0076 574C     		ldr	r4, .L29+4
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 9
+
+
+ 176 0078 E260     		str	r2, [r4, #12]
+ 177              	.LVL17:
+ 178              	.L3:
+ 183:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   {
+ 179              		.loc 1 183 53 discriminator 2 view .LVU65
+ 180 007a 0133     		adds	r3, r3, #1
+ 181              	.LVL18:
+ 183:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   {
+ 182              		.loc 1 183 3 discriminator 2 view .LVU66
+ 183 007c 0F2B     		cmp	r3, #15
+ 184 007e 00F2A280 		bhi	.L27
+ 185              	.LVL19:
+ 186              	.L12:
+ 186:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     /* Get the current IO position */
+ 187              		.loc 1 186 5 is_stmt 1 view .LVU67
+ 186:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     /* Get the current IO position */
+ 188              		.loc 1 186 16 is_stmt 0 view .LVU68
+ 189 0082 0122     		movs	r2, #1
+ 190 0084 9A40     		lsls	r2, r2, r3
+ 191              	.LVL20:
+ 188:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 192              		.loc 1 188 5 is_stmt 1 view .LVU69
+ 188:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 193              		.loc 1 188 37 is_stmt 0 view .LVU70
+ 194 0086 0C68     		ldr	r4, [r1]
+ 188:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 195              		.loc 1 188 15 view .LVU71
+ 196 0088 04EA0205 		and	r5, r4, r2
+ 197              	.LVL21:
+ 190:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     {
+ 198              		.loc 1 190 5 is_stmt 1 view .LVU72
+ 190:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     {
+ 199              		.loc 1 190 7 is_stmt 0 view .LVU73
+ 200 008c AA42     		cmp	r2, r5
+ 201 008e F4D1     		bne	.L3
+ 194:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       {
+ 202              		.loc 1 194 7 is_stmt 1 view .LVU74
+ 194:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       {
+ 203              		.loc 1 194 20 is_stmt 0 view .LVU75
+ 204 0090 4C68     		ldr	r4, [r1, #4]
+ 194:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       {
+ 205              		.loc 1 194 9 view .LVU76
+ 206 0092 122C     		cmp	r4, #18
+ 207 0094 18BF     		it	ne
+ 208 0096 022C     		cmpne	r4, #2
+ 209 0098 10D1     		bne	.L4
+ 197:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         
+ 210              		.loc 1 197 9 is_stmt 1 view .LVU77
+ 200:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp &= ~((uint32_t)0xF << ((uint32_t)(position & (uint32_t)0x07) * 4)) ;
+ 211              		.loc 1 200 9 view .LVU78
+ 200:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp &= ~((uint32_t)0xF << ((uint32_t)(position & (uint32_t)0x07) * 4)) ;
+ 212              		.loc 1 200 36 is_stmt 0 view .LVU79
+ 213 009a DE08     		lsrs	r6, r3, #3
+ 200:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp &= ~((uint32_t)0xF << ((uint32_t)(position & (uint32_t)0x07) * 4)) ;
+ 214              		.loc 1 200 14 view .LVU80
+ 215 009c 0836     		adds	r6, r6, #8
+ 216 009e 50F826C0 		ldr	ip, [r0, r6, lsl #2]
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 10
+
+
+ 217              	.LVL22:
+ 201:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp |= ((uint32_t)(GPIO_Init->Alternate) << (((uint32_t)position & (uint32_t)0x07) * 4));
+ 218              		.loc 1 201 9 is_stmt 1 view .LVU81
+ 201:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp |= ((uint32_t)(GPIO_Init->Alternate) << (((uint32_t)position & (uint32_t)0x07) * 4));
+ 219              		.loc 1 201 37 is_stmt 0 view .LVU82
+ 220 00a2 03F00704 		and	r4, r3, #7
+ 201:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp |= ((uint32_t)(GPIO_Init->Alternate) << (((uint32_t)position & (uint32_t)0x07) * 4));
+ 221              		.loc 1 201 75 view .LVU83
+ 222 00a6 A700     		lsls	r7, r4, #2
+ 201:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp |= ((uint32_t)(GPIO_Init->Alternate) << (((uint32_t)position & (uint32_t)0x07) * 4));
+ 223              		.loc 1 201 33 view .LVU84
+ 224 00a8 0F24     		movs	r4, #15
+ 225 00aa BC40     		lsls	r4, r4, r7
+ 201:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp |= ((uint32_t)(GPIO_Init->Alternate) << (((uint32_t)position & (uint32_t)0x07) * 4));
+ 226              		.loc 1 201 14 view .LVU85
+ 227 00ac 2CEA040C 		bic	ip, ip, r4
+ 228              	.LVL23:
+ 202:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         GPIOx->AFR[position >> 3] = temp;
+ 229              		.loc 1 202 9 is_stmt 1 view .LVU86
+ 202:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         GPIOx->AFR[position >> 3] = temp;
+ 230              		.loc 1 202 38 is_stmt 0 view .LVU87
+ 231 00b0 0C69     		ldr	r4, [r1, #16]
+ 202:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         GPIOx->AFR[position >> 3] = temp;
+ 232              		.loc 1 202 51 view .LVU88
+ 233 00b2 BC40     		lsls	r4, r4, r7
+ 202:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         GPIOx->AFR[position >> 3] = temp;
+ 234              		.loc 1 202 14 view .LVU89
+ 235 00b4 44EA0C04 		orr	r4, r4, ip
+ 236              	.LVL24:
+ 203:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       }
+ 237              		.loc 1 203 9 is_stmt 1 view .LVU90
+ 203:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       }
+ 238              		.loc 1 203 35 is_stmt 0 view .LVU91
+ 239 00b8 40F82640 		str	r4, [r0, r6, lsl #2]
+ 240              	.LVL25:
+ 241              	.L4:
+ 207:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       temp &= ~(GPIO_MODER_MODER0 << (position * 2));
+ 242              		.loc 1 207 7 is_stmt 1 view .LVU92
+ 207:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       temp &= ~(GPIO_MODER_MODER0 << (position * 2));
+ 243              		.loc 1 207 12 is_stmt 0 view .LVU93
+ 244 00bc 0468     		ldr	r4, [r0]
+ 245              	.LVL26:
+ 208:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       temp |= ((GPIO_Init->Mode & GPIO_MODE) << (position * 2));
+ 246              		.loc 1 208 7 is_stmt 1 view .LVU94
+ 208:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       temp |= ((GPIO_Init->Mode & GPIO_MODE) << (position * 2));
+ 247              		.loc 1 208 48 is_stmt 0 view .LVU95
+ 248 00be 5F00     		lsls	r7, r3, #1
+ 208:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       temp |= ((GPIO_Init->Mode & GPIO_MODE) << (position * 2));
+ 249              		.loc 1 208 35 view .LVU96
+ 250 00c0 0326     		movs	r6, #3
+ 251 00c2 BE40     		lsls	r6, r6, r7
+ 208:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       temp |= ((GPIO_Init->Mode & GPIO_MODE) << (position * 2));
+ 252              		.loc 1 208 15 view .LVU97
+ 253 00c4 F643     		mvns	r6, r6
+ 208:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       temp |= ((GPIO_Init->Mode & GPIO_MODE) << (position * 2));
+ 254              		.loc 1 208 12 view .LVU98
+ 255 00c6 06EA040C 		and	ip, r6, r4
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 11
+
+
+ 256              	.LVL27:
+ 209:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       GPIOx->MODER = temp;
+ 257              		.loc 1 209 7 is_stmt 1 view .LVU99
+ 209:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       GPIOx->MODER = temp;
+ 258              		.loc 1 209 26 is_stmt 0 view .LVU100
+ 259 00ca 4C68     		ldr	r4, [r1, #4]
+ 209:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       GPIOx->MODER = temp;
+ 260              		.loc 1 209 33 view .LVU101
+ 261 00cc 04F00304 		and	r4, r4, #3
+ 209:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       GPIOx->MODER = temp;
+ 262              		.loc 1 209 46 view .LVU102
+ 263 00d0 BC40     		lsls	r4, r4, r7
+ 209:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       GPIOx->MODER = temp;
+ 264              		.loc 1 209 12 view .LVU103
+ 265 00d2 44EA0C04 		orr	r4, r4, ip
+ 266              	.LVL28:
+ 210:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 267              		.loc 1 210 7 is_stmt 1 view .LVU104
+ 210:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 268              		.loc 1 210 20 is_stmt 0 view .LVU105
+ 269 00d6 0460     		str	r4, [r0]
+ 213:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****          (GPIO_Init->Mode == GPIO_MODE_OUTPUT_OD) || (GPIO_Init->Mode == GPIO_MODE_AF_OD))
+ 270              		.loc 1 213 7 is_stmt 1 view .LVU106
+ 213:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****          (GPIO_Init->Mode == GPIO_MODE_OUTPUT_OD) || (GPIO_Init->Mode == GPIO_MODE_AF_OD))
+ 271              		.loc 1 213 20 is_stmt 0 view .LVU107
+ 272 00d8 4C68     		ldr	r4, [r1, #4]
+ 273              	.LVL29:
+ 213:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****          (GPIO_Init->Mode == GPIO_MODE_OUTPUT_OD) || (GPIO_Init->Mode == GPIO_MODE_AF_OD))
+ 274              		.loc 1 213 91 view .LVU108
+ 275 00da 04F1FF3C 		add	ip, r4, #-1
+ 213:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****          (GPIO_Init->Mode == GPIO_MODE_OUTPUT_OD) || (GPIO_Init->Mode == GPIO_MODE_AF_OD))
+ 276              		.loc 1 213 9 view .LVU109
+ 277 00de 112C     		cmp	r4, #17
+ 278 00e0 18BF     		it	ne
+ 279 00e2 BCF1010F 		cmpne	ip, #1
+ 280 00e6 01D9     		bls	.L5
+ 214:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       {
+ 281              		.loc 1 214 51 view .LVU110
+ 282 00e8 122C     		cmp	r4, #18
+ 283 00ea 11D1     		bne	.L6
+ 284              	.L5:
+ 217:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         /* Configure the IO Speed */
+ 285              		.loc 1 217 9 is_stmt 1 view .LVU111
+ 219:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp &= ~(GPIO_OSPEEDER_OSPEEDR0 << (position * 2));
+ 286              		.loc 1 219 9 view .LVU112
+ 219:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp &= ~(GPIO_OSPEEDER_OSPEEDR0 << (position * 2));
+ 287              		.loc 1 219 14 is_stmt 0 view .LVU113
+ 288 00ec 8468     		ldr	r4, [r0, #8]
+ 289              	.LVL30:
+ 220:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp |= (GPIO_Init->Speed << (position * 2));
+ 290              		.loc 1 220 9 is_stmt 1 view .LVU114
+ 220:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp |= (GPIO_Init->Speed << (position * 2));
+ 291              		.loc 1 220 14 is_stmt 0 view .LVU115
+ 292 00ee 06EA040C 		and	ip, r6, r4
+ 293              	.LVL31:
+ 221:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         GPIOx->OSPEEDR = temp;
+ 294              		.loc 1 221 9 is_stmt 1 view .LVU116
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 12
+
+
+ 221:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         GPIOx->OSPEEDR = temp;
+ 295              		.loc 1 221 27 is_stmt 0 view .LVU117
+ 296 00f2 CC68     		ldr	r4, [r1, #12]
+ 221:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         GPIOx->OSPEEDR = temp;
+ 297              		.loc 1 221 35 view .LVU118
+ 298 00f4 BC40     		lsls	r4, r4, r7
+ 221:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         GPIOx->OSPEEDR = temp;
+ 299              		.loc 1 221 14 view .LVU119
+ 300 00f6 44EA0C04 		orr	r4, r4, ip
+ 301              	.LVL32:
+ 222:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 302              		.loc 1 222 9 is_stmt 1 view .LVU120
+ 222:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 303              		.loc 1 222 24 is_stmt 0 view .LVU121
+ 304 00fa 8460     		str	r4, [r0, #8]
+ 225:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp &= ~(GPIO_OTYPER_OT_0 << position) ;
+ 305              		.loc 1 225 9 is_stmt 1 view .LVU122
+ 225:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp &= ~(GPIO_OTYPER_OT_0 << position) ;
+ 306              		.loc 1 225 14 is_stmt 0 view .LVU123
+ 307 00fc 4468     		ldr	r4, [r0, #4]
+ 308              	.LVL33:
+ 226:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp |= (((GPIO_Init->Mode & GPIO_OUTPUT_TYPE) >> 4) << position);
+ 309              		.loc 1 226 9 is_stmt 1 view .LVU124
+ 226:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp |= (((GPIO_Init->Mode & GPIO_OUTPUT_TYPE) >> 4) << position);
+ 310              		.loc 1 226 14 is_stmt 0 view .LVU125
+ 311 00fe 24EA020C 		bic	ip, r4, r2
+ 312              	.LVL34:
+ 227:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         GPIOx->OTYPER = temp;
+ 313              		.loc 1 227 9 is_stmt 1 view .LVU126
+ 227:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         GPIOx->OTYPER = temp;
+ 314              		.loc 1 227 29 is_stmt 0 view .LVU127
+ 315 0102 4C68     		ldr	r4, [r1, #4]
+ 227:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         GPIOx->OTYPER = temp;
+ 316              		.loc 1 227 56 view .LVU128
+ 317 0104 C4F30012 		ubfx	r2, r4, #4, #1
+ 318              	.LVL35:
+ 227:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         GPIOx->OTYPER = temp;
+ 319              		.loc 1 227 62 view .LVU129
+ 320 0108 9A40     		lsls	r2, r2, r3
+ 227:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         GPIOx->OTYPER = temp;
+ 321              		.loc 1 227 14 view .LVU130
+ 322 010a 42EA0C02 		orr	r2, r2, ip
+ 323              	.LVL36:
+ 228:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       }
+ 324              		.loc 1 228 9 is_stmt 1 view .LVU131
+ 228:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       }
+ 325              		.loc 1 228 23 is_stmt 0 view .LVU132
+ 326 010e 4260     		str	r2, [r0, #4]
+ 327              	.LVL37:
+ 328              	.L6:
+ 232:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       temp &= ~(GPIO_PUPDR_PUPDR0 << (position * 2));
+ 329              		.loc 1 232 7 is_stmt 1 view .LVU133
+ 232:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       temp &= ~(GPIO_PUPDR_PUPDR0 << (position * 2));
+ 330              		.loc 1 232 12 is_stmt 0 view .LVU134
+ 331 0110 C268     		ldr	r2, [r0, #12]
+ 332              	.LVL38:
+ 233:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       temp |= ((GPIO_Init->Pull) << (position * 2));
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 13
+
+
+ 333              		.loc 1 233 7 is_stmt 1 view .LVU135
+ 233:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       temp |= ((GPIO_Init->Pull) << (position * 2));
+ 334              		.loc 1 233 12 is_stmt 0 view .LVU136
+ 335 0112 1640     		ands	r6, r6, r2
+ 336              	.LVL39:
+ 234:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       GPIOx->PUPDR = temp;
+ 337              		.loc 1 234 7 is_stmt 1 view .LVU137
+ 234:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       GPIOx->PUPDR = temp;
+ 338              		.loc 1 234 26 is_stmt 0 view .LVU138
+ 339 0114 8A68     		ldr	r2, [r1, #8]
+ 234:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       GPIOx->PUPDR = temp;
+ 340              		.loc 1 234 34 view .LVU139
+ 341 0116 BA40     		lsls	r2, r2, r7
+ 234:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       GPIOx->PUPDR = temp;
+ 342              		.loc 1 234 12 view .LVU140
+ 343 0118 3243     		orrs	r2, r2, r6
+ 344              	.LVL40:
+ 235:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 345              		.loc 1 235 7 is_stmt 1 view .LVU141
+ 235:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 346              		.loc 1 235 20 is_stmt 0 view .LVU142
+ 347 011a C260     		str	r2, [r0, #12]
+ 239:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       {
+ 348              		.loc 1 239 7 is_stmt 1 view .LVU143
+ 239:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       {
+ 349              		.loc 1 239 20 is_stmt 0 view .LVU144
+ 350 011c 4A68     		ldr	r2, [r1, #4]
+ 351              	.LVL41:
+ 239:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       {
+ 352              		.loc 1 239 9 view .LVU145
+ 353 011e 12F0805F 		tst	r2, #268435456
+ 354 0122 AAD0     		beq	.L3
+ 242:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 355              		.loc 1 242 9 is_stmt 1 view .LVU146
+ 356              	.LBB2:
+ 242:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 357              		.loc 1 242 9 view .LVU147
+ 242:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 358              		.loc 1 242 9 view .LVU148
+ 359 0124 2C4A     		ldr	r2, .L29+8
+ 360 0126 546C     		ldr	r4, [r2, #68]
+ 361 0128 44F48044 		orr	r4, r4, #16384
+ 362 012c 5464     		str	r4, [r2, #68]
+ 363              	.LVL42:
+ 242:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 364              		.loc 1 242 9 view .LVU149
+ 365 012e 526C     		ldr	r2, [r2, #68]
+ 366 0130 02F48042 		and	r2, r2, #16384
+ 367 0134 0192     		str	r2, [sp, #4]
+ 242:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 368              		.loc 1 242 9 view .LVU150
+ 369 0136 019A     		ldr	r2, [sp, #4]
+ 370              	.LBE2:
+ 244:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp &= ~(((uint32_t)0x0F) << (4 * (position & 0x03)));
+ 371              		.loc 1 244 9 view .LVU151
+ 244:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp &= ~(((uint32_t)0x0F) << (4 * (position & 0x03)));
+ 372              		.loc 1 244 40 is_stmt 0 view .LVU152
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 14
+
+
+ 373 0138 9C08     		lsrs	r4, r3, #2
+ 244:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp &= ~(((uint32_t)0x0F) << (4 * (position & 0x03)));
+ 374              		.loc 1 244 14 view .LVU153
+ 375 013a A61C     		adds	r6, r4, #2
+ 376 013c 244A     		ldr	r2, .L29
+ 377 013e 52F82670 		ldr	r7, [r2, r6, lsl #2]
+ 378              	.LVL43:
+ 245:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp |= ((uint32_t)(GPIO_GET_INDEX(GPIOx)) << (4 * (position & 0x03)));
+ 379              		.loc 1 245 9 is_stmt 1 view .LVU154
+ 245:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp |= ((uint32_t)(GPIO_GET_INDEX(GPIOx)) << (4 * (position & 0x03)));
+ 380              		.loc 1 245 54 is_stmt 0 view .LVU155
+ 381 0142 03F00302 		and	r2, r3, #3
+ 245:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp |= ((uint32_t)(GPIO_GET_INDEX(GPIOx)) << (4 * (position & 0x03)));
+ 382              		.loc 1 245 42 view .LVU156
+ 383 0146 9600     		lsls	r6, r2, #2
+ 245:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp |= ((uint32_t)(GPIO_GET_INDEX(GPIOx)) << (4 * (position & 0x03)));
+ 384              		.loc 1 245 36 view .LVU157
+ 385 0148 0F22     		movs	r2, #15
+ 386 014a B240     		lsls	r2, r2, r6
+ 245:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         temp |= ((uint32_t)(GPIO_GET_INDEX(GPIOx)) << (4 * (position & 0x03)));
+ 387              		.loc 1 245 14 view .LVU158
+ 388 014c 27EA0207 		bic	r7, r7, r2
+ 389              	.LVL44:
+ 246:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         SYSCFG->EXTICR[position >> 2] = temp;
+ 390              		.loc 1 246 9 is_stmt 1 view .LVU159
+ 246:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         SYSCFG->EXTICR[position >> 2] = temp;
+ 391              		.loc 1 246 18 is_stmt 0 view .LVU160
+ 392 0150 224A     		ldr	r2, .L29+12
+ 393 0152 9042     		cmp	r0, r2
+ 394 0154 3FF45DAF 		beq	.L13
+ 246:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         SYSCFG->EXTICR[position >> 2] = temp;
+ 395              		.loc 1 246 29 discriminator 1 view .LVU161
+ 396 0158 02F58062 		add	r2, r2, #1024
+ 397 015c 9042     		cmp	r0, r2
+ 398 015e 22D0     		beq	.L14
+ 246:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         SYSCFG->EXTICR[position >> 2] = temp;
+ 399              		.loc 1 246 29 discriminator 3 view .LVU162
+ 400 0160 02F58062 		add	r2, r2, #1024
+ 401 0164 9042     		cmp	r0, r2
+ 402 0166 20D0     		beq	.L15
+ 246:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         SYSCFG->EXTICR[position >> 2] = temp;
+ 403              		.loc 1 246 29 discriminator 5 view .LVU163
+ 404 0168 02F58062 		add	r2, r2, #1024
+ 405 016c 9042     		cmp	r0, r2
+ 406 016e 1ED0     		beq	.L16
+ 246:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         SYSCFG->EXTICR[position >> 2] = temp;
+ 407              		.loc 1 246 29 discriminator 7 view .LVU164
+ 408 0170 02F58062 		add	r2, r2, #1024
+ 409 0174 9042     		cmp	r0, r2
+ 410 0176 1CD0     		beq	.L17
+ 246:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         SYSCFG->EXTICR[position >> 2] = temp;
+ 411              		.loc 1 246 29 discriminator 9 view .LVU165
+ 412 0178 02F58062 		add	r2, r2, #1024
+ 413 017c 9042     		cmp	r0, r2
+ 414 017e 1AD0     		beq	.L18
+ 246:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         SYSCFG->EXTICR[position >> 2] = temp;
+ 415              		.loc 1 246 29 discriminator 11 view .LVU166
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 15
+
+
+ 416 0180 02F58062 		add	r2, r2, #1024
+ 417 0184 9042     		cmp	r0, r2
+ 418 0186 18D0     		beq	.L19
+ 246:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         SYSCFG->EXTICR[position >> 2] = temp;
+ 419              		.loc 1 246 29 discriminator 13 view .LVU167
+ 420 0188 02F58062 		add	r2, r2, #1024
+ 421 018c 9042     		cmp	r0, r2
+ 422 018e 16D0     		beq	.L20
+ 246:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         SYSCFG->EXTICR[position >> 2] = temp;
+ 423              		.loc 1 246 29 discriminator 15 view .LVU168
+ 424 0190 02F58062 		add	r2, r2, #1024
+ 425 0194 9042     		cmp	r0, r2
+ 426 0196 14D0     		beq	.L21
+ 246:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         SYSCFG->EXTICR[position >> 2] = temp;
+ 427              		.loc 1 246 29 discriminator 17 view .LVU169
+ 428 0198 02F58062 		add	r2, r2, #1024
+ 429 019c 9042     		cmp	r0, r2
+ 430 019e 3FF436AF 		beq	.L28
+ 246:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         SYSCFG->EXTICR[position >> 2] = temp;
+ 431              		.loc 1 246 29 view .LVU170
+ 432 01a2 0A22     		movs	r2, #10
+ 433 01a4 36E7     		b	.L7
+ 434              	.L14:
+ 435 01a6 0122     		movs	r2, #1
+ 436              	.LVL45:
+ 246:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         SYSCFG->EXTICR[position >> 2] = temp;
+ 437              		.loc 1 246 29 view .LVU171
+ 438 01a8 34E7     		b	.L7
+ 439              	.LVL46:
+ 440              	.L15:
+ 246:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         SYSCFG->EXTICR[position >> 2] = temp;
+ 441              		.loc 1 246 29 view .LVU172
+ 442 01aa 0222     		movs	r2, #2
+ 443 01ac 32E7     		b	.L7
+ 444              	.L16:
+ 445 01ae 0322     		movs	r2, #3
+ 446 01b0 30E7     		b	.L7
+ 447              	.L17:
+ 448 01b2 0422     		movs	r2, #4
+ 449 01b4 2EE7     		b	.L7
+ 450              	.L18:
+ 451 01b6 0522     		movs	r2, #5
+ 452 01b8 2CE7     		b	.L7
+ 453              	.L19:
+ 454 01ba 0622     		movs	r2, #6
+ 455 01bc 2AE7     		b	.L7
+ 456              	.L20:
+ 457 01be 0722     		movs	r2, #7
+ 458 01c0 28E7     		b	.L7
+ 459              	.L21:
+ 460 01c2 0822     		movs	r2, #8
+ 461 01c4 26E7     		b	.L7
+ 462              	.LVL47:
+ 463              	.L27:
+ 282:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       }
+ 283:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     }
+ 284:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   }
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 16
+
+
+ 285:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** }
+ 464              		.loc 1 285 1 view .LVU173
+ 465 01c6 02B0     		add	sp, sp, #8
+ 466              	.LCFI2:
+ 467              		.cfi_def_cfa_offset 16
+ 468              		@ sp needed
+ 469 01c8 F0BC     		pop	{r4, r5, r6, r7}
+ 470              	.LCFI3:
+ 471              		.cfi_restore 7
+ 472              		.cfi_restore 6
+ 473              		.cfi_restore 5
+ 474              		.cfi_restore 4
+ 475              		.cfi_def_cfa_offset 0
+ 476              	.LVL48:
+ 477              		.loc 1 285 1 view .LVU174
+ 478 01ca 7047     		bx	lr
+ 479              	.LVL49:
+ 480              	.L26:
+ 481              		.loc 1 285 1 view .LVU175
+ 482 01cc 7047     		bx	lr
+ 483              	.L30:
+ 484 01ce 00BF     		.align	2
+ 485              	.L29:
+ 486 01d0 00380140 		.word	1073821696
+ 487 01d4 003C0140 		.word	1073822720
+ 488 01d8 00380240 		.word	1073887232
+ 489 01dc 00000240 		.word	1073872896
+ 490              		.cfi_endproc
+ 491              	.LFE141:
+ 493              		.section	.text.HAL_GPIO_DeInit,"ax",%progbits
+ 494              		.align	1
+ 495              		.global	HAL_GPIO_DeInit
+ 496              		.syntax unified
+ 497              		.thumb
+ 498              		.thumb_func
+ 499              		.fpu fpv5-d16
+ 501              	HAL_GPIO_DeInit:
+ 502              	.LVL50:
+ 503              	.LFB142:
+ 286:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 287:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** /**
+ 288:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @brief  De-initializes the GPIOx peripheral registers to their default reset values.
+ 289:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @param  GPIOx where x can be (A..K) to select the GPIO peripheral.
+ 290:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @param  GPIO_Pin specifies the port bit to be written.
+ 291:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   *          This parameter can be one of GPIO_PIN_x where x can be (0..15).
+ 292:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @retval None
+ 293:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   */
+ 294:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** void HAL_GPIO_DeInit(GPIO_TypeDef  *GPIOx, uint32_t GPIO_Pin)
+ 295:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** {
+ 504              		.loc 1 295 1 is_stmt 1 view -0
+ 505              		.cfi_startproc
+ 506              		@ args = 0, pretend = 0, frame = 0
+ 507              		@ frame_needed = 0, uses_anonymous_args = 0
+ 296:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   uint32_t position;
+ 508              		.loc 1 296 3 view .LVU177
+ 297:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   uint32_t ioposition = 0x00;
+ 509              		.loc 1 297 3 view .LVU178
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 17
+
+
+ 298:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   uint32_t iocurrent = 0x00;
+ 510              		.loc 1 298 3 view .LVU179
+ 299:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   uint32_t tmp = 0x00;
+ 511              		.loc 1 299 3 view .LVU180
+ 300:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 301:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   /* Check the parameters */
+ 302:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   assert_param(IS_GPIO_ALL_INSTANCE(GPIOx));
+ 512              		.loc 1 302 3 view .LVU181
+ 303:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   
+ 304:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   /* Configure the port pins */
+ 305:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   for(position = 0; position < GPIO_NUMBER; position++)
+ 513              		.loc 1 305 3 view .LVU182
+ 514              		.loc 1 305 16 is_stmt 0 view .LVU183
+ 515 0000 0023     		movs	r3, #0
+ 516              	.LVL51:
+ 517              		.loc 1 305 3 view .LVU184
+ 518 0002 0F2B     		cmp	r3, #15
+ 519 0004 00F29380 		bhi	.L50
+ 295:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   uint32_t position;
+ 520              		.loc 1 295 1 view .LVU185
+ 521 0008 F0B5     		push	{r4, r5, r6, r7, lr}
+ 522              	.LCFI4:
+ 523              		.cfi_def_cfa_offset 20
+ 524              		.cfi_offset 4, -20
+ 525              		.cfi_offset 5, -16
+ 526              		.cfi_offset 6, -12
+ 527              		.cfi_offset 7, -8
+ 528              		.cfi_offset 14, -4
+ 529 000a 29E0     		b	.L36
+ 530              	.LVL52:
+ 531              	.L53:
+ 306:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   {
+ 307:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     /* Get the IO position */
+ 308:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     ioposition = ((uint32_t)0x01) << position;
+ 309:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     /* Get the current IO position */
+ 310:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     iocurrent = (GPIO_Pin) & ioposition;
+ 311:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 312:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     if(iocurrent == ioposition)
+ 313:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     {
+ 314:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       /*------------------------- EXTI Mode Configuration --------------------*/
+ 315:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       tmp = SYSCFG->EXTICR[position >> 2];
+ 316:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       tmp &= (((uint32_t)0x0F) << (4 * (position & 0x03)));
+ 317:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       if(tmp == ((uint32_t)(GPIO_GET_INDEX(GPIOx)) << (4 * (position & 0x03))))
+ 532              		.loc 1 317 29 view .LVU186
+ 533 000c 0927     		movs	r7, #9
+ 534 000e 00E0     		b	.L34
+ 535              	.L37:
+ 536              		.loc 1 317 18 view .LVU187
+ 537 0010 0027     		movs	r7, #0
+ 538              	.L34:
+ 539              		.loc 1 317 52 discriminator 40 view .LVU188
+ 540 0012 07FA05F5 		lsl	r5, r7, r5
+ 541              		.loc 1 317 9 discriminator 40 view .LVU189
+ 542 0016 B542     		cmp	r5, r6
+ 543 0018 70D0     		beq	.L51
+ 544              	.LVL53:
+ 545              	.L35:
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 18
+
+
+ 318:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       {
+ 319:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         /* Configure the External Interrupt or event for the current IO */
+ 320:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         tmp = ((uint32_t)0x0F) << (4 * (position & 0x03));
+ 321:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         SYSCFG->EXTICR[position >> 2] &= ~tmp;
+ 322:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 323:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         /* Clear EXTI line configuration */
+ 324:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         EXTI->IMR &= ~((uint32_t)iocurrent);
+ 325:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         EXTI->EMR &= ~((uint32_t)iocurrent);
+ 326:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 327:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         /* Clear Rising Falling edge configuration */
+ 328:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         EXTI->RTSR &= ~((uint32_t)iocurrent);
+ 329:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         EXTI->FTSR &= ~((uint32_t)iocurrent);
+ 330:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       }
+ 331:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       /*------------------------- GPIO Mode Configuration --------------------*/
+ 332:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       /* Configure IO Direction in Input Floating Mode */
+ 333:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       GPIOx->MODER &= ~(GPIO_MODER_MODER0 << (position * 2));
+ 546              		.loc 1 333 7 is_stmt 1 view .LVU190
+ 547              		.loc 1 333 20 is_stmt 0 view .LVU191
+ 548 001a 0568     		ldr	r5, [r0]
+ 549              		.loc 1 333 56 view .LVU192
+ 550 001c 5E00     		lsls	r6, r3, #1
+ 551              		.loc 1 333 43 view .LVU193
+ 552 001e 0324     		movs	r4, #3
+ 553 0020 B440     		lsls	r4, r4, r6
+ 554              		.loc 1 333 23 view .LVU194
+ 555 0022 E443     		mvns	r4, r4
+ 556              		.loc 1 333 20 view .LVU195
+ 557 0024 2540     		ands	r5, r5, r4
+ 558 0026 0560     		str	r5, [r0]
+ 334:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 335:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       /* Configure the default Alternate Function in current IO */
+ 336:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       GPIOx->AFR[position >> 3] &= ~((uint32_t)0xF << ((uint32_t)(position & (uint32_t)0x07) * 4)) 
+ 559              		.loc 1 336 7 is_stmt 1 view .LVU196
+ 560              		.loc 1 336 33 is_stmt 0 view .LVU197
+ 561 0028 DD08     		lsrs	r5, r3, #3
+ 562 002a 0835     		adds	r5, r5, #8
+ 563 002c 50F82560 		ldr	r6, [r0, r5, lsl #2]
+ 564              		.loc 1 336 56 view .LVU198
+ 565 0030 03F00707 		and	r7, r3, #7
+ 566              		.loc 1 336 94 view .LVU199
+ 567 0034 4FEA870C 		lsl	ip, r7, #2
+ 568              		.loc 1 336 52 view .LVU200
+ 569 0038 0F27     		movs	r7, #15
+ 570 003a 07FA0CF7 		lsl	r7, r7, ip
+ 571              		.loc 1 336 33 view .LVU201
+ 572 003e 26EA0706 		bic	r6, r6, r7
+ 573 0042 40F82560 		str	r6, [r0, r5, lsl #2]
+ 337:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 338:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       /* Configure the default value for IO Speed */
+ 339:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       GPIOx->OSPEEDR &= ~(GPIO_OSPEEDER_OSPEEDR0 << (position * 2));
+ 574              		.loc 1 339 7 is_stmt 1 view .LVU202
+ 575              		.loc 1 339 22 is_stmt 0 view .LVU203
+ 576 0046 8568     		ldr	r5, [r0, #8]
+ 577 0048 2540     		ands	r5, r5, r4
+ 578 004a 8560     		str	r5, [r0, #8]
+ 340:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 341:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       /* Configure the default value IO Output Type */
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 19
+
+
+ 342:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       GPIOx->OTYPER  &= ~(GPIO_OTYPER_OT_0 << position) ;
+ 579              		.loc 1 342 7 is_stmt 1 view .LVU204
+ 580              		.loc 1 342 22 is_stmt 0 view .LVU205
+ 581 004c 4568     		ldr	r5, [r0, #4]
+ 582 004e 25EA0202 		bic	r2, r5, r2
+ 583              	.LVL54:
+ 584              		.loc 1 342 22 view .LVU206
+ 585 0052 4260     		str	r2, [r0, #4]
+ 343:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 344:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       /* Deactivate the Pull-up and Pull-down resistor for the current IO */
+ 345:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       GPIOx->PUPDR &= ~(GPIO_PUPDR_PUPDR0 << (position * 2));
+ 586              		.loc 1 345 7 is_stmt 1 view .LVU207
+ 587              		.loc 1 345 20 is_stmt 0 view .LVU208
+ 588 0054 C268     		ldr	r2, [r0, #12]
+ 589 0056 1440     		ands	r4, r4, r2
+ 590 0058 C460     		str	r4, [r0, #12]
+ 591              	.L33:
+ 305:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   {
+ 592              		.loc 1 305 53 discriminator 2 view .LVU209
+ 593 005a 0133     		adds	r3, r3, #1
+ 594              	.LVL55:
+ 305:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   {
+ 595              		.loc 1 305 3 discriminator 2 view .LVU210
+ 596 005c 0F2B     		cmp	r3, #15
+ 597 005e 65D8     		bhi	.L52
+ 598              	.LVL56:
+ 599              	.L36:
+ 308:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     /* Get the current IO position */
+ 600              		.loc 1 308 5 is_stmt 1 view .LVU211
+ 308:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     /* Get the current IO position */
+ 601              		.loc 1 308 16 is_stmt 0 view .LVU212
+ 602 0060 0122     		movs	r2, #1
+ 603 0062 9A40     		lsls	r2, r2, r3
+ 604              	.LVL57:
+ 310:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 605              		.loc 1 310 5 is_stmt 1 view .LVU213
+ 310:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 606              		.loc 1 310 15 is_stmt 0 view .LVU214
+ 607 0064 02EA0104 		and	r4, r2, r1
+ 608              	.LVL58:
+ 312:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     {
+ 609              		.loc 1 312 5 is_stmt 1 view .LVU215
+ 312:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     {
+ 610              		.loc 1 312 7 is_stmt 0 view .LVU216
+ 611 0068 A242     		cmp	r2, r4
+ 612 006a F6D1     		bne	.L33
+ 315:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       tmp &= (((uint32_t)0x0F) << (4 * (position & 0x03)));
+ 613              		.loc 1 315 7 is_stmt 1 view .LVU217
+ 315:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       tmp &= (((uint32_t)0x0F) << (4 * (position & 0x03)));
+ 614              		.loc 1 315 37 is_stmt 0 view .LVU218
+ 615 006c 4FEA930C 		lsr	ip, r3, #2
+ 315:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       tmp &= (((uint32_t)0x0F) << (4 * (position & 0x03)));
+ 616              		.loc 1 315 11 view .LVU219
+ 617 0070 0CF10206 		add	r6, ip, #2
+ 618 0074 2E4D     		ldr	r5, .L54
+ 619 0076 55F82660 		ldr	r6, [r5, r6, lsl #2]
+ 620              	.LVL59:
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 20
+
+
+ 316:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       if(tmp == ((uint32_t)(GPIO_GET_INDEX(GPIOx)) << (4 * (position & 0x03))))
+ 621              		.loc 1 316 7 is_stmt 1 view .LVU220
+ 316:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       if(tmp == ((uint32_t)(GPIO_GET_INDEX(GPIOx)) << (4 * (position & 0x03))))
+ 622              		.loc 1 316 50 is_stmt 0 view .LVU221
+ 623 007a 03F00305 		and	r5, r3, #3
+ 316:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       if(tmp == ((uint32_t)(GPIO_GET_INDEX(GPIOx)) << (4 * (position & 0x03))))
+ 624              		.loc 1 316 38 view .LVU222
+ 625 007e AD00     		lsls	r5, r5, #2
+ 316:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       if(tmp == ((uint32_t)(GPIO_GET_INDEX(GPIOx)) << (4 * (position & 0x03))))
+ 626              		.loc 1 316 32 view .LVU223
+ 627 0080 0F27     		movs	r7, #15
+ 628 0082 07FA05FE 		lsl	lr, r7, r5
+ 316:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       if(tmp == ((uint32_t)(GPIO_GET_INDEX(GPIOx)) << (4 * (position & 0x03))))
+ 629              		.loc 1 316 11 view .LVU224
+ 630 0086 0EEA0606 		and	r6, lr, r6
+ 631              	.LVL60:
+ 317:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       {
+ 632              		.loc 1 317 7 is_stmt 1 view .LVU225
+ 317:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       {
+ 633              		.loc 1 317 18 is_stmt 0 view .LVU226
+ 634 008a 2A4F     		ldr	r7, .L54+4
+ 635 008c B842     		cmp	r0, r7
+ 636 008e BFD0     		beq	.L37
+ 317:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       {
+ 637              		.loc 1 317 29 discriminator 1 view .LVU227
+ 638 0090 07F58067 		add	r7, r7, #1024
+ 639 0094 B842     		cmp	r0, r7
+ 640 0096 21D0     		beq	.L38
+ 317:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       {
+ 641              		.loc 1 317 29 discriminator 3 view .LVU228
+ 642 0098 07F58067 		add	r7, r7, #1024
+ 643 009c B842     		cmp	r0, r7
+ 644 009e 1FD0     		beq	.L39
+ 317:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       {
+ 645              		.loc 1 317 29 discriminator 5 view .LVU229
+ 646 00a0 07F58067 		add	r7, r7, #1024
+ 647 00a4 B842     		cmp	r0, r7
+ 648 00a6 1DD0     		beq	.L40
+ 317:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       {
+ 649              		.loc 1 317 29 discriminator 7 view .LVU230
+ 650 00a8 07F58067 		add	r7, r7, #1024
+ 651 00ac B842     		cmp	r0, r7
+ 652 00ae 1BD0     		beq	.L41
+ 317:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       {
+ 653              		.loc 1 317 29 discriminator 9 view .LVU231
+ 654 00b0 07F58067 		add	r7, r7, #1024
+ 655 00b4 B842     		cmp	r0, r7
+ 656 00b6 19D0     		beq	.L42
+ 317:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       {
+ 657              		.loc 1 317 29 discriminator 11 view .LVU232
+ 658 00b8 07F58067 		add	r7, r7, #1024
+ 659 00bc B842     		cmp	r0, r7
+ 660 00be 17D0     		beq	.L43
+ 317:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       {
+ 661              		.loc 1 317 29 discriminator 13 view .LVU233
+ 662 00c0 07F58067 		add	r7, r7, #1024
+ 663 00c4 B842     		cmp	r0, r7
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 21
+
+
+ 664 00c6 15D0     		beq	.L44
+ 317:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       {
+ 665              		.loc 1 317 29 discriminator 15 view .LVU234
+ 666 00c8 07F58067 		add	r7, r7, #1024
+ 667 00cc B842     		cmp	r0, r7
+ 668 00ce 13D0     		beq	.L45
+ 317:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       {
+ 669              		.loc 1 317 29 discriminator 17 view .LVU235
+ 670 00d0 07F58067 		add	r7, r7, #1024
+ 671 00d4 B842     		cmp	r0, r7
+ 672 00d6 99D0     		beq	.L53
+ 317:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       {
+ 673              		.loc 1 317 29 view .LVU236
+ 674 00d8 0A27     		movs	r7, #10
+ 675 00da 9AE7     		b	.L34
+ 676              	.L38:
+ 677 00dc 0127     		movs	r7, #1
+ 678 00de 98E7     		b	.L34
+ 679              	.L39:
+ 680 00e0 0227     		movs	r7, #2
+ 681 00e2 96E7     		b	.L34
+ 682              	.L40:
+ 683 00e4 0327     		movs	r7, #3
+ 684 00e6 94E7     		b	.L34
+ 685              	.L41:
+ 686 00e8 0427     		movs	r7, #4
+ 687 00ea 92E7     		b	.L34
+ 688              	.L42:
+ 689 00ec 0527     		movs	r7, #5
+ 690 00ee 90E7     		b	.L34
+ 691              	.L43:
+ 692 00f0 0627     		movs	r7, #6
+ 693 00f2 8EE7     		b	.L34
+ 694              	.L44:
+ 695 00f4 0727     		movs	r7, #7
+ 696 00f6 8CE7     		b	.L34
+ 697              	.L45:
+ 698 00f8 0827     		movs	r7, #8
+ 699 00fa 8AE7     		b	.L34
+ 700              	.L51:
+ 320:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         SYSCFG->EXTICR[position >> 2] &= ~tmp;
+ 701              		.loc 1 320 9 is_stmt 1 view .LVU237
+ 702              	.LVL61:
+ 321:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 703              		.loc 1 321 9 view .LVU238
+ 321:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 704              		.loc 1 321 39 is_stmt 0 view .LVU239
+ 705 00fc 0C4E     		ldr	r6, .L54
+ 706 00fe 0CF10205 		add	r5, ip, #2
+ 707 0102 56F82570 		ldr	r7, [r6, r5, lsl #2]
+ 708 0106 27EA0E07 		bic	r7, r7, lr
+ 709 010a 46F82570 		str	r7, [r6, r5, lsl #2]
+ 324:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         EXTI->EMR &= ~((uint32_t)iocurrent);
+ 710              		.loc 1 324 9 is_stmt 1 view .LVU240
+ 324:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         EXTI->EMR &= ~((uint32_t)iocurrent);
+ 711              		.loc 1 324 19 is_stmt 0 view .LVU241
+ 712 010e 0A4D     		ldr	r5, .L54+8
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 22
+
+
+ 713 0110 2E68     		ldr	r6, [r5]
+ 324:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         EXTI->EMR &= ~((uint32_t)iocurrent);
+ 714              		.loc 1 324 22 view .LVU242
+ 715 0112 E443     		mvns	r4, r4
+ 716              	.LVL62:
+ 324:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         EXTI->EMR &= ~((uint32_t)iocurrent);
+ 717              		.loc 1 324 19 view .LVU243
+ 718 0114 2640     		ands	r6, r6, r4
+ 719 0116 2E60     		str	r6, [r5]
+ 325:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 720              		.loc 1 325 9 is_stmt 1 view .LVU244
+ 325:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 721              		.loc 1 325 19 is_stmt 0 view .LVU245
+ 722 0118 6E68     		ldr	r6, [r5, #4]
+ 723 011a 2640     		ands	r6, r6, r4
+ 724 011c 6E60     		str	r6, [r5, #4]
+ 328:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         EXTI->FTSR &= ~((uint32_t)iocurrent);
+ 725              		.loc 1 328 9 is_stmt 1 view .LVU246
+ 328:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****         EXTI->FTSR &= ~((uint32_t)iocurrent);
+ 726              		.loc 1 328 20 is_stmt 0 view .LVU247
+ 727 011e AE68     		ldr	r6, [r5, #8]
+ 728 0120 2640     		ands	r6, r6, r4
+ 729 0122 AE60     		str	r6, [r5, #8]
+ 329:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       }
+ 730              		.loc 1 329 9 is_stmt 1 view .LVU248
+ 329:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       }
+ 731              		.loc 1 329 20 is_stmt 0 view .LVU249
+ 732 0124 EE68     		ldr	r6, [r5, #12]
+ 733 0126 3440     		ands	r4, r4, r6
+ 734              	.LVL63:
+ 329:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****       }
+ 735              		.loc 1 329 20 view .LVU250
+ 736 0128 EC60     		str	r4, [r5, #12]
+ 737 012a 76E7     		b	.L35
+ 738              	.LVL64:
+ 739              	.L52:
+ 346:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     }
+ 347:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   }
+ 348:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** }
+ 740              		.loc 1 348 1 view .LVU251
+ 741 012c F0BD     		pop	{r4, r5, r6, r7, pc}
+ 742              	.LVL65:
+ 743              	.L50:
+ 744              	.LCFI5:
+ 745              		.cfi_def_cfa_offset 0
+ 746              		.cfi_restore 4
+ 747              		.cfi_restore 5
+ 748              		.cfi_restore 6
+ 749              		.cfi_restore 7
+ 750              		.cfi_restore 14
+ 751              		.loc 1 348 1 view .LVU252
+ 752 012e 7047     		bx	lr
+ 753              	.L55:
+ 754              		.align	2
+ 755              	.L54:
+ 756 0130 00380140 		.word	1073821696
+ 757 0134 00000240 		.word	1073872896
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 23
+
+
+ 758 0138 003C0140 		.word	1073822720
+ 759              		.cfi_endproc
+ 760              	.LFE142:
+ 762              		.section	.text.HAL_GPIO_ReadPin,"ax",%progbits
+ 763              		.align	1
+ 764              		.global	HAL_GPIO_ReadPin
+ 765              		.syntax unified
+ 766              		.thumb
+ 767              		.thumb_func
+ 768              		.fpu fpv5-d16
+ 770              	HAL_GPIO_ReadPin:
+ 771              	.LVL66:
+ 772              	.LFB143:
+ 349:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 350:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** /**
+ 351:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @}
+ 352:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   */
+ 353:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 354:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** /** @defgroup GPIO_Exported_Functions_Group2 IO operation functions 
+ 355:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****  *  @brief   GPIO Read and Write
+ 356:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****  *
+ 357:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** @verbatim
+ 358:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****  ===============================================================================
+ 359:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****                        ##### IO operation functions #####
+ 360:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****  ===============================================================================
+ 361:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 362:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** @endverbatim
+ 363:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @{
+ 364:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   */
+ 365:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 366:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** /**
+ 367:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @brief  Reads the specified input port pin.
+ 368:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @param  GPIOx where x can be (A..K) to select the GPIO peripheral.
+ 369:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @param  GPIO_Pin specifies the port bit to read.
+ 370:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   *         This parameter can be GPIO_PIN_x where x can be (0..15).
+ 371:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @retval The input port pin value.
+ 372:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   */
+ 373:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** GPIO_PinState HAL_GPIO_ReadPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+ 374:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** {
+ 773              		.loc 1 374 1 is_stmt 1 view -0
+ 774              		.cfi_startproc
+ 775              		@ args = 0, pretend = 0, frame = 0
+ 776              		@ frame_needed = 0, uses_anonymous_args = 0
+ 777              		@ link register save eliminated.
+ 375:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   GPIO_PinState bitstatus;
+ 778              		.loc 1 375 3 view .LVU254
+ 376:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 377:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   /* Check the parameters */
+ 378:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   assert_param(IS_GPIO_PIN(GPIO_Pin));
+ 779              		.loc 1 378 3 view .LVU255
+ 379:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 380:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   if((GPIOx->IDR & GPIO_Pin) != (uint32_t)GPIO_PIN_RESET)
+ 780              		.loc 1 380 3 view .LVU256
+ 781              		.loc 1 380 12 is_stmt 0 view .LVU257
+ 782 0000 0369     		ldr	r3, [r0, #16]
+ 783              		.loc 1 380 5 view .LVU258
+ 784 0002 1942     		tst	r1, r3
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 24
+
+
+ 785 0004 01D0     		beq	.L58
+ 381:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   {
+ 382:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     bitstatus = GPIO_PIN_SET;
+ 786              		.loc 1 382 15 view .LVU259
+ 787 0006 0120     		movs	r0, #1
+ 788              	.LVL67:
+ 789              		.loc 1 382 15 view .LVU260
+ 790 0008 7047     		bx	lr
+ 791              	.LVL68:
+ 792              	.L58:
+ 383:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   }
+ 384:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   else
+ 385:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   {
+ 386:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     bitstatus = GPIO_PIN_RESET;
+ 793              		.loc 1 386 15 view .LVU261
+ 794 000a 0020     		movs	r0, #0
+ 795              	.LVL69:
+ 387:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   }
+ 388:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   return bitstatus;
+ 796              		.loc 1 388 3 is_stmt 1 view .LVU262
+ 389:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** }
+ 797              		.loc 1 389 1 is_stmt 0 view .LVU263
+ 798 000c 7047     		bx	lr
+ 799              		.cfi_endproc
+ 800              	.LFE143:
+ 802              		.section	.text.HAL_GPIO_WritePin,"ax",%progbits
+ 803              		.align	1
+ 804              		.global	HAL_GPIO_WritePin
+ 805              		.syntax unified
+ 806              		.thumb
+ 807              		.thumb_func
+ 808              		.fpu fpv5-d16
+ 810              	HAL_GPIO_WritePin:
+ 811              	.LVL70:
+ 812              	.LFB144:
+ 390:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 391:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** /**
+ 392:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @brief  Sets or clears the selected data port bit.
+ 393:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   *
+ 394:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @note   This function uses GPIOx_BSRR register to allow atomic read/modify
+ 395:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   *         accesses. In this way, there is no risk of an IRQ occurring between
+ 396:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   *         the read and the modify access.
+ 397:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   *
+ 398:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @param  GPIOx where x can be (A..K) to select the GPIO peripheral.
+ 399:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @param  GPIO_Pin specifies the port bit to be written.
+ 400:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   *          This parameter can be one of GPIO_PIN_x where x can be (0..15).
+ 401:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @param  PinState specifies the value to be written to the selected bit.
+ 402:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   *          This parameter can be one of the GPIO_PinState enum values:
+ 403:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   *            @arg GPIO_PIN_RESET: to clear the port pin
+ 404:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   *            @arg GPIO_PIN_SET: to set the port pin
+ 405:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @retval None
+ 406:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   */
+ 407:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** void HAL_GPIO_WritePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, GPIO_PinState PinState)
+ 408:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** {
+ 813              		.loc 1 408 1 is_stmt 1 view -0
+ 814              		.cfi_startproc
+ 815              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 25
+
+
+ 816              		@ frame_needed = 0, uses_anonymous_args = 0
+ 817              		@ link register save eliminated.
+ 409:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   /* Check the parameters */
+ 410:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   assert_param(IS_GPIO_PIN(GPIO_Pin));
+ 818              		.loc 1 410 3 view .LVU265
+ 411:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   assert_param(IS_GPIO_PIN_ACTION(PinState));
+ 819              		.loc 1 411 3 view .LVU266
+ 412:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 413:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   if(PinState != GPIO_PIN_RESET)
+ 820              		.loc 1 413 3 view .LVU267
+ 821              		.loc 1 413 5 is_stmt 0 view .LVU268
+ 822 0000 0AB1     		cbz	r2, .L60
+ 414:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   {
+ 415:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     GPIOx->BSRR = GPIO_Pin;
+ 823              		.loc 1 415 5 is_stmt 1 view .LVU269
+ 824              		.loc 1 415 17 is_stmt 0 view .LVU270
+ 825 0002 8161     		str	r1, [r0, #24]
+ 826 0004 7047     		bx	lr
+ 827              	.L60:
+ 416:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   }
+ 417:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   else
+ 418:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   {
+ 419:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     GPIOx->BSRR = (uint32_t)GPIO_Pin << 16;
+ 828              		.loc 1 419 5 is_stmt 1 view .LVU271
+ 829              		.loc 1 419 38 is_stmt 0 view .LVU272
+ 830 0006 0904     		lsls	r1, r1, #16
+ 831              	.LVL71:
+ 832              		.loc 1 419 17 view .LVU273
+ 833 0008 8161     		str	r1, [r0, #24]
+ 420:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   }
+ 421:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** }
+ 834              		.loc 1 421 1 view .LVU274
+ 835 000a 7047     		bx	lr
+ 836              		.cfi_endproc
+ 837              	.LFE144:
+ 839              		.section	.text.HAL_GPIO_TogglePin,"ax",%progbits
+ 840              		.align	1
+ 841              		.global	HAL_GPIO_TogglePin
+ 842              		.syntax unified
+ 843              		.thumb
+ 844              		.thumb_func
+ 845              		.fpu fpv5-d16
+ 847              	HAL_GPIO_TogglePin:
+ 848              	.LVL72:
+ 849              	.LFB145:
+ 422:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 423:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** /**
+ 424:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @brief  Toggles the specified GPIO pins.
+ 425:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @param  GPIOx Where x can be (A..I) to select the GPIO peripheral.
+ 426:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @param  GPIO_Pin Specifies the pins to be toggled.
+ 427:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @retval None
+ 428:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   */
+ 429:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** void HAL_GPIO_TogglePin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+ 430:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** {
+ 850              		.loc 1 430 1 is_stmt 1 view -0
+ 851              		.cfi_startproc
+ 852              		@ args = 0, pretend = 0, frame = 0
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 26
+
+
+ 853              		@ frame_needed = 0, uses_anonymous_args = 0
+ 854              		@ link register save eliminated.
+ 431:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   /* Check the parameters */
+ 432:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   assert_param(IS_GPIO_PIN(GPIO_Pin));
+ 855              		.loc 1 432 3 view .LVU276
+ 433:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 434:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   if ((GPIOx->ODR & GPIO_Pin) == GPIO_Pin)
+ 856              		.loc 1 434 3 view .LVU277
+ 857              		.loc 1 434 13 is_stmt 0 view .LVU278
+ 858 0000 4369     		ldr	r3, [r0, #20]
+ 859              		.loc 1 434 6 view .LVU279
+ 860 0002 31EA0303 		bics	r3, r1, r3
+ 861 0006 01D0     		beq	.L65
+ 435:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   {
+ 436:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     GPIOx->BSRR = (uint32_t)GPIO_Pin << GPIO_NUMBER;
+ 437:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   }
+ 438:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   else
+ 439:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   {
+ 440:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     GPIOx->BSRR = GPIO_Pin;
+ 862              		.loc 1 440 5 is_stmt 1 view .LVU280
+ 863              		.loc 1 440 17 is_stmt 0 view .LVU281
+ 864 0008 8161     		str	r1, [r0, #24]
+ 441:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   }
+ 442:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** }
+ 865              		.loc 1 442 1 view .LVU282
+ 866 000a 7047     		bx	lr
+ 867              	.L65:
+ 436:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   }
+ 868              		.loc 1 436 5 is_stmt 1 view .LVU283
+ 436:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   }
+ 869              		.loc 1 436 38 is_stmt 0 view .LVU284
+ 870 000c 0904     		lsls	r1, r1, #16
+ 871              	.LVL73:
+ 436:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   }
+ 872              		.loc 1 436 17 view .LVU285
+ 873 000e 8161     		str	r1, [r0, #24]
+ 874 0010 7047     		bx	lr
+ 875              		.cfi_endproc
+ 876              	.LFE145:
+ 878              		.section	.text.HAL_GPIO_LockPin,"ax",%progbits
+ 879              		.align	1
+ 880              		.global	HAL_GPIO_LockPin
+ 881              		.syntax unified
+ 882              		.thumb
+ 883              		.thumb_func
+ 884              		.fpu fpv5-d16
+ 886              	HAL_GPIO_LockPin:
+ 887              	.LVL74:
+ 888              	.LFB146:
+ 443:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 444:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** /**
+ 445:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @brief  Locks GPIO Pins configuration registers.
+ 446:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @note   The locked registers are GPIOx_MODER, GPIOx_OTYPER, GPIOx_OSPEEDR,
+ 447:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   *         GPIOx_PUPDR, GPIOx_AFRL and GPIOx_AFRH.
+ 448:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @note   The configuration of the locked GPIO pins can no longer be modified
+ 449:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   *         until the next reset.
+ 450:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @param  GPIOx where x can be (A..F) to select the GPIO peripheral for STM32F7 family
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 27
+
+
+ 451:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @param  GPIO_Pin specifies the port bit to be locked.
+ 452:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   *         This parameter can be any combination of GPIO_PIN_x where x can be (0..15).
+ 453:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @retval None
+ 454:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   */
+ 455:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** HAL_StatusTypeDef HAL_GPIO_LockPin(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin)
+ 456:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** {
+ 889              		.loc 1 456 1 is_stmt 1 view -0
+ 890              		.cfi_startproc
+ 891              		@ args = 0, pretend = 0, frame = 8
+ 892              		@ frame_needed = 0, uses_anonymous_args = 0
+ 893              		@ link register save eliminated.
+ 894              		.loc 1 456 1 is_stmt 0 view .LVU287
+ 895 0000 82B0     		sub	sp, sp, #8
+ 896              	.LCFI6:
+ 897              		.cfi_def_cfa_offset 8
+ 457:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   __IO uint32_t tmp = GPIO_LCKR_LCKK;
+ 898              		.loc 1 457 3 is_stmt 1 view .LVU288
+ 899              		.loc 1 457 17 is_stmt 0 view .LVU289
+ 900 0002 4FF48033 		mov	r3, #65536
+ 901 0006 0193     		str	r3, [sp, #4]
+ 458:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 459:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   /* Check the parameters */
+ 460:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   assert_param(IS_GPIO_PIN(GPIO_Pin));
+ 902              		.loc 1 460 3 is_stmt 1 view .LVU290
+ 461:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 462:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   /* Apply lock key write sequence */
+ 463:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   tmp |= GPIO_Pin;
+ 903              		.loc 1 463 3 view .LVU291
+ 904              		.loc 1 463 7 is_stmt 0 view .LVU292
+ 905 0008 019B     		ldr	r3, [sp, #4]
+ 906 000a 0B43     		orrs	r3, r3, r1
+ 907 000c 0193     		str	r3, [sp, #4]
+ 464:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   /* Set LCKx bit(s): LCKK='1' + LCK[15-0] */
+ 465:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   GPIOx->LCKR = tmp;
+ 908              		.loc 1 465 3 is_stmt 1 view .LVU293
+ 909              		.loc 1 465 15 is_stmt 0 view .LVU294
+ 910 000e 019B     		ldr	r3, [sp, #4]
+ 911 0010 C361     		str	r3, [r0, #28]
+ 466:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   /* Reset LCKx bit(s): LCKK='0' + LCK[15-0] */
+ 467:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   GPIOx->LCKR = GPIO_Pin;
+ 912              		.loc 1 467 3 is_stmt 1 view .LVU295
+ 913              		.loc 1 467 15 is_stmt 0 view .LVU296
+ 914 0012 C161     		str	r1, [r0, #28]
+ 468:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   /* Set LCKx bit(s): LCKK='1' + LCK[15-0] */
+ 469:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   GPIOx->LCKR = tmp;
+ 915              		.loc 1 469 3 is_stmt 1 view .LVU297
+ 916              		.loc 1 469 15 is_stmt 0 view .LVU298
+ 917 0014 019B     		ldr	r3, [sp, #4]
+ 918 0016 C361     		str	r3, [r0, #28]
+ 470:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   /* Read LCKK bit*/
+ 471:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   tmp = GPIOx->LCKR;
+ 919              		.loc 1 471 3 is_stmt 1 view .LVU299
+ 920              		.loc 1 471 14 is_stmt 0 view .LVU300
+ 921 0018 C369     		ldr	r3, [r0, #28]
+ 922              		.loc 1 471 7 view .LVU301
+ 923 001a 0193     		str	r3, [sp, #4]
+ 472:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 28
+
+
+ 473:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****  if((GPIOx->LCKR & GPIO_LCKR_LCKK) != RESET)
+ 924              		.loc 1 473 2 is_stmt 1 view .LVU302
+ 925              		.loc 1 473 11 is_stmt 0 view .LVU303
+ 926 001c C369     		ldr	r3, [r0, #28]
+ 927              		.loc 1 473 4 view .LVU304
+ 928 001e 13F4803F 		tst	r3, #65536
+ 929 0022 02D0     		beq	.L68
+ 474:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   {
+ 475:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     return HAL_OK;
+ 930              		.loc 1 475 12 view .LVU305
+ 931 0024 0020     		movs	r0, #0
+ 932              	.LVL75:
+ 933              	.L67:
+ 476:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   }
+ 477:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   else
+ 478:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   {
+ 479:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     return HAL_ERROR;
+ 480:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   }
+ 481:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** }
+ 934              		.loc 1 481 1 view .LVU306
+ 935 0026 02B0     		add	sp, sp, #8
+ 936              	.LCFI7:
+ 937              		.cfi_remember_state
+ 938              		.cfi_def_cfa_offset 0
+ 939              		@ sp needed
+ 940 0028 7047     		bx	lr
+ 941              	.LVL76:
+ 942              	.L68:
+ 943              	.LCFI8:
+ 944              		.cfi_restore_state
+ 479:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   }
+ 945              		.loc 1 479 12 view .LVU307
+ 946 002a 0120     		movs	r0, #1
+ 947              	.LVL77:
+ 479:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   }
+ 948              		.loc 1 479 12 view .LVU308
+ 949 002c FBE7     		b	.L67
+ 950              		.cfi_endproc
+ 951              	.LFE146:
+ 953              		.section	.text.HAL_GPIO_EXTI_Callback,"ax",%progbits
+ 954              		.align	1
+ 955              		.weak	HAL_GPIO_EXTI_Callback
+ 956              		.syntax unified
+ 957              		.thumb
+ 958              		.thumb_func
+ 959              		.fpu fpv5-d16
+ 961              	HAL_GPIO_EXTI_Callback:
+ 962              	.LVL78:
+ 963              	.LFB148:
+ 482:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 483:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** /**
+ 484:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @brief  This function handles EXTI interrupt request.
+ 485:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @param  GPIO_Pin Specifies the pins connected EXTI line
+ 486:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @retval None
+ 487:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   */
+ 488:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** void HAL_GPIO_EXTI_IRQHandler(uint16_t GPIO_Pin)
+ 489:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** {
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 29
+
+
+ 490:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   /* EXTI line interrupt detected */
+ 491:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   if(__HAL_GPIO_EXTI_GET_IT(GPIO_Pin) != RESET)
+ 492:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   {
+ 493:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     __HAL_GPIO_EXTI_CLEAR_IT(GPIO_Pin);
+ 494:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     HAL_GPIO_EXTI_Callback(GPIO_Pin);
+ 495:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   }
+ 496:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** }
+ 497:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 498:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** /**
+ 499:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @brief  EXTI line detection callbacks.
+ 500:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @param  GPIO_Pin Specifies the pins connected EXTI line
+ 501:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   * @retval None
+ 502:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   */
+ 503:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** __weak void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+ 504:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** {
+ 964              		.loc 1 504 1 is_stmt 1 view -0
+ 965              		.cfi_startproc
+ 966              		@ args = 0, pretend = 0, frame = 0
+ 967              		@ frame_needed = 0, uses_anonymous_args = 0
+ 968              		@ link register save eliminated.
+ 505:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   /* Prevent unused argument(s) compilation warning */
+ 506:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   UNUSED(GPIO_Pin);
+ 969              		.loc 1 506 3 view .LVU310
+ 507:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   
+ 508:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   /* NOTE: This function Should not be modified, when the callback is needed,
+ 509:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****            the HAL_GPIO_EXTI_Callback could be implemented in the user file
+ 510:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****    */
+ 511:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** }
+ 970              		.loc 1 511 1 is_stmt 0 view .LVU311
+ 971 0000 7047     		bx	lr
+ 972              		.cfi_endproc
+ 973              	.LFE148:
+ 975              		.section	.text.HAL_GPIO_EXTI_IRQHandler,"ax",%progbits
+ 976              		.align	1
+ 977              		.global	HAL_GPIO_EXTI_IRQHandler
+ 978              		.syntax unified
+ 979              		.thumb
+ 980              		.thumb_func
+ 981              		.fpu fpv5-d16
+ 983              	HAL_GPIO_EXTI_IRQHandler:
+ 984              	.LVL79:
+ 985              	.LFB147:
+ 489:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   /* EXTI line interrupt detected */
+ 986              		.loc 1 489 1 is_stmt 1 view -0
+ 987              		.cfi_startproc
+ 988              		@ args = 0, pretend = 0, frame = 0
+ 989              		@ frame_needed = 0, uses_anonymous_args = 0
+ 489:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   /* EXTI line interrupt detected */
+ 990              		.loc 1 489 1 is_stmt 0 view .LVU313
+ 991 0000 08B5     		push	{r3, lr}
+ 992              	.LCFI9:
+ 993              		.cfi_def_cfa_offset 8
+ 994              		.cfi_offset 3, -8
+ 995              		.cfi_offset 14, -4
+ 491:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   {
+ 996              		.loc 1 491 3 is_stmt 1 view .LVU314
+ 491:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   {
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 30
+
+
+ 997              		.loc 1 491 6 is_stmt 0 view .LVU315
+ 998 0002 054B     		ldr	r3, .L75
+ 999 0004 5B69     		ldr	r3, [r3, #20]
+ 491:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   {
+ 1000              		.loc 1 491 5 view .LVU316
+ 1001 0006 0342     		tst	r3, r0
+ 1002 0008 00D1     		bne	.L74
+ 1003              	.LVL80:
+ 1004              	.L71:
+ 496:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 1005              		.loc 1 496 1 view .LVU317
+ 1006 000a 08BD     		pop	{r3, pc}
+ 1007              	.LVL81:
+ 1008              	.L74:
+ 493:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****     HAL_GPIO_EXTI_Callback(GPIO_Pin);
+ 1009              		.loc 1 493 5 is_stmt 1 view .LVU318
+ 1010 000c 024B     		ldr	r3, .L75
+ 1011 000e 5861     		str	r0, [r3, #20]
+ 494:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c ****   }
+ 1012              		.loc 1 494 5 view .LVU319
+ 1013 0010 FFF7FEFF 		bl	HAL_GPIO_EXTI_Callback
+ 1014              	.LVL82:
+ 496:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal_gpio.c **** 
+ 1015              		.loc 1 496 1 is_stmt 0 view .LVU320
+ 1016 0014 F9E7     		b	.L71
+ 1017              	.L76:
+ 1018 0016 00BF     		.align	2
+ 1019              	.L75:
+ 1020 0018 003C0140 		.word	1073822720
+ 1021              		.cfi_endproc
+ 1022              	.LFE147:
+ 1024              		.text
+ 1025              	.Letext0:
+ 1026              		.file 2 "/usr/local/Cellar/arm-none-eabi-gcc/8-2018-q4-major/gcc/arm-none-eabi/include/machine/_de
+ 1027              		.file 3 "/usr/local/Cellar/arm-none-eabi-gcc/8-2018-q4-major/gcc/arm-none-eabi/include/sys/_stdint
+ 1028              		.file 4 "/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/CMSIS/Include/c
+ 1029              		.file 5 "/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/CMSIS/Device/ST
+ 1030              		.file 6 "/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/CMSIS/Device/ST
+ 1031              		.file 7 "/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/CMSIS/Device/ST
+ 1032              		.file 8 "/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_D
+ 1033              		.file 9 "/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_D
+ 1034              		.file 10 "/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s 			page 31
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 stm32f7xx_hal_gpio.c
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s:17     .text.HAL_GPIO_Init:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s:25     .text.HAL_GPIO_Init:0000000000000000 HAL_GPIO_Init
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s:486    .text.HAL_GPIO_Init:00000000000001d0 $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s:494    .text.HAL_GPIO_DeInit:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s:501    .text.HAL_GPIO_DeInit:0000000000000000 HAL_GPIO_DeInit
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s:756    .text.HAL_GPIO_DeInit:0000000000000130 $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s:763    .text.HAL_GPIO_ReadPin:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s:770    .text.HAL_GPIO_ReadPin:0000000000000000 HAL_GPIO_ReadPin
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s:803    .text.HAL_GPIO_WritePin:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s:810    .text.HAL_GPIO_WritePin:0000000000000000 HAL_GPIO_WritePin
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s:840    .text.HAL_GPIO_TogglePin:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s:847    .text.HAL_GPIO_TogglePin:0000000000000000 HAL_GPIO_TogglePin
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s:879    .text.HAL_GPIO_LockPin:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s:886    .text.HAL_GPIO_LockPin:0000000000000000 HAL_GPIO_LockPin
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s:954    .text.HAL_GPIO_EXTI_Callback:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s:961    .text.HAL_GPIO_EXTI_Callback:0000000000000000 HAL_GPIO_EXTI_Callback
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s:976    .text.HAL_GPIO_EXTI_IRQHandler:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s:983    .text.HAL_GPIO_EXTI_IRQHandler:0000000000000000 HAL_GPIO_EXTI_IRQHandler
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//ccuz8H1S.s:1020   .text.HAL_GPIO_EXTI_IRQHandler:0000000000000018 $d
+
+NO UNDEFINED SYMBOLS

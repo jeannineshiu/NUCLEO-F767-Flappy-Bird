@@ -1,0 +1,1823 @@
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 1
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"stm32f7xx_hal.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.HAL_MspInit,"ax",%progbits
+  17              		.align	1
+  18              		.weak	HAL_MspInit
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	HAL_MspInit:
+  26              	.LFB143:
+  27              		.file 1 "/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_D
+   1:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+   2:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   ******************************************************************************
+   3:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @file    stm32f7xx_hal.c
+   4:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @author  MCD Application Team
+   5:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief   HAL module driver.
+   6:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *          This is the common part of the HAL initialization
+   7:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *
+   8:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   @verbatim
+   9:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   ==============================================================================
+  10:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****                      ##### How to use this driver #####
+  11:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   ==============================================================================
+  12:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****     [..]
+  13:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****     The common HAL driver contains a set of generic and common APIs that can be
+  14:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****     used by the PPP peripheral drivers and the user to start using the HAL. 
+  15:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****     [..]
+  16:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****     The HAL contains two APIs' categories: 
+  17:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****          (+) Common HAL APIs
+  18:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****          (+) Services HAL APIs
+  19:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+  20:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   @endverbatim
+  21:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   ******************************************************************************
+  22:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @attention
+  23:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *
+  24:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+  25:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * All rights reserved.</center></h2>
+  26:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *
+  27:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * This software component is licensed by ST under BSD 3-Clause license,
+  28:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * the "License"; You may not use this file except in compliance with the
+  29:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * License. You may obtain a copy of the License at:
+  30:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *                        opensource.org/licenses/BSD-3-Clause
+  31:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 2
+
+
+  32:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   ******************************************************************************
+  33:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */ 
+  34:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+  35:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /* Includes ------------------------------------------------------------------*/
+  36:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** #include "stm32f7xx_hal.h"
+  37:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+  38:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /** @addtogroup STM32F7xx_HAL_Driver
+  39:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @{
+  40:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+  41:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+  42:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /** @defgroup HAL HAL
+  43:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief HAL module driver.
+  44:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @{
+  45:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+  46:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+  47:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /* Private typedef -----------------------------------------------------------*/
+  48:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /* Private define ------------------------------------------------------------*/
+  49:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /** @addtogroup HAL_Private_Constants
+  50:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @{
+  51:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+  52:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+  53:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****  * @brief STM32F7xx HAL Driver version number V1.2.7
+  54:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****    */
+  55:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** #define __STM32F7xx_HAL_VERSION_MAIN   (0x01) /*!< [31:24] main version */
+  56:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** #define __STM32F7xx_HAL_VERSION_SUB1   (0x02) /*!< [23:16] sub1 version */
+  57:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** #define __STM32F7xx_HAL_VERSION_SUB2   (0x07) /*!< [15:8]  sub2 version */
+  58:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** #define __STM32F7xx_HAL_VERSION_RC     (0x00) /*!< [7:0]  release candidate */ 
+  59:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** #define __STM32F7xx_HAL_VERSION         ((__STM32F7xx_HAL_VERSION_MAIN << 24)\
+  60:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****                                         |(__STM32F7xx_HAL_VERSION_SUB1 << 16)\
+  61:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****                                         |(__STM32F7xx_HAL_VERSION_SUB2 << 8 )\
+  62:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****                                         |(__STM32F7xx_HAL_VERSION_RC))
+  63:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****                                         
+  64:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** #define IDCODE_DEVID_MASK    ((uint32_t)0x00000FFF)
+  65:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+  66:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @}
+  67:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+  68:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+  69:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /* Private macro -------------------------------------------------------------*/
+  70:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /* Exported variables ---------------------------------------------------------*/
+  71:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /** @addtogroup HAL_Exported_Variables
+  72:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @{
+  73:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+  74:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** __IO uint32_t uwTick;
+  75:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** uint32_t uwTickPrio   = (1UL << __NVIC_PRIO_BITS); /* Invalid PRIO */
+  76:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** HAL_TickFreqTypeDef uwTickFreq = HAL_TICK_FREQ_DEFAULT;  /* 1KHz */
+  77:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+  78:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @}
+  79:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+  80:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+  81:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /* Private function prototypes -----------------------------------------------*/
+  82:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /* Private functions ---------------------------------------------------------*/
+  83:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+  84:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /** @defgroup HAL_Exported_Functions HAL Exported Functions
+  85:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @{
+  86:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+  87:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+  88:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /** @defgroup HAL_Exported_Functions_Group1 Initialization and de-initialization Functions 
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 3
+
+
+  89:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****  *  @brief    Initialization and de-initialization functions
+  90:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****  *
+  91:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** @verbatim    
+  92:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****  ===============================================================================
+  93:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****               ##### Initialization and Configuration functions #####
+  94:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****  ===============================================================================
+  95:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****     [..]  This section provides functions allowing to:
+  96:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****       (+) Initializes the Flash interface the NVIC allocation and initial clock 
+  97:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****           configuration. It initializes the systick also when timeout is needed 
+  98:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****           and the backup domain when enabled.
+  99:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****       (+) De-Initializes common part of the HAL.
+ 100:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****       (+) Configure the time base source to have 1ms time base with a dedicated 
+ 101:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****           Tick interrupt priority. 
+ 102:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****         (++) SysTick timer is used by default as source of time base, but user
+ 103:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****              can eventually implement his proper time base source (a general purpose 
+ 104:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****              timer for example or other time source), keeping in mind that Time base 
+ 105:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****              duration should be kept 1ms since PPP_TIMEOUT_VALUEs are defined and 
+ 106:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****              handled in milliseconds basis.
+ 107:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****         (++) Time base configuration function (HAL_InitTick ()) is called automatically 
+ 108:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****              at the beginning of the program after reset by HAL_Init() or at any time 
+ 109:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****              when clock is configured, by HAL_RCC_ClockConfig(). 
+ 110:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****         (++) Source of time base is configured  to generate interrupts at regular 
+ 111:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****              time intervals. Care must be taken if HAL_Delay() is called from a 
+ 112:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****              peripheral ISR process, the Tick interrupt line must have higher priority 
+ 113:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****             (numerically lower) than the peripheral interrupt. Otherwise the caller 
+ 114:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****             ISR process will be blocked. 
+ 115:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****        (++) functions affecting time base configurations are declared as __weak  
+ 116:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****              to make  override possible  in case of other  implementations in user file.
+ 117:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** @endverbatim
+ 118:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @{
+ 119:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 120:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 121:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 122:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief  This function is used to initialize the HAL Library; it must be the first 
+ 123:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *         instruction to be executed in the main program (before to call any other
+ 124:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *         HAL function), it performs the following:
+ 125:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *           Configure the Flash prefetch, and instruction cache through ART accelerator.
+ 126:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *           Configures the SysTick to generate an interrupt each 1 millisecond,
+ 127:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *           which is clocked by the HSI (at this stage, the clock is not yet
+ 128:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *           configured and thus the system is running from the internal HSI at 16 MHz).
+ 129:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *           Set NVIC Group Priority to 4.
+ 130:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *           Calls the HAL_MspInit() callback function defined in user file 
+ 131:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *           "stm32f7xx_hal_msp.c" to do the global low level hardware initialization 
+ 132:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *            
+ 133:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @note   SysTick is used as time base for the HAL_Delay() function, the application
+ 134:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *         need to ensure that the SysTick time base is always set to 1 millisecond
+ 135:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *         to have correct HAL operation.
+ 136:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval HAL status
+ 137:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 138:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** HAL_StatusTypeDef HAL_Init(void)
+ 139:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 140:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   /* Configure Instruction cache through ART accelerator */ 
+ 141:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** #if (ART_ACCLERATOR_ENABLE != 0)
+ 142:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****    __HAL_FLASH_ART_ENABLE();
+ 143:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** #endif /* ART_ACCLERATOR_ENABLE */
+ 144:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 145:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   /* Configure Flash prefetch */
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 4
+
+
+ 146:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** #if (PREFETCH_ENABLE != 0U)
+ 147:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   __HAL_FLASH_PREFETCH_BUFFER_ENABLE();
+ 148:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** #endif /* PREFETCH_ENABLE */
+ 149:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 150:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   /* Set Interrupt Group Priority */
+ 151:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
+ 152:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 153:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   /* Use systick as time base source and configure 1ms tick (default clock after Reset is HSI) */
+ 154:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   HAL_InitTick(TICK_INT_PRIORITY);
+ 155:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   
+ 156:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   /* Init the low level hardware */
+ 157:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   HAL_MspInit();
+ 158:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   
+ 159:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   /* Return function status */
+ 160:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   return HAL_OK;
+ 161:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 162:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 163:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 164:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief  This function de-Initializes common part of the HAL and stops the systick.
+ 165:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *         This function is optional.   
+ 166:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval HAL status
+ 167:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 168:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** HAL_StatusTypeDef HAL_DeInit(void)
+ 169:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 170:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   /* Reset of all peripherals */
+ 171:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   __HAL_RCC_APB1_FORCE_RESET();
+ 172:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   __HAL_RCC_APB1_RELEASE_RESET();
+ 173:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 174:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   __HAL_RCC_APB2_FORCE_RESET();
+ 175:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   __HAL_RCC_APB2_RELEASE_RESET();
+ 176:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 177:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   __HAL_RCC_AHB1_FORCE_RESET();
+ 178:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   __HAL_RCC_AHB1_RELEASE_RESET();
+ 179:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 180:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   __HAL_RCC_AHB2_FORCE_RESET();
+ 181:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   __HAL_RCC_AHB2_RELEASE_RESET();
+ 182:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 183:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   __HAL_RCC_AHB3_FORCE_RESET();
+ 184:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   __HAL_RCC_AHB3_RELEASE_RESET();
+ 185:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 186:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   /* De-Init the low level hardware */
+ 187:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   HAL_MspDeInit();
+ 188:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****     
+ 189:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   /* Return function status */
+ 190:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   return HAL_OK;
+ 191:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 192:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 193:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 194:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief  Initialize the MSP.
+ 195:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval None
+ 196:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 197:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** __weak void HAL_MspInit(void)
+ 198:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+  28              		.loc 1 198 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 5
+
+
+  32              		@ link register save eliminated.
+ 199:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   /* NOTE : This function should not be modified, when the callback is needed,
+ 200:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****             the HAL_MspInit could be implemented in the user file
+ 201:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****    */
+ 202:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+  33              		.loc 1 202 1 view .LVU1
+  34 0000 7047     		bx	lr
+  35              		.cfi_endproc
+  36              	.LFE143:
+  38              		.section	.text.HAL_MspDeInit,"ax",%progbits
+  39              		.align	1
+  40              		.weak	HAL_MspDeInit
+  41              		.syntax unified
+  42              		.thumb
+  43              		.thumb_func
+  44              		.fpu fpv5-d16
+  46              	HAL_MspDeInit:
+  47              	.LFB144:
+ 203:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 204:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 205:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief  DeInitializes the MSP.
+ 206:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval None
+ 207:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 208:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** __weak void HAL_MspDeInit(void)
+ 209:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+  48              		.loc 1 209 1 view -0
+  49              		.cfi_startproc
+  50              		@ args = 0, pretend = 0, frame = 0
+  51              		@ frame_needed = 0, uses_anonymous_args = 0
+  52              		@ link register save eliminated.
+ 210:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   /* NOTE : This function should not be modified, when the callback is needed,
+ 211:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****             the HAL_MspDeInit could be implemented in the user file
+ 212:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****    */ 
+ 213:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+  53              		.loc 1 213 1 view .LVU3
+  54 0000 7047     		bx	lr
+  55              		.cfi_endproc
+  56              	.LFE144:
+  58              		.section	.text.HAL_DeInit,"ax",%progbits
+  59              		.align	1
+  60              		.global	HAL_DeInit
+  61              		.syntax unified
+  62              		.thumb
+  63              		.thumb_func
+  64              		.fpu fpv5-d16
+  66              	HAL_DeInit:
+  67              	.LFB142:
+ 169:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   /* Reset of all peripherals */
+  68              		.loc 1 169 1 view -0
+  69              		.cfi_startproc
+  70              		@ args = 0, pretend = 0, frame = 0
+  71              		@ frame_needed = 0, uses_anonymous_args = 0
+  72 0000 10B5     		push	{r4, lr}
+  73              	.LCFI0:
+  74              		.cfi_def_cfa_offset 8
+  75              		.cfi_offset 4, -8
+  76              		.cfi_offset 14, -4
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 6
+
+
+ 171:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   __HAL_RCC_APB1_RELEASE_RESET();
+  77              		.loc 1 171 3 view .LVU5
+  78 0002 094B     		ldr	r3, .L5
+  79 0004 4FF0FF32 		mov	r2, #-1
+  80 0008 1A62     		str	r2, [r3, #32]
+ 172:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+  81              		.loc 1 172 3 view .LVU6
+  82 000a 0024     		movs	r4, #0
+  83 000c 1C62     		str	r4, [r3, #32]
+ 174:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   __HAL_RCC_APB2_RELEASE_RESET();
+  84              		.loc 1 174 3 view .LVU7
+  85 000e 5A62     		str	r2, [r3, #36]
+ 175:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+  86              		.loc 1 175 3 view .LVU8
+  87 0010 5C62     		str	r4, [r3, #36]
+ 177:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   __HAL_RCC_AHB1_RELEASE_RESET();
+  88              		.loc 1 177 3 view .LVU9
+  89 0012 1A61     		str	r2, [r3, #16]
+ 178:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+  90              		.loc 1 178 3 view .LVU10
+  91 0014 1C61     		str	r4, [r3, #16]
+ 180:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   __HAL_RCC_AHB2_RELEASE_RESET();
+  92              		.loc 1 180 3 view .LVU11
+  93 0016 5A61     		str	r2, [r3, #20]
+ 181:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+  94              		.loc 1 181 3 view .LVU12
+  95 0018 5C61     		str	r4, [r3, #20]
+ 183:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   __HAL_RCC_AHB3_RELEASE_RESET();
+  96              		.loc 1 183 3 view .LVU13
+  97 001a 9A61     		str	r2, [r3, #24]
+ 184:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+  98              		.loc 1 184 3 view .LVU14
+  99 001c 9C61     		str	r4, [r3, #24]
+ 187:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****     
+ 100              		.loc 1 187 3 view .LVU15
+ 101 001e FFF7FEFF 		bl	HAL_MspDeInit
+ 102              	.LVL0:
+ 190:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 103              		.loc 1 190 3 view .LVU16
+ 191:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 104              		.loc 1 191 1 is_stmt 0 view .LVU17
+ 105 0022 2046     		mov	r0, r4
+ 106 0024 10BD     		pop	{r4, pc}
+ 107              	.L6:
+ 108 0026 00BF     		.align	2
+ 109              	.L5:
+ 110 0028 00380240 		.word	1073887232
+ 111              		.cfi_endproc
+ 112              	.LFE142:
+ 114              		.section	.text.HAL_InitTick,"ax",%progbits
+ 115              		.align	1
+ 116              		.weak	HAL_InitTick
+ 117              		.syntax unified
+ 118              		.thumb
+ 119              		.thumb_func
+ 120              		.fpu fpv5-d16
+ 122              	HAL_InitTick:
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 7
+
+
+ 123              	.LVL1:
+ 124              	.LFB145:
+ 214:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 215:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 216:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief This function configures the source of the time base.
+ 217:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *        The time source is configured  to have 1ms time base with a dedicated 
+ 218:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *        Tick interrupt priority.
+ 219:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @note This function is called  automatically at the beginning of program after
+ 220:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *       reset by HAL_Init() or at any time when clock is reconfigured  by HAL_RCC_ClockConfig().
+ 221:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @note In the default implementation, SysTick timer is the source of time base. 
+ 222:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *       It is used to generate interrupts at regular time intervals. 
+ 223:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *       Care must be taken if HAL_Delay() is called from a peripheral ISR process, 
+ 224:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *       The SysTick interrupt must have higher priority (numerically lower)
+ 225:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *       than the peripheral interrupt. Otherwise the caller ISR process will be blocked.
+ 226:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *       The function is declared as __weak  to be overwritten  in case of other
+ 227:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *       implementation  in user file.
+ 228:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @param TickPriority Tick interrupt priority.
+ 229:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval HAL status
+ 230:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 231:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** __weak HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
+ 232:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 125              		.loc 1 232 1 is_stmt 1 view -0
+ 126              		.cfi_startproc
+ 127              		@ args = 0, pretend = 0, frame = 0
+ 128              		@ frame_needed = 0, uses_anonymous_args = 0
+ 129              		.loc 1 232 1 is_stmt 0 view .LVU19
+ 130 0000 10B5     		push	{r4, lr}
+ 131              	.LCFI1:
+ 132              		.cfi_def_cfa_offset 8
+ 133              		.cfi_offset 4, -8
+ 134              		.cfi_offset 14, -4
+ 135 0002 0446     		mov	r4, r0
+ 233:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   /* Configure the SysTick to have interrupt in 1ms time basis*/
+ 234:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   if (HAL_SYSTICK_Config(SystemCoreClock / (1000U / uwTickFreq)) > 0U)
+ 136              		.loc 1 234 3 is_stmt 1 view .LVU20
+ 137              		.loc 1 234 51 is_stmt 0 view .LVU21
+ 138 0004 0E4B     		ldr	r3, .L13
+ 139 0006 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 140              	.LVL2:
+ 141              		.loc 1 234 51 view .LVU22
+ 142 0008 4FF47A73 		mov	r3, #1000
+ 143 000c B3FBF0F3 		udiv	r3, r3, r0
+ 144              		.loc 1 234 7 view .LVU23
+ 145 0010 0C4A     		ldr	r2, .L13+4
+ 146 0012 1068     		ldr	r0, [r2]
+ 147 0014 B0FBF3F0 		udiv	r0, r0, r3
+ 148 0018 FFF7FEFF 		bl	HAL_SYSTICK_Config
+ 149              	.LVL3:
+ 150              		.loc 1 234 6 view .LVU24
+ 151 001c 68B9     		cbnz	r0, .L9
+ 235:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   {
+ 236:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****     return HAL_ERROR;
+ 237:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   }
+ 238:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 239:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   /* Configure the SysTick IRQ priority */
+ 240:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   if (TickPriority < (1UL << __NVIC_PRIO_BITS))
+ 152              		.loc 1 240 3 is_stmt 1 view .LVU25
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 8
+
+
+ 153              		.loc 1 240 6 is_stmt 0 view .LVU26
+ 154 001e 0F2C     		cmp	r4, #15
+ 155 0020 01D9     		bls	.L12
+ 241:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   {
+ 242:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****     HAL_NVIC_SetPriority(SysTick_IRQn, TickPriority, 0U);
+ 243:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****     uwTickPrio = TickPriority;
+ 244:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   }
+ 245:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   else
+ 246:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   {
+ 247:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****     return HAL_ERROR;
+ 156              		.loc 1 247 12 view .LVU27
+ 157 0022 0120     		movs	r0, #1
+ 158 0024 0AE0     		b	.L8
+ 159              	.L12:
+ 242:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****     uwTickPrio = TickPriority;
+ 160              		.loc 1 242 5 is_stmt 1 view .LVU28
+ 161 0026 0022     		movs	r2, #0
+ 162 0028 2146     		mov	r1, r4
+ 163 002a 4FF0FF30 		mov	r0, #-1
+ 164 002e FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 165              	.LVL4:
+ 243:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   }
+ 166              		.loc 1 243 5 view .LVU29
+ 243:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   }
+ 167              		.loc 1 243 16 is_stmt 0 view .LVU30
+ 168 0032 054B     		ldr	r3, .L13+8
+ 169 0034 1C60     		str	r4, [r3]
+ 248:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   }
+ 249:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 250:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   /* Return function status */
+ 251:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   return HAL_OK;
+ 170              		.loc 1 251 3 is_stmt 1 view .LVU31
+ 171              		.loc 1 251 10 is_stmt 0 view .LVU32
+ 172 0036 0020     		movs	r0, #0
+ 173 0038 00E0     		b	.L8
+ 174              	.L9:
+ 236:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   }
+ 175              		.loc 1 236 12 view .LVU33
+ 176 003a 0120     		movs	r0, #1
+ 177              	.L8:
+ 252:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 178              		.loc 1 252 1 view .LVU34
+ 179 003c 10BD     		pop	{r4, pc}
+ 180              	.LVL5:
+ 181              	.L14:
+ 182              		.loc 1 252 1 view .LVU35
+ 183 003e 00BF     		.align	2
+ 184              	.L13:
+ 185 0040 00000000 		.word	.LANCHOR0
+ 186 0044 00000000 		.word	SystemCoreClock
+ 187 0048 00000000 		.word	.LANCHOR1
+ 188              		.cfi_endproc
+ 189              	.LFE145:
+ 191              		.section	.text.HAL_Init,"ax",%progbits
+ 192              		.align	1
+ 193              		.global	HAL_Init
+ 194              		.syntax unified
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 9
+
+
+ 195              		.thumb
+ 196              		.thumb_func
+ 197              		.fpu fpv5-d16
+ 199              	HAL_Init:
+ 200              	.LFB141:
+ 139:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   /* Configure Instruction cache through ART accelerator */ 
+ 201              		.loc 1 139 1 is_stmt 1 view -0
+ 202              		.cfi_startproc
+ 203              		@ args = 0, pretend = 0, frame = 0
+ 204              		@ frame_needed = 0, uses_anonymous_args = 0
+ 205 0000 08B5     		push	{r3, lr}
+ 206              	.LCFI2:
+ 207              		.cfi_def_cfa_offset 8
+ 208              		.cfi_offset 3, -8
+ 209              		.cfi_offset 14, -4
+ 151:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 210              		.loc 1 151 3 view .LVU37
+ 211 0002 0320     		movs	r0, #3
+ 212 0004 FFF7FEFF 		bl	HAL_NVIC_SetPriorityGrouping
+ 213              	.LVL6:
+ 154:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   
+ 214              		.loc 1 154 3 view .LVU38
+ 215 0008 0020     		movs	r0, #0
+ 216 000a FFF7FEFF 		bl	HAL_InitTick
+ 217              	.LVL7:
+ 157:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   
+ 218              		.loc 1 157 3 view .LVU39
+ 219 000e FFF7FEFF 		bl	HAL_MspInit
+ 220              	.LVL8:
+ 160:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 221              		.loc 1 160 3 view .LVU40
+ 161:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 222              		.loc 1 161 1 is_stmt 0 view .LVU41
+ 223 0012 0020     		movs	r0, #0
+ 224 0014 08BD     		pop	{r3, pc}
+ 225              		.cfi_endproc
+ 226              	.LFE141:
+ 228              		.section	.text.HAL_IncTick,"ax",%progbits
+ 229              		.align	1
+ 230              		.weak	HAL_IncTick
+ 231              		.syntax unified
+ 232              		.thumb
+ 233              		.thumb_func
+ 234              		.fpu fpv5-d16
+ 236              	HAL_IncTick:
+ 237              	.LFB146:
+ 253:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 254:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 255:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @}
+ 256:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 257:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 258:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /** @defgroup HAL_Exported_Functions_Group2 HAL Control functions 
+ 259:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****  *  @brief    HAL Control functions
+ 260:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****  *
+ 261:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** @verbatim
+ 262:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****  ===============================================================================
+ 263:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****                       ##### HAL Control functions #####
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 10
+
+
+ 264:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****  ===============================================================================
+ 265:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****     [..]  This section provides functions allowing to:
+ 266:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****       (+) Provide a tick value in millisecond
+ 267:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****       (+) Provide a blocking delay in millisecond
+ 268:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****       (+) Suspend the time base source interrupt
+ 269:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****       (+) Resume the time base source interrupt
+ 270:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****       (+) Get the HAL API driver version
+ 271:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****       (+) Get the device identifier
+ 272:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****       (+) Get the device revision identifier
+ 273:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****       (+) Enable/Disable Debug module during SLEEP mode
+ 274:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****       (+) Enable/Disable Debug module during STOP mode
+ 275:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****       (+) Enable/Disable Debug module during STANDBY mode
+ 276:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 277:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** @endverbatim
+ 278:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @{
+ 279:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 280:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 281:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 282:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief This function is called to increment  a global variable "uwTick"
+ 283:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *        used as application time base.
+ 284:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @note In the default implementation, this variable is incremented each 1ms
+ 285:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *       in SysTick ISR.
+ 286:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****  * @note This function is declared as __weak to be overwritten in case of other 
+ 287:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *      implementations in user file.
+ 288:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval None
+ 289:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 290:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** __weak void HAL_IncTick(void)
+ 291:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 238              		.loc 1 291 1 is_stmt 1 view -0
+ 239              		.cfi_startproc
+ 240              		@ args = 0, pretend = 0, frame = 0
+ 241              		@ frame_needed = 0, uses_anonymous_args = 0
+ 242              		@ link register save eliminated.
+ 292:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   uwTick += uwTickFreq;
+ 243              		.loc 1 292 3 view .LVU43
+ 244              		.loc 1 292 10 is_stmt 0 view .LVU44
+ 245 0000 034A     		ldr	r2, .L18
+ 246 0002 1168     		ldr	r1, [r2]
+ 247 0004 034B     		ldr	r3, .L18+4
+ 248 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 249 0008 0B44     		add	r3, r3, r1
+ 250 000a 1360     		str	r3, [r2]
+ 293:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 251              		.loc 1 293 1 view .LVU45
+ 252 000c 7047     		bx	lr
+ 253              	.L19:
+ 254 000e 00BF     		.align	2
+ 255              	.L18:
+ 256 0010 00000000 		.word	uwTick
+ 257 0014 00000000 		.word	.LANCHOR0
+ 258              		.cfi_endproc
+ 259              	.LFE146:
+ 261              		.section	.text.HAL_GetTick,"ax",%progbits
+ 262              		.align	1
+ 263              		.weak	HAL_GetTick
+ 264              		.syntax unified
+ 265              		.thumb
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 11
+
+
+ 266              		.thumb_func
+ 267              		.fpu fpv5-d16
+ 269              	HAL_GetTick:
+ 270              	.LFB147:
+ 294:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 295:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 296:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief Provides a tick value in millisecond.
+ 297:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @note This function is declared as __weak to be overwritten in case of other 
+ 298:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *       implementations in user file.
+ 299:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval tick value
+ 300:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 301:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** __weak uint32_t HAL_GetTick(void)
+ 302:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 271              		.loc 1 302 1 is_stmt 1 view -0
+ 272              		.cfi_startproc
+ 273              		@ args = 0, pretend = 0, frame = 0
+ 274              		@ frame_needed = 0, uses_anonymous_args = 0
+ 275              		@ link register save eliminated.
+ 303:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   return uwTick;
+ 276              		.loc 1 303 3 view .LVU47
+ 277              		.loc 1 303 10 is_stmt 0 view .LVU48
+ 278 0000 014B     		ldr	r3, .L21
+ 279 0002 1868     		ldr	r0, [r3]
+ 304:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 280              		.loc 1 304 1 view .LVU49
+ 281 0004 7047     		bx	lr
+ 282              	.L22:
+ 283 0006 00BF     		.align	2
+ 284              	.L21:
+ 285 0008 00000000 		.word	uwTick
+ 286              		.cfi_endproc
+ 287              	.LFE147:
+ 289              		.section	.text.HAL_GetTickPrio,"ax",%progbits
+ 290              		.align	1
+ 291              		.global	HAL_GetTickPrio
+ 292              		.syntax unified
+ 293              		.thumb
+ 294              		.thumb_func
+ 295              		.fpu fpv5-d16
+ 297              	HAL_GetTickPrio:
+ 298              	.LFB148:
+ 305:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 306:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 307:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief This function returns a tick priority.
+ 308:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval tick priority
+ 309:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 310:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** uint32_t HAL_GetTickPrio(void)
+ 311:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 299              		.loc 1 311 1 is_stmt 1 view -0
+ 300              		.cfi_startproc
+ 301              		@ args = 0, pretend = 0, frame = 0
+ 302              		@ frame_needed = 0, uses_anonymous_args = 0
+ 303              		@ link register save eliminated.
+ 312:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   return uwTickPrio;
+ 304              		.loc 1 312 3 view .LVU51
+ 313:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 305              		.loc 1 313 1 is_stmt 0 view .LVU52
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 12
+
+
+ 306 0000 014B     		ldr	r3, .L24
+ 307 0002 1868     		ldr	r0, [r3]
+ 308 0004 7047     		bx	lr
+ 309              	.L25:
+ 310 0006 00BF     		.align	2
+ 311              	.L24:
+ 312 0008 00000000 		.word	.LANCHOR1
+ 313              		.cfi_endproc
+ 314              	.LFE148:
+ 316              		.section	.text.HAL_SetTickFreq,"ax",%progbits
+ 317              		.align	1
+ 318              		.global	HAL_SetTickFreq
+ 319              		.syntax unified
+ 320              		.thumb
+ 321              		.thumb_func
+ 322              		.fpu fpv5-d16
+ 324              	HAL_SetTickFreq:
+ 325              	.LVL9:
+ 326              	.LFB149:
+ 314:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 315:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 316:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief Set new tick Freq.
+ 317:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval Status
+ 318:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 319:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** HAL_StatusTypeDef HAL_SetTickFreq(HAL_TickFreqTypeDef Freq)
+ 320:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 327              		.loc 1 320 1 is_stmt 1 view -0
+ 328              		.cfi_startproc
+ 329              		@ args = 0, pretend = 0, frame = 0
+ 330              		@ frame_needed = 0, uses_anonymous_args = 0
+ 331              		.loc 1 320 1 is_stmt 0 view .LVU54
+ 332 0000 08B5     		push	{r3, lr}
+ 333              	.LCFI3:
+ 334              		.cfi_def_cfa_offset 8
+ 335              		.cfi_offset 3, -8
+ 336              		.cfi_offset 14, -4
+ 321:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   HAL_StatusTypeDef status  = HAL_OK;
+ 337              		.loc 1 321 3 is_stmt 1 view .LVU55
+ 338              	.LVL10:
+ 322:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   assert_param(IS_TICKFREQ(Freq));
+ 339              		.loc 1 322 3 view .LVU56
+ 323:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 324:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   if (uwTickFreq != Freq)
+ 340              		.loc 1 324 3 view .LVU57
+ 341              		.loc 1 324 18 is_stmt 0 view .LVU58
+ 342 0002 064B     		ldr	r3, .L31
+ 343 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 344              		.loc 1 324 6 view .LVU59
+ 345 0006 8342     		cmp	r3, r0
+ 346 0008 01D1     		bne	.L30
+ 321:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   assert_param(IS_TICKFREQ(Freq));
+ 347              		.loc 1 321 21 view .LVU60
+ 348 000a 0020     		movs	r0, #0
+ 349              	.LVL11:
+ 350              	.L27:
+ 325:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   {
+ 326:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****     uwTickFreq = Freq;
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 13
+
+
+ 327:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 328:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****     /* Apply the new tick Freq  */
+ 329:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****     status = HAL_InitTick(uwTickPrio);
+ 330:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   }
+ 331:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 332:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   return status;
+ 351              		.loc 1 332 3 is_stmt 1 view .LVU61
+ 333:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 352              		.loc 1 333 1 is_stmt 0 view .LVU62
+ 353 000c 08BD     		pop	{r3, pc}
+ 354              	.LVL12:
+ 355              	.L30:
+ 326:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 356              		.loc 1 326 5 is_stmt 1 view .LVU63
+ 326:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 357              		.loc 1 326 16 is_stmt 0 view .LVU64
+ 358 000e 034B     		ldr	r3, .L31
+ 359 0010 1870     		strb	r0, [r3]
+ 329:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   }
+ 360              		.loc 1 329 5 is_stmt 1 view .LVU65
+ 329:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   }
+ 361              		.loc 1 329 14 is_stmt 0 view .LVU66
+ 362 0012 034B     		ldr	r3, .L31+4
+ 363 0014 1868     		ldr	r0, [r3]
+ 364              	.LVL13:
+ 329:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   }
+ 365              		.loc 1 329 14 view .LVU67
+ 366 0016 FFF7FEFF 		bl	HAL_InitTick
+ 367              	.LVL14:
+ 329:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   }
+ 368              		.loc 1 329 14 view .LVU68
+ 369 001a F7E7     		b	.L27
+ 370              	.L32:
+ 371              		.align	2
+ 372              	.L31:
+ 373 001c 00000000 		.word	.LANCHOR0
+ 374 0020 00000000 		.word	.LANCHOR1
+ 375              		.cfi_endproc
+ 376              	.LFE149:
+ 378              		.section	.text.HAL_GetTickFreq,"ax",%progbits
+ 379              		.align	1
+ 380              		.global	HAL_GetTickFreq
+ 381              		.syntax unified
+ 382              		.thumb
+ 383              		.thumb_func
+ 384              		.fpu fpv5-d16
+ 386              	HAL_GetTickFreq:
+ 387              	.LFB150:
+ 334:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 335:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 336:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief Return tick frequency.
+ 337:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval tick period in Hz
+ 338:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 339:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** HAL_TickFreqTypeDef HAL_GetTickFreq(void)
+ 340:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 388              		.loc 1 340 1 is_stmt 1 view -0
+ 389              		.cfi_startproc
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 14
+
+
+ 390              		@ args = 0, pretend = 0, frame = 0
+ 391              		@ frame_needed = 0, uses_anonymous_args = 0
+ 392              		@ link register save eliminated.
+ 341:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   return uwTickFreq;
+ 393              		.loc 1 341 3 view .LVU70
+ 342:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 394              		.loc 1 342 1 is_stmt 0 view .LVU71
+ 395 0000 014B     		ldr	r3, .L34
+ 396 0002 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 397 0004 7047     		bx	lr
+ 398              	.L35:
+ 399 0006 00BF     		.align	2
+ 400              	.L34:
+ 401 0008 00000000 		.word	.LANCHOR0
+ 402              		.cfi_endproc
+ 403              	.LFE150:
+ 405              		.section	.text.HAL_Delay,"ax",%progbits
+ 406              		.align	1
+ 407              		.weak	HAL_Delay
+ 408              		.syntax unified
+ 409              		.thumb
+ 410              		.thumb_func
+ 411              		.fpu fpv5-d16
+ 413              	HAL_Delay:
+ 414              	.LVL15:
+ 415              	.LFB151:
+ 343:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 344:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 345:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief This function provides minimum delay (in milliseconds) based
+ 346:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *        on variable incremented.
+ 347:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @note In the default implementation , SysTick timer is the source of time base.
+ 348:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *       It is used to generate interrupts at regular time intervals where uwTick
+ 349:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *       is incremented.
+ 350:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @note This function is declared as __weak to be overwritten in case of other
+ 351:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *       implementations in user file.
+ 352:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @param Delay  specifies the delay time length, in milliseconds.
+ 353:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval None
+ 354:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 355:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** __weak void HAL_Delay(uint32_t Delay)
+ 356:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 416              		.loc 1 356 1 is_stmt 1 view -0
+ 417              		.cfi_startproc
+ 418              		@ args = 0, pretend = 0, frame = 0
+ 419              		@ frame_needed = 0, uses_anonymous_args = 0
+ 420              		.loc 1 356 1 is_stmt 0 view .LVU73
+ 421 0000 38B5     		push	{r3, r4, r5, lr}
+ 422              	.LCFI4:
+ 423              		.cfi_def_cfa_offset 16
+ 424              		.cfi_offset 3, -16
+ 425              		.cfi_offset 4, -12
+ 426              		.cfi_offset 5, -8
+ 427              		.cfi_offset 14, -4
+ 428 0002 0446     		mov	r4, r0
+ 357:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   uint32_t tickstart = HAL_GetTick();
+ 429              		.loc 1 357 3 is_stmt 1 view .LVU74
+ 430              		.loc 1 357 24 is_stmt 0 view .LVU75
+ 431 0004 FFF7FEFF 		bl	HAL_GetTick
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 15
+
+
+ 432              	.LVL16:
+ 433              		.loc 1 357 24 view .LVU76
+ 434 0008 0546     		mov	r5, r0
+ 435              	.LVL17:
+ 358:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   uint32_t wait = Delay;
+ 436              		.loc 1 358 3 is_stmt 1 view .LVU77
+ 359:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 360:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   /* Add a freq to guarantee minimum wait */
+ 361:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   if (wait < HAL_MAX_DELAY)
+ 437              		.loc 1 361 3 view .LVU78
+ 438              		.loc 1 361 6 is_stmt 0 view .LVU79
+ 439 000a B4F1FF3F 		cmp	r4, #-1
+ 440 000e 02D0     		beq	.L38
+ 362:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   {
+ 363:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****     wait += (uint32_t)(uwTickFreq);
+ 441              		.loc 1 363 5 is_stmt 1 view .LVU80
+ 442              		.loc 1 363 13 is_stmt 0 view .LVU81
+ 443 0010 044B     		ldr	r3, .L40
+ 444 0012 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 445              		.loc 1 363 10 view .LVU82
+ 446 0014 1C44     		add	r4, r4, r3
+ 447              	.LVL18:
+ 448              	.L38:
+ 364:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   }
+ 365:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 366:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   while ((HAL_GetTick() - tickstart) < wait)
+ 367:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   {
+ 368:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   }
+ 449              		.loc 1 368 3 is_stmt 1 discriminator 1 view .LVU83
+ 366:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   {
+ 450              		.loc 1 366 11 is_stmt 0 discriminator 1 view .LVU84
+ 451 0016 FFF7FEFF 		bl	HAL_GetTick
+ 452              	.LVL19:
+ 366:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   {
+ 453              		.loc 1 366 25 discriminator 1 view .LVU85
+ 454 001a 401B     		subs	r0, r0, r5
+ 366:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   {
+ 455              		.loc 1 366 9 discriminator 1 view .LVU86
+ 456 001c A042     		cmp	r0, r4
+ 457 001e FAD3     		bcc	.L38
+ 369:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 458              		.loc 1 369 1 view .LVU87
+ 459 0020 38BD     		pop	{r3, r4, r5, pc}
+ 460              	.LVL20:
+ 461              	.L41:
+ 462              		.loc 1 369 1 view .LVU88
+ 463 0022 00BF     		.align	2
+ 464              	.L40:
+ 465 0024 00000000 		.word	.LANCHOR0
+ 466              		.cfi_endproc
+ 467              	.LFE151:
+ 469              		.section	.text.HAL_SuspendTick,"ax",%progbits
+ 470              		.align	1
+ 471              		.weak	HAL_SuspendTick
+ 472              		.syntax unified
+ 473              		.thumb
+ 474              		.thumb_func
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 16
+
+
+ 475              		.fpu fpv5-d16
+ 477              	HAL_SuspendTick:
+ 478              	.LFB152:
+ 370:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 371:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 372:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief Suspend Tick increment.
+ 373:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @note In the default implementation , SysTick timer is the source of time base. It is
+ 374:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *       used to generate interrupts at regular time intervals. Once HAL_SuspendTick()
+ 375:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *       is called, the SysTick interrupt will be disabled and so Tick increment 
+ 376:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *       is suspended.
+ 377:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @note This function is declared as __weak to be overwritten in case of other
+ 378:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *       implementations in user file.
+ 379:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval None
+ 380:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 381:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** __weak void HAL_SuspendTick(void)
+ 382:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 479              		.loc 1 382 1 is_stmt 1 view -0
+ 480              		.cfi_startproc
+ 481              		@ args = 0, pretend = 0, frame = 0
+ 482              		@ frame_needed = 0, uses_anonymous_args = 0
+ 483              		@ link register save eliminated.
+ 383:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   /* Disable SysTick Interrupt */
+ 384:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   SysTick->CTRL &= ~SysTick_CTRL_TICKINT_Msk;
+ 484              		.loc 1 384 3 view .LVU90
+ 485              		.loc 1 384 17 is_stmt 0 view .LVU91
+ 486 0000 024A     		ldr	r2, .L43
+ 487 0002 1368     		ldr	r3, [r2]
+ 488 0004 23F00203 		bic	r3, r3, #2
+ 489 0008 1360     		str	r3, [r2]
+ 385:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 490              		.loc 1 385 1 view .LVU92
+ 491 000a 7047     		bx	lr
+ 492              	.L44:
+ 493              		.align	2
+ 494              	.L43:
+ 495 000c 10E000E0 		.word	-536813552
+ 496              		.cfi_endproc
+ 497              	.LFE152:
+ 499              		.section	.text.HAL_ResumeTick,"ax",%progbits
+ 500              		.align	1
+ 501              		.weak	HAL_ResumeTick
+ 502              		.syntax unified
+ 503              		.thumb
+ 504              		.thumb_func
+ 505              		.fpu fpv5-d16
+ 507              	HAL_ResumeTick:
+ 508              	.LFB153:
+ 386:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 387:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 388:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief Resume Tick increment.
+ 389:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @note In the default implementation , SysTick timer is the source of time base. It is
+ 390:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *       used to generate interrupts at regular time intervals. Once HAL_ResumeTick()
+ 391:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *       is called, the SysTick interrupt will be enabled and so Tick increment 
+ 392:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *       is resumed.
+ 393:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @note This function is declared as __weak to be overwritten in case of other
+ 394:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *       implementations in user file.
+ 395:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval None
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 17
+
+
+ 396:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 397:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** __weak void HAL_ResumeTick(void)
+ 398:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 509              		.loc 1 398 1 is_stmt 1 view -0
+ 510              		.cfi_startproc
+ 511              		@ args = 0, pretend = 0, frame = 0
+ 512              		@ frame_needed = 0, uses_anonymous_args = 0
+ 513              		@ link register save eliminated.
+ 399:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   /* Enable SysTick Interrupt */
+ 400:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   SysTick->CTRL  |= SysTick_CTRL_TICKINT_Msk;
+ 514              		.loc 1 400 3 view .LVU94
+ 515              		.loc 1 400 18 is_stmt 0 view .LVU95
+ 516 0000 024A     		ldr	r2, .L46
+ 517 0002 1368     		ldr	r3, [r2]
+ 518 0004 43F00203 		orr	r3, r3, #2
+ 519 0008 1360     		str	r3, [r2]
+ 401:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 520              		.loc 1 401 1 view .LVU96
+ 521 000a 7047     		bx	lr
+ 522              	.L47:
+ 523              		.align	2
+ 524              	.L46:
+ 525 000c 10E000E0 		.word	-536813552
+ 526              		.cfi_endproc
+ 527              	.LFE153:
+ 529              		.section	.text.HAL_GetHalVersion,"ax",%progbits
+ 530              		.align	1
+ 531              		.global	HAL_GetHalVersion
+ 532              		.syntax unified
+ 533              		.thumb
+ 534              		.thumb_func
+ 535              		.fpu fpv5-d16
+ 537              	HAL_GetHalVersion:
+ 538              	.LFB154:
+ 402:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 403:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 404:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief  Returns the HAL revision
+ 405:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval version : 0xXYZR (8bits for each decimal, R for RC)
+ 406:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 407:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** uint32_t HAL_GetHalVersion(void)
+ 408:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 539              		.loc 1 408 1 is_stmt 1 view -0
+ 540              		.cfi_startproc
+ 541              		@ args = 0, pretend = 0, frame = 0
+ 542              		@ frame_needed = 0, uses_anonymous_args = 0
+ 543              		@ link register save eliminated.
+ 409:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****  return __STM32F7xx_HAL_VERSION;
+ 544              		.loc 1 409 2 view .LVU98
+ 410:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 545              		.loc 1 410 1 is_stmt 0 view .LVU99
+ 546 0000 0048     		ldr	r0, .L49
+ 547 0002 7047     		bx	lr
+ 548              	.L50:
+ 549              		.align	2
+ 550              	.L49:
+ 551 0004 00070201 		.word	16910080
+ 552              		.cfi_endproc
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 18
+
+
+ 553              	.LFE154:
+ 555              		.section	.text.HAL_GetREVID,"ax",%progbits
+ 556              		.align	1
+ 557              		.global	HAL_GetREVID
+ 558              		.syntax unified
+ 559              		.thumb
+ 560              		.thumb_func
+ 561              		.fpu fpv5-d16
+ 563              	HAL_GetREVID:
+ 564              	.LFB155:
+ 411:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 412:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 413:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief  Returns the device revision identifier.
+ 414:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval Device revision identifier
+ 415:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 416:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** uint32_t HAL_GetREVID(void)
+ 417:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 565              		.loc 1 417 1 is_stmt 1 view -0
+ 566              		.cfi_startproc
+ 567              		@ args = 0, pretend = 0, frame = 0
+ 568              		@ frame_needed = 0, uses_anonymous_args = 0
+ 569              		@ link register save eliminated.
+ 418:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****    return((DBGMCU->IDCODE) >> 16U);
+ 570              		.loc 1 418 4 view .LVU101
+ 571              		.loc 1 418 18 is_stmt 0 view .LVU102
+ 572 0000 014B     		ldr	r3, .L52
+ 573 0002 1868     		ldr	r0, [r3]
+ 419:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 574              		.loc 1 419 1 view .LVU103
+ 575 0004 000C     		lsrs	r0, r0, #16
+ 576 0006 7047     		bx	lr
+ 577              	.L53:
+ 578              		.align	2
+ 579              	.L52:
+ 580 0008 002004E0 		.word	-536600576
+ 581              		.cfi_endproc
+ 582              	.LFE155:
+ 584              		.section	.text.HAL_GetDEVID,"ax",%progbits
+ 585              		.align	1
+ 586              		.global	HAL_GetDEVID
+ 587              		.syntax unified
+ 588              		.thumb
+ 589              		.thumb_func
+ 590              		.fpu fpv5-d16
+ 592              	HAL_GetDEVID:
+ 593              	.LFB156:
+ 420:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 421:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 422:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief  Returns the device identifier.
+ 423:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval Device identifier
+ 424:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 425:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** uint32_t HAL_GetDEVID(void)
+ 426:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 594              		.loc 1 426 1 is_stmt 1 view -0
+ 595              		.cfi_startproc
+ 596              		@ args = 0, pretend = 0, frame = 0
+ 597              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 19
+
+
+ 598              		@ link register save eliminated.
+ 427:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****    return((DBGMCU->IDCODE) & IDCODE_DEVID_MASK);
+ 599              		.loc 1 427 4 view .LVU105
+ 600              		.loc 1 427 18 is_stmt 0 view .LVU106
+ 601 0000 024B     		ldr	r3, .L55
+ 602 0002 1868     		ldr	r0, [r3]
+ 428:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 603              		.loc 1 428 1 view .LVU107
+ 604 0004 C0F30B00 		ubfx	r0, r0, #0, #12
+ 605 0008 7047     		bx	lr
+ 606              	.L56:
+ 607 000a 00BF     		.align	2
+ 608              	.L55:
+ 609 000c 002004E0 		.word	-536600576
+ 610              		.cfi_endproc
+ 611              	.LFE156:
+ 613              		.section	.text.HAL_GetUIDw0,"ax",%progbits
+ 614              		.align	1
+ 615              		.global	HAL_GetUIDw0
+ 616              		.syntax unified
+ 617              		.thumb
+ 618              		.thumb_func
+ 619              		.fpu fpv5-d16
+ 621              	HAL_GetUIDw0:
+ 622              	.LFB157:
+ 429:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 430:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 431:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief  Returns first word of the unique device identifier (UID based on 96 bits)
+ 432:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval Device identifier
+ 433:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 434:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** uint32_t HAL_GetUIDw0(void)
+ 435:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 623              		.loc 1 435 1 is_stmt 1 view -0
+ 624              		.cfi_startproc
+ 625              		@ args = 0, pretend = 0, frame = 0
+ 626              		@ frame_needed = 0, uses_anonymous_args = 0
+ 627              		@ link register save eliminated.
+ 436:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****    return(READ_REG(*((uint32_t *)UID_BASE)));
+ 628              		.loc 1 436 4 view .LVU109
+ 437:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 629              		.loc 1 437 1 is_stmt 0 view .LVU110
+ 630 0000 014B     		ldr	r3, .L58
+ 631 0002 1868     		ldr	r0, [r3]
+ 632 0004 7047     		bx	lr
+ 633              	.L59:
+ 634 0006 00BF     		.align	2
+ 635              	.L58:
+ 636 0008 20F4F01F 		.word	535884832
+ 637              		.cfi_endproc
+ 638              	.LFE157:
+ 640              		.section	.text.HAL_GetUIDw1,"ax",%progbits
+ 641              		.align	1
+ 642              		.global	HAL_GetUIDw1
+ 643              		.syntax unified
+ 644              		.thumb
+ 645              		.thumb_func
+ 646              		.fpu fpv5-d16
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 20
+
+
+ 648              	HAL_GetUIDw1:
+ 649              	.LFB158:
+ 438:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 439:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 440:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief  Returns second word of the unique device identifier (UID based on 96 bits)
+ 441:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval Device identifier
+ 442:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 443:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** uint32_t HAL_GetUIDw1(void)
+ 444:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 650              		.loc 1 444 1 is_stmt 1 view -0
+ 651              		.cfi_startproc
+ 652              		@ args = 0, pretend = 0, frame = 0
+ 653              		@ frame_needed = 0, uses_anonymous_args = 0
+ 654              		@ link register save eliminated.
+ 445:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****    return(READ_REG(*((uint32_t *)(UID_BASE + 4U))));
+ 655              		.loc 1 445 4 view .LVU112
+ 446:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 656              		.loc 1 446 1 is_stmt 0 view .LVU113
+ 657 0000 014B     		ldr	r3, .L61
+ 658 0002 1868     		ldr	r0, [r3]
+ 659 0004 7047     		bx	lr
+ 660              	.L62:
+ 661 0006 00BF     		.align	2
+ 662              	.L61:
+ 663 0008 24F4F01F 		.word	535884836
+ 664              		.cfi_endproc
+ 665              	.LFE158:
+ 667              		.section	.text.HAL_GetUIDw2,"ax",%progbits
+ 668              		.align	1
+ 669              		.global	HAL_GetUIDw2
+ 670              		.syntax unified
+ 671              		.thumb
+ 672              		.thumb_func
+ 673              		.fpu fpv5-d16
+ 675              	HAL_GetUIDw2:
+ 676              	.LFB159:
+ 447:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 448:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 449:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief  Returns third word of the unique device identifier (UID based on 96 bits)
+ 450:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval Device identifier
+ 451:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 452:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** uint32_t HAL_GetUIDw2(void)
+ 453:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 677              		.loc 1 453 1 is_stmt 1 view -0
+ 678              		.cfi_startproc
+ 679              		@ args = 0, pretend = 0, frame = 0
+ 680              		@ frame_needed = 0, uses_anonymous_args = 0
+ 681              		@ link register save eliminated.
+ 454:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****    return(READ_REG(*((uint32_t *)(UID_BASE + 8U))));
+ 682              		.loc 1 454 4 view .LVU115
+ 455:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 683              		.loc 1 455 1 is_stmt 0 view .LVU116
+ 684 0000 014B     		ldr	r3, .L64
+ 685 0002 1868     		ldr	r0, [r3]
+ 686 0004 7047     		bx	lr
+ 687              	.L65:
+ 688 0006 00BF     		.align	2
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 21
+
+
+ 689              	.L64:
+ 690 0008 28F4F01F 		.word	535884840
+ 691              		.cfi_endproc
+ 692              	.LFE159:
+ 694              		.section	.text.HAL_DBGMCU_EnableDBGSleepMode,"ax",%progbits
+ 695              		.align	1
+ 696              		.global	HAL_DBGMCU_EnableDBGSleepMode
+ 697              		.syntax unified
+ 698              		.thumb
+ 699              		.thumb_func
+ 700              		.fpu fpv5-d16
+ 702              	HAL_DBGMCU_EnableDBGSleepMode:
+ 703              	.LFB160:
+ 456:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 457:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 458:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief  Enable the Debug Module during SLEEP mode
+ 459:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval None
+ 460:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 461:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** void HAL_DBGMCU_EnableDBGSleepMode(void)
+ 462:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 704              		.loc 1 462 1 is_stmt 1 view -0
+ 705              		.cfi_startproc
+ 706              		@ args = 0, pretend = 0, frame = 0
+ 707              		@ frame_needed = 0, uses_anonymous_args = 0
+ 708              		@ link register save eliminated.
+ 463:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   SET_BIT(DBGMCU->CR, DBGMCU_CR_DBG_SLEEP);
+ 709              		.loc 1 463 3 view .LVU118
+ 710 0000 024A     		ldr	r2, .L67
+ 711 0002 5368     		ldr	r3, [r2, #4]
+ 712 0004 43F00103 		orr	r3, r3, #1
+ 713 0008 5360     		str	r3, [r2, #4]
+ 464:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 714              		.loc 1 464 1 is_stmt 0 view .LVU119
+ 715 000a 7047     		bx	lr
+ 716              	.L68:
+ 717              		.align	2
+ 718              	.L67:
+ 719 000c 002004E0 		.word	-536600576
+ 720              		.cfi_endproc
+ 721              	.LFE160:
+ 723              		.section	.text.HAL_DBGMCU_DisableDBGSleepMode,"ax",%progbits
+ 724              		.align	1
+ 725              		.global	HAL_DBGMCU_DisableDBGSleepMode
+ 726              		.syntax unified
+ 727              		.thumb
+ 728              		.thumb_func
+ 729              		.fpu fpv5-d16
+ 731              	HAL_DBGMCU_DisableDBGSleepMode:
+ 732              	.LFB161:
+ 465:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 466:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 467:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief  Disable the Debug Module during SLEEP mode
+ 468:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval None
+ 469:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 470:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** void HAL_DBGMCU_DisableDBGSleepMode(void)
+ 471:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 733              		.loc 1 471 1 is_stmt 1 view -0
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 22
+
+
+ 734              		.cfi_startproc
+ 735              		@ args = 0, pretend = 0, frame = 0
+ 736              		@ frame_needed = 0, uses_anonymous_args = 0
+ 737              		@ link register save eliminated.
+ 472:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   CLEAR_BIT(DBGMCU->CR, DBGMCU_CR_DBG_SLEEP);
+ 738              		.loc 1 472 3 view .LVU121
+ 739 0000 024A     		ldr	r2, .L70
+ 740 0002 5368     		ldr	r3, [r2, #4]
+ 741 0004 23F00103 		bic	r3, r3, #1
+ 742 0008 5360     		str	r3, [r2, #4]
+ 473:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 743              		.loc 1 473 1 is_stmt 0 view .LVU122
+ 744 000a 7047     		bx	lr
+ 745              	.L71:
+ 746              		.align	2
+ 747              	.L70:
+ 748 000c 002004E0 		.word	-536600576
+ 749              		.cfi_endproc
+ 750              	.LFE161:
+ 752              		.section	.text.HAL_DBGMCU_EnableDBGStopMode,"ax",%progbits
+ 753              		.align	1
+ 754              		.global	HAL_DBGMCU_EnableDBGStopMode
+ 755              		.syntax unified
+ 756              		.thumb
+ 757              		.thumb_func
+ 758              		.fpu fpv5-d16
+ 760              	HAL_DBGMCU_EnableDBGStopMode:
+ 761              	.LFB162:
+ 474:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 475:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 476:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief  Enable the Debug Module during STOP mode
+ 477:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval None
+ 478:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 479:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** void HAL_DBGMCU_EnableDBGStopMode(void)
+ 480:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 762              		.loc 1 480 1 is_stmt 1 view -0
+ 763              		.cfi_startproc
+ 764              		@ args = 0, pretend = 0, frame = 0
+ 765              		@ frame_needed = 0, uses_anonymous_args = 0
+ 766              		@ link register save eliminated.
+ 481:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   SET_BIT(DBGMCU->CR, DBGMCU_CR_DBG_STOP);
+ 767              		.loc 1 481 3 view .LVU124
+ 768 0000 024A     		ldr	r2, .L73
+ 769 0002 5368     		ldr	r3, [r2, #4]
+ 770 0004 43F00203 		orr	r3, r3, #2
+ 771 0008 5360     		str	r3, [r2, #4]
+ 482:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 772              		.loc 1 482 1 is_stmt 0 view .LVU125
+ 773 000a 7047     		bx	lr
+ 774              	.L74:
+ 775              		.align	2
+ 776              	.L73:
+ 777 000c 002004E0 		.word	-536600576
+ 778              		.cfi_endproc
+ 779              	.LFE162:
+ 781              		.section	.text.HAL_DBGMCU_DisableDBGStopMode,"ax",%progbits
+ 782              		.align	1
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 23
+
+
+ 783              		.global	HAL_DBGMCU_DisableDBGStopMode
+ 784              		.syntax unified
+ 785              		.thumb
+ 786              		.thumb_func
+ 787              		.fpu fpv5-d16
+ 789              	HAL_DBGMCU_DisableDBGStopMode:
+ 790              	.LFB163:
+ 483:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 484:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 485:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief  Disable the Debug Module during STOP mode
+ 486:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval None
+ 487:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 488:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** void HAL_DBGMCU_DisableDBGStopMode(void)
+ 489:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 791              		.loc 1 489 1 is_stmt 1 view -0
+ 792              		.cfi_startproc
+ 793              		@ args = 0, pretend = 0, frame = 0
+ 794              		@ frame_needed = 0, uses_anonymous_args = 0
+ 795              		@ link register save eliminated.
+ 490:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   CLEAR_BIT(DBGMCU->CR, DBGMCU_CR_DBG_STOP);
+ 796              		.loc 1 490 3 view .LVU127
+ 797 0000 024A     		ldr	r2, .L76
+ 798 0002 5368     		ldr	r3, [r2, #4]
+ 799 0004 23F00203 		bic	r3, r3, #2
+ 800 0008 5360     		str	r3, [r2, #4]
+ 491:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 801              		.loc 1 491 1 is_stmt 0 view .LVU128
+ 802 000a 7047     		bx	lr
+ 803              	.L77:
+ 804              		.align	2
+ 805              	.L76:
+ 806 000c 002004E0 		.word	-536600576
+ 807              		.cfi_endproc
+ 808              	.LFE163:
+ 810              		.section	.text.HAL_DBGMCU_EnableDBGStandbyMode,"ax",%progbits
+ 811              		.align	1
+ 812              		.global	HAL_DBGMCU_EnableDBGStandbyMode
+ 813              		.syntax unified
+ 814              		.thumb
+ 815              		.thumb_func
+ 816              		.fpu fpv5-d16
+ 818              	HAL_DBGMCU_EnableDBGStandbyMode:
+ 819              	.LFB164:
+ 492:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 493:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 494:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief  Enable the Debug Module during STANDBY mode
+ 495:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval None
+ 496:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 497:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** void HAL_DBGMCU_EnableDBGStandbyMode(void)
+ 498:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 820              		.loc 1 498 1 is_stmt 1 view -0
+ 821              		.cfi_startproc
+ 822              		@ args = 0, pretend = 0, frame = 0
+ 823              		@ frame_needed = 0, uses_anonymous_args = 0
+ 824              		@ link register save eliminated.
+ 499:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   SET_BIT(DBGMCU->CR, DBGMCU_CR_DBG_STANDBY);
+ 825              		.loc 1 499 3 view .LVU130
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 24
+
+
+ 826 0000 024A     		ldr	r2, .L79
+ 827 0002 5368     		ldr	r3, [r2, #4]
+ 828 0004 43F00403 		orr	r3, r3, #4
+ 829 0008 5360     		str	r3, [r2, #4]
+ 500:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 830              		.loc 1 500 1 is_stmt 0 view .LVU131
+ 831 000a 7047     		bx	lr
+ 832              	.L80:
+ 833              		.align	2
+ 834              	.L79:
+ 835 000c 002004E0 		.word	-536600576
+ 836              		.cfi_endproc
+ 837              	.LFE164:
+ 839              		.section	.text.HAL_DBGMCU_DisableDBGStandbyMode,"ax",%progbits
+ 840              		.align	1
+ 841              		.global	HAL_DBGMCU_DisableDBGStandbyMode
+ 842              		.syntax unified
+ 843              		.thumb
+ 844              		.thumb_func
+ 845              		.fpu fpv5-d16
+ 847              	HAL_DBGMCU_DisableDBGStandbyMode:
+ 848              	.LFB165:
+ 501:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 502:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 503:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief  Disable the Debug Module during STANDBY mode
+ 504:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval None
+ 505:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 506:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** void HAL_DBGMCU_DisableDBGStandbyMode(void)
+ 507:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 849              		.loc 1 507 1 is_stmt 1 view -0
+ 850              		.cfi_startproc
+ 851              		@ args = 0, pretend = 0, frame = 0
+ 852              		@ frame_needed = 0, uses_anonymous_args = 0
+ 853              		@ link register save eliminated.
+ 508:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   CLEAR_BIT(DBGMCU->CR, DBGMCU_CR_DBG_STANDBY);
+ 854              		.loc 1 508 3 view .LVU133
+ 855 0000 024A     		ldr	r2, .L82
+ 856 0002 5368     		ldr	r3, [r2, #4]
+ 857 0004 23F00403 		bic	r3, r3, #4
+ 858 0008 5360     		str	r3, [r2, #4]
+ 509:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 859              		.loc 1 509 1 is_stmt 0 view .LVU134
+ 860 000a 7047     		bx	lr
+ 861              	.L83:
+ 862              		.align	2
+ 863              	.L82:
+ 864 000c 002004E0 		.word	-536600576
+ 865              		.cfi_endproc
+ 866              	.LFE165:
+ 868              		.section	.text.HAL_EnableCompensationCell,"ax",%progbits
+ 869              		.align	1
+ 870              		.global	HAL_EnableCompensationCell
+ 871              		.syntax unified
+ 872              		.thumb
+ 873              		.thumb_func
+ 874              		.fpu fpv5-d16
+ 876              	HAL_EnableCompensationCell:
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 25
+
+
+ 877              	.LFB166:
+ 510:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 511:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 512:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief  Enables the I/O Compensation Cell.
+ 513:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @note   The I/O compensation cell can be used only when the device supply
+ 514:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *         voltage ranges from 2.4 to 3.6 V.  
+ 515:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval None
+ 516:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 517:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** void HAL_EnableCompensationCell(void)
+ 518:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 878              		.loc 1 518 1 is_stmt 1 view -0
+ 879              		.cfi_startproc
+ 880              		@ args = 0, pretend = 0, frame = 0
+ 881              		@ frame_needed = 0, uses_anonymous_args = 0
+ 882              		@ link register save eliminated.
+ 519:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   SYSCFG->CMPCR |= SYSCFG_CMPCR_CMP_PD;
+ 883              		.loc 1 519 3 view .LVU136
+ 884              		.loc 1 519 17 is_stmt 0 view .LVU137
+ 885 0000 024A     		ldr	r2, .L85
+ 886 0002 136A     		ldr	r3, [r2, #32]
+ 887 0004 43F00103 		orr	r3, r3, #1
+ 888 0008 1362     		str	r3, [r2, #32]
+ 520:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 889              		.loc 1 520 1 view .LVU138
+ 890 000a 7047     		bx	lr
+ 891              	.L86:
+ 892              		.align	2
+ 893              	.L85:
+ 894 000c 00380140 		.word	1073821696
+ 895              		.cfi_endproc
+ 896              	.LFE166:
+ 898              		.section	.text.HAL_DisableCompensationCell,"ax",%progbits
+ 899              		.align	1
+ 900              		.global	HAL_DisableCompensationCell
+ 901              		.syntax unified
+ 902              		.thumb
+ 903              		.thumb_func
+ 904              		.fpu fpv5-d16
+ 906              	HAL_DisableCompensationCell:
+ 907              	.LFB167:
+ 521:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 522:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 523:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief  Power-down the I/O Compensation Cell.
+ 524:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @note   The I/O compensation cell can be used only when the device supply
+ 525:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *         voltage ranges from 2.4 to 3.6 V.  
+ 526:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval None
+ 527:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 528:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** void HAL_DisableCompensationCell(void)
+ 529:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 908              		.loc 1 529 1 is_stmt 1 view -0
+ 909              		.cfi_startproc
+ 910              		@ args = 0, pretend = 0, frame = 0
+ 911              		@ frame_needed = 0, uses_anonymous_args = 0
+ 912              		@ link register save eliminated.
+ 530:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   SYSCFG->CMPCR &= (uint32_t)~((uint32_t)SYSCFG_CMPCR_CMP_PD);
+ 913              		.loc 1 530 3 view .LVU140
+ 914              		.loc 1 530 17 is_stmt 0 view .LVU141
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 26
+
+
+ 915 0000 024A     		ldr	r2, .L88
+ 916 0002 136A     		ldr	r3, [r2, #32]
+ 917 0004 23F00103 		bic	r3, r3, #1
+ 918 0008 1362     		str	r3, [r2, #32]
+ 531:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 919              		.loc 1 531 1 view .LVU142
+ 920 000a 7047     		bx	lr
+ 921              	.L89:
+ 922              		.align	2
+ 923              	.L88:
+ 924 000c 00380140 		.word	1073821696
+ 925              		.cfi_endproc
+ 926              	.LFE167:
+ 928              		.section	.text.HAL_EnableFMCMemorySwapping,"ax",%progbits
+ 929              		.align	1
+ 930              		.global	HAL_EnableFMCMemorySwapping
+ 931              		.syntax unified
+ 932              		.thumb
+ 933              		.thumb_func
+ 934              		.fpu fpv5-d16
+ 936              	HAL_EnableFMCMemorySwapping:
+ 937              	.LFB168:
+ 532:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 533:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 534:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief  Enables the FMC Memory Mapping Swapping.
+ 535:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *   
+ 536:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @note   SDRAM is accessible at 0x60000000 
+ 537:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *         and NOR/RAM is accessible at 0xC0000000   
+ 538:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *
+ 539:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval None
+ 540:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 541:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** void HAL_EnableFMCMemorySwapping(void)
+ 542:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 938              		.loc 1 542 1 is_stmt 1 view -0
+ 939              		.cfi_startproc
+ 940              		@ args = 0, pretend = 0, frame = 0
+ 941              		@ frame_needed = 0, uses_anonymous_args = 0
+ 942              		@ link register save eliminated.
+ 543:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   SYSCFG->MEMRMP |= SYSCFG_MEMRMP_SWP_FMC_0;
+ 943              		.loc 1 543 3 view .LVU144
+ 944              		.loc 1 543 18 is_stmt 0 view .LVU145
+ 945 0000 024A     		ldr	r2, .L91
+ 946 0002 1368     		ldr	r3, [r2]
+ 947 0004 43F48063 		orr	r3, r3, #1024
+ 948 0008 1360     		str	r3, [r2]
+ 544:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 949              		.loc 1 544 1 view .LVU146
+ 950 000a 7047     		bx	lr
+ 951              	.L92:
+ 952              		.align	2
+ 953              	.L91:
+ 954 000c 00380140 		.word	1073821696
+ 955              		.cfi_endproc
+ 956              	.LFE168:
+ 958              		.section	.text.HAL_DisableFMCMemorySwapping,"ax",%progbits
+ 959              		.align	1
+ 960              		.global	HAL_DisableFMCMemorySwapping
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 27
+
+
+ 961              		.syntax unified
+ 962              		.thumb
+ 963              		.thumb_func
+ 964              		.fpu fpv5-d16
+ 966              	HAL_DisableFMCMemorySwapping:
+ 967              	.LFB169:
+ 545:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 546:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 547:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @brief  Disables the FMC Memory Mapping Swapping
+ 548:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *   
+ 549:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @note   SDRAM is accessible at 0xC0000000 (default mapping)  
+ 550:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *         and NOR/RAM is accessible at 0x60000000 (default mapping)    
+ 551:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   *           
+ 552:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   * @retval None
+ 553:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   */
+ 554:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** void HAL_DisableFMCMemorySwapping(void)
+ 555:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 968              		.loc 1 555 1 is_stmt 1 view -0
+ 969              		.cfi_startproc
+ 970              		@ args = 0, pretend = 0, frame = 0
+ 971              		@ frame_needed = 0, uses_anonymous_args = 0
+ 972              		@ link register save eliminated.
+ 556:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 557:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   SYSCFG->MEMRMP &= (uint32_t)~((uint32_t)SYSCFG_MEMRMP_SWP_FMC);
+ 973              		.loc 1 557 3 view .LVU148
+ 974              		.loc 1 557 18 is_stmt 0 view .LVU149
+ 975 0000 024A     		ldr	r2, .L94
+ 976 0002 1368     		ldr	r3, [r2]
+ 977 0004 23F44063 		bic	r3, r3, #3072
+ 978 0008 1360     		str	r3, [r2]
+ 558:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 979              		.loc 1 558 1 view .LVU150
+ 980 000a 7047     		bx	lr
+ 981              	.L95:
+ 982              		.align	2
+ 983              	.L94:
+ 984 000c 00380140 		.word	1073821696
+ 985              		.cfi_endproc
+ 986              	.LFE169:
+ 988              		.section	.text.HAL_EnableMemorySwappingBank,"ax",%progbits
+ 989              		.align	1
+ 990              		.global	HAL_EnableMemorySwappingBank
+ 991              		.syntax unified
+ 992              		.thumb
+ 993              		.thumb_func
+ 994              		.fpu fpv5-d16
+ 996              	HAL_EnableMemorySwappingBank:
+ 997              	.LFB170:
+ 559:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 560:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** #if defined (STM32F765xx) || defined (STM32F767xx) || defined (STM32F769xx) || defined (STM32F777xx
+ 561:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 562:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** * @brief  Enable the Internal FLASH Bank Swapping.
+ 563:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** *   
+ 564:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** * @note   This function can be used only for STM32F77xx/STM32F76xx devices. 
+ 565:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** *
+ 566:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** * @note   Flash Bank2 mapped at 0x08000000 (AXI) (aliased at 0x00200000 (TCM)) 
+ 567:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** *         and Flash Bank1 mapped at 0x08100000 (AXI) (aliased at 0x00300000 (TCM))   
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 28
+
+
+ 568:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** *
+ 569:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** * @retval None
+ 570:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** */
+ 571:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** void HAL_EnableMemorySwappingBank(void)
+ 572:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 998              		.loc 1 572 1 is_stmt 1 view -0
+ 999              		.cfi_startproc
+ 1000              		@ args = 0, pretend = 0, frame = 0
+ 1001              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1002              		@ link register save eliminated.
+ 573:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   SET_BIT(SYSCFG->MEMRMP, SYSCFG_MEMRMP_SWP_FB);
+ 1003              		.loc 1 573 3 view .LVU152
+ 1004 0000 024A     		ldr	r2, .L97
+ 1005 0002 1368     		ldr	r3, [r2]
+ 1006 0004 43F48073 		orr	r3, r3, #256
+ 1007 0008 1360     		str	r3, [r2]
+ 574:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 1008              		.loc 1 574 1 is_stmt 0 view .LVU153
+ 1009 000a 7047     		bx	lr
+ 1010              	.L98:
+ 1011              		.align	2
+ 1012              	.L97:
+ 1013 000c 00380140 		.word	1073821696
+ 1014              		.cfi_endproc
+ 1015              	.LFE170:
+ 1017              		.section	.text.HAL_DisableMemorySwappingBank,"ax",%progbits
+ 1018              		.align	1
+ 1019              		.global	HAL_DisableMemorySwappingBank
+ 1020              		.syntax unified
+ 1021              		.thumb
+ 1022              		.thumb_func
+ 1023              		.fpu fpv5-d16
+ 1025              	HAL_DisableMemorySwappingBank:
+ 1026              	.LFB171:
+ 575:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** 
+ 576:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** /**
+ 577:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** * @brief  Disable the Internal FLASH Bank Swapping.
+ 578:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** *   
+ 579:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** * @note   This function can be used only for STM32F77xx/STM32F76xx devices. 
+ 580:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** *
+ 581:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** * @note   The default state : Flash Bank1 mapped at 0x08000000 (AXI) (aliased at 0x00200000 (TCM)) 
+ 582:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** *         and Flash Bank2 mapped at 0x08100000 (AXI)( aliased at 0x00300000 (TCM)) 
+ 583:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** *           
+ 584:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** * @retval None
+ 585:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** */
+ 586:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** void HAL_DisableMemorySwappingBank(void)
+ 587:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** {
+ 1027              		.loc 1 587 1 is_stmt 1 view -0
+ 1028              		.cfi_startproc
+ 1029              		@ args = 0, pretend = 0, frame = 0
+ 1030              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1031              		@ link register save eliminated.
+ 588:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c ****   CLEAR_BIT(SYSCFG->MEMRMP, SYSCFG_MEMRMP_SWP_FB);
+ 1032              		.loc 1 588 3 view .LVU155
+ 1033 0000 024A     		ldr	r2, .L100
+ 1034 0002 1368     		ldr	r3, [r2]
+ 1035 0004 23F48073 		bic	r3, r3, #256
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 29
+
+
+ 1036 0008 1360     		str	r3, [r2]
+ 589:/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_Driver/Src/stm32f7xx_hal.c **** }
+ 1037              		.loc 1 589 1 is_stmt 0 view .LVU156
+ 1038 000a 7047     		bx	lr
+ 1039              	.L101:
+ 1040              		.align	2
+ 1041              	.L100:
+ 1042 000c 00380140 		.word	1073821696
+ 1043              		.cfi_endproc
+ 1044              	.LFE171:
+ 1046              		.global	uwTickFreq
+ 1047              		.global	uwTickPrio
+ 1048              		.comm	uwTick,4,4
+ 1049              		.section	.data.uwTickFreq,"aw"
+ 1050              		.set	.LANCHOR0,. + 0
+ 1053              	uwTickFreq:
+ 1054 0000 01       		.byte	1
+ 1055              		.section	.data.uwTickPrio,"aw"
+ 1056              		.align	2
+ 1057              		.set	.LANCHOR1,. + 0
+ 1060              	uwTickPrio:
+ 1061 0000 10000000 		.word	16
+ 1062              		.text
+ 1063              	.Letext0:
+ 1064              		.file 2 "/usr/local/Cellar/arm-none-eabi-gcc/8-2018-q4-major/gcc/arm-none-eabi/include/machine/_de
+ 1065              		.file 3 "/usr/local/Cellar/arm-none-eabi-gcc/8-2018-q4-major/gcc/arm-none-eabi/include/sys/_stdint
+ 1066              		.file 4 "/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/CMSIS/Include/c
+ 1067              		.file 5 "/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/CMSIS/Device/ST
+ 1068              		.file 6 "/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/CMSIS/Device/ST
+ 1069              		.file 7 "/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_D
+ 1070              		.file 8 "/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_D
+ 1071              		.file 9 "/Users/jeannine.shiu/STM32Cube/Repository/STM32Cube_FW_F7_V1.15.0/Drivers/STM32F7xx_HAL_D
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 30
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 stm32f7xx_hal.c
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:17     .text.HAL_MspInit:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:25     .text.HAL_MspInit:0000000000000000 HAL_MspInit
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:39     .text.HAL_MspDeInit:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:46     .text.HAL_MspDeInit:0000000000000000 HAL_MspDeInit
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:59     .text.HAL_DeInit:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:66     .text.HAL_DeInit:0000000000000000 HAL_DeInit
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:110    .text.HAL_DeInit:0000000000000028 $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:115    .text.HAL_InitTick:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:122    .text.HAL_InitTick:0000000000000000 HAL_InitTick
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:185    .text.HAL_InitTick:0000000000000040 $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:192    .text.HAL_Init:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:199    .text.HAL_Init:0000000000000000 HAL_Init
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:229    .text.HAL_IncTick:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:236    .text.HAL_IncTick:0000000000000000 HAL_IncTick
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:256    .text.HAL_IncTick:0000000000000010 $d
+                            *COM*:0000000000000004 uwTick
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:262    .text.HAL_GetTick:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:269    .text.HAL_GetTick:0000000000000000 HAL_GetTick
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:285    .text.HAL_GetTick:0000000000000008 $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:290    .text.HAL_GetTickPrio:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:297    .text.HAL_GetTickPrio:0000000000000000 HAL_GetTickPrio
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:312    .text.HAL_GetTickPrio:0000000000000008 $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:317    .text.HAL_SetTickFreq:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:324    .text.HAL_SetTickFreq:0000000000000000 HAL_SetTickFreq
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:373    .text.HAL_SetTickFreq:000000000000001c $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:379    .text.HAL_GetTickFreq:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:386    .text.HAL_GetTickFreq:0000000000000000 HAL_GetTickFreq
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:401    .text.HAL_GetTickFreq:0000000000000008 $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:406    .text.HAL_Delay:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:413    .text.HAL_Delay:0000000000000000 HAL_Delay
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:465    .text.HAL_Delay:0000000000000024 $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:470    .text.HAL_SuspendTick:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:477    .text.HAL_SuspendTick:0000000000000000 HAL_SuspendTick
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:495    .text.HAL_SuspendTick:000000000000000c $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:500    .text.HAL_ResumeTick:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:507    .text.HAL_ResumeTick:0000000000000000 HAL_ResumeTick
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:525    .text.HAL_ResumeTick:000000000000000c $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:530    .text.HAL_GetHalVersion:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:537    .text.HAL_GetHalVersion:0000000000000000 HAL_GetHalVersion
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:551    .text.HAL_GetHalVersion:0000000000000004 $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:556    .text.HAL_GetREVID:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:563    .text.HAL_GetREVID:0000000000000000 HAL_GetREVID
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:580    .text.HAL_GetREVID:0000000000000008 $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:585    .text.HAL_GetDEVID:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:592    .text.HAL_GetDEVID:0000000000000000 HAL_GetDEVID
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:609    .text.HAL_GetDEVID:000000000000000c $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:614    .text.HAL_GetUIDw0:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:621    .text.HAL_GetUIDw0:0000000000000000 HAL_GetUIDw0
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:636    .text.HAL_GetUIDw0:0000000000000008 $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:641    .text.HAL_GetUIDw1:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:648    .text.HAL_GetUIDw1:0000000000000000 HAL_GetUIDw1
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:663    .text.HAL_GetUIDw1:0000000000000008 $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:668    .text.HAL_GetUIDw2:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:675    .text.HAL_GetUIDw2:0000000000000000 HAL_GetUIDw2
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:690    .text.HAL_GetUIDw2:0000000000000008 $d
+ARM GAS  /var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s 			page 31
+
+
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:695    .text.HAL_DBGMCU_EnableDBGSleepMode:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:702    .text.HAL_DBGMCU_EnableDBGSleepMode:0000000000000000 HAL_DBGMCU_EnableDBGSleepMode
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:719    .text.HAL_DBGMCU_EnableDBGSleepMode:000000000000000c $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:724    .text.HAL_DBGMCU_DisableDBGSleepMode:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:731    .text.HAL_DBGMCU_DisableDBGSleepMode:0000000000000000 HAL_DBGMCU_DisableDBGSleepMode
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:748    .text.HAL_DBGMCU_DisableDBGSleepMode:000000000000000c $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:753    .text.HAL_DBGMCU_EnableDBGStopMode:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:760    .text.HAL_DBGMCU_EnableDBGStopMode:0000000000000000 HAL_DBGMCU_EnableDBGStopMode
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:777    .text.HAL_DBGMCU_EnableDBGStopMode:000000000000000c $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:782    .text.HAL_DBGMCU_DisableDBGStopMode:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:789    .text.HAL_DBGMCU_DisableDBGStopMode:0000000000000000 HAL_DBGMCU_DisableDBGStopMode
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:806    .text.HAL_DBGMCU_DisableDBGStopMode:000000000000000c $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:811    .text.HAL_DBGMCU_EnableDBGStandbyMode:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:818    .text.HAL_DBGMCU_EnableDBGStandbyMode:0000000000000000 HAL_DBGMCU_EnableDBGStandbyMode
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:835    .text.HAL_DBGMCU_EnableDBGStandbyMode:000000000000000c $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:840    .text.HAL_DBGMCU_DisableDBGStandbyMode:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:847    .text.HAL_DBGMCU_DisableDBGStandbyMode:0000000000000000 HAL_DBGMCU_DisableDBGStandbyMode
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:864    .text.HAL_DBGMCU_DisableDBGStandbyMode:000000000000000c $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:869    .text.HAL_EnableCompensationCell:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:876    .text.HAL_EnableCompensationCell:0000000000000000 HAL_EnableCompensationCell
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:894    .text.HAL_EnableCompensationCell:000000000000000c $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:899    .text.HAL_DisableCompensationCell:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:906    .text.HAL_DisableCompensationCell:0000000000000000 HAL_DisableCompensationCell
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:924    .text.HAL_DisableCompensationCell:000000000000000c $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:929    .text.HAL_EnableFMCMemorySwapping:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:936    .text.HAL_EnableFMCMemorySwapping:0000000000000000 HAL_EnableFMCMemorySwapping
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:954    .text.HAL_EnableFMCMemorySwapping:000000000000000c $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:959    .text.HAL_DisableFMCMemorySwapping:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:966    .text.HAL_DisableFMCMemorySwapping:0000000000000000 HAL_DisableFMCMemorySwapping
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:984    .text.HAL_DisableFMCMemorySwapping:000000000000000c $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:989    .text.HAL_EnableMemorySwappingBank:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:996    .text.HAL_EnableMemorySwappingBank:0000000000000000 HAL_EnableMemorySwappingBank
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:1013   .text.HAL_EnableMemorySwappingBank:000000000000000c $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:1018   .text.HAL_DisableMemorySwappingBank:0000000000000000 $t
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:1025   .text.HAL_DisableMemorySwappingBank:0000000000000000 HAL_DisableMemorySwappingBank
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:1042   .text.HAL_DisableMemorySwappingBank:000000000000000c $d
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:1053   .data.uwTickFreq:0000000000000000 uwTickFreq
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:1060   .data.uwTickPrio:0000000000000000 uwTickPrio
+/var/folders/gy/djtlh36967g6qz60tx0ltrsw0000gn/T//cccfPXt1.s:1056   .data.uwTickPrio:0000000000000000 $d
+
+UNDEFINED SYMBOLS
+HAL_SYSTICK_Config
+HAL_NVIC_SetPriority
+SystemCoreClock
+HAL_NVIC_SetPriorityGrouping
