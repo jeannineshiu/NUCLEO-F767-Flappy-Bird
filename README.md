@@ -6,7 +6,7 @@ Flappy Bird Game on NUCLEO-F767ZI with TFT LCD Touch Panel<br>
 
 ## Prerequisites
 ### Hardware
-1. NUCLEO-F767ZI
+1. NUCLEO-F767ZI<br>
 https://www.st.com/content/st_com/en/products/evaluation-tools/product-evaluation-tools/mcu-mpu-eval-tools/stm32-mcu-mpu-eval-tools/stm32-nucleo-boards/nucleo-f767zi.html
 2. Touch LCD - TJCTM24028 (TFT Display: ILI9341、Touch Panel: XPT2046/ TSC2046/ADS7846)
 
